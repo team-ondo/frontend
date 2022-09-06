@@ -1,0 +1,18 @@
+// variables
+
+// breakpoint
+$breakpoints: (
+  sp: 'screen and (max-width: 900px)',
+);
+
+// z-index
+$z-header: 100;
+$z-dialogModal: 1000;
+
+// color
+$themeWhite: #fff;
+$themeBlack: #2a395c;
+
+// width
+$contentWidthPc: 960px;
+$maxWidthPc: 1280px;

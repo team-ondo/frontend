@@ -1,0 +1,30 @@
+@use "@mixin" as mi;
+
+.pc {
+  @include mi.mq() {
+    display: none;
+  }
+}
+
+.sp {
+  display: none;
+  @include mi.mq() {
+    display: block;
+  }
+}
+
+.spImage {
+  display: none;
+  @include mi.mq() {
+    display: inline;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.spFlex {
+  display: none;
+  @include mi.mq() {
+    display: flex;
+  }
+}

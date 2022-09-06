@@ -1,3 +1,6 @@
+@use "variables" as var;
+@use "mixin" as mi;
+
 html,
 body {
   padding: 0;
