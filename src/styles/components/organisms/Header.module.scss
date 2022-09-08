@@ -1,0 +1,33 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.header {
+  position: fixed;
+  z-index: var.$z-header;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: var.$contentWidthPc;
+
+
+  @include mi.mq {
+    position: static;
+    width: auto;
+    min-width: auto;
+  }
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 960px;
+    padding: 15px 0;
+
+    @include mi.mq {
+      width: 100%;
+      padding: 15px 10px;
+      box-sizing: border-box;
+    }
+  }
+}
