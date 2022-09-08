@@ -24,3 +24,11 @@ a {
   box-sizing: border-box;
   line-height: 1;
 }
+
+main {
+  padding-top: 200px;
+
+  @include mi.mq {
+    padding: 0 10px;
+  }
+}
