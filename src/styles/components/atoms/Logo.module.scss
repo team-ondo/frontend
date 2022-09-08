@@ -1,0 +1,9 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.logo {
+  @include mi.mq {
+    width: 200px;
+    height: auto;
+  }
+}
