@@ -6,7 +6,7 @@ export default function Top() {
   return (
     <div className={styles.top}>
       <div className={styles.top__inner}>
-       <Weather />
+        <Weather />
       </div>
     </div>
   );
