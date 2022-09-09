@@ -4,4 +4,31 @@
 .weather {
   display: flex;
   align-items: center;
+
+  &__location {
+    font-size: 20px;
+    font-weight: bold;
+    color: var.$themeBlack;
+  }
+
+  &__date {
+    font-size: 20px;
+    font-weight: bold;
+    color: var.$themeBlack;
+    margin-left: 10px;
+  }
+
+  &__temperature {
+    font-size: 20px;
+    font-weight: bold;
+    color: var.$themeBlack;
+    margin-left: 10px;
+  }
+
+  &__humidity {
+    font-size: 20px;
+    font-weight: bold;
+    color: var.$themeBlack;
+    margin-left: 10px;
+  }
 }
