@@ -45,13 +45,11 @@ export default function Weather() {
 
     console.log("Latitude is:", lat);
     console.log("Longitude is:", long);
-
   }, [lat, long]);
-
 
   return (
     <div className={styles.weather}>
-      {typeof data.main != 'undefined' ? (
+      {typeof data.main != "undefined" ? (
         <>
           <p className={styles.weather__location}>{data.name}</p>
           <p className={styles.weather__date}>{day}</p>
