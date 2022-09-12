@@ -5,7 +5,7 @@ import axios from "axios";
 type Props = {
   lat: number | null;
   long: number | null;
-}
+};
 
 export default function Weather(props: Props) {
   const [data, setData] = useState<any>([]);
@@ -48,19 +48,23 @@ export default function Weather(props: Props) {
     <div className={styles.weather}>
       {typeof data.main != "undefined" ? (
         <>
-          <p className={styles.weather__location}>{data.name}</p>
-          <p className={styles.weather__date}>{day}</p>
-          <p className={styles.weather__temperature}>
-            {data.main.temp}&#x2103;
-          </p>
-          <p className={styles.weather__humidity}>{data.main.humidity}%</p>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
-            width={40}
-            height={40}
-            alt=""
-          />
+          <div className={styles.location__info}>
+            <p className={styles.weather__location}>{data.name}</p>
+            <p className={styles.weather__date}>{day}</p>
+          </div>
+          <div className={styles.location__data}>
+            <p className={styles.weather__temperature}>
+              {data.main.temp}&#x2103;
+            </p>
+            <p className={styles.weather__humidity}>{data.main.humidity}%</p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`http://openweathermap.org/img/wn/${data.weather[0].icon}.png`}
+              width={40}
+              height={40}
+              alt=""
+            />
+          </div>
         </>
       ) : (
         <div></div>
