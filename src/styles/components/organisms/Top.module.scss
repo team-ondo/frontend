@@ -2,22 +2,22 @@
 @use "@mixin" as mi;
 
 .top {
-  display: flex;
-  justify-content: center;
-  min-width: var.$contentWidthPc;
-  padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    min-width: var.$contentWidthPc;
+    padding: 10px 0;
 
-  @include mi.mq {
-      min-width: auto;
-      padding: 10px 0;
-      text-align: center;
-  }
+    @include mi.mq {
+        min-width: auto;
+        padding: 10px 0;
+        text-align: center;
+    }
 
-  &__inner {
-      width: var.$contentWidthPc;
+    &__inner {
+        width: var.$contentWidthPc;
 
-      @include mi.mq {
-          width: 100%;
-      }
-  }
+        @include mi.mq {
+            width: 100%;
+        }
+    }
 }
