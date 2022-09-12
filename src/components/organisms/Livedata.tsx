@@ -1,38 +1,53 @@
 import React from "react";
 import styles from "@/styles/components/organisms/Livedata.module.scss";
-import { ArcElement } from "chart.js";
-import Chart from "chart.js/auto";
+import "chartjs-plugin-doughnutlabel";
 import { Doughnut } from "react-chartjs-2";
 
-export default function Livedata() {
-  Chart.register(ArcElement);
+type Props = {
+  currTemp: number;
+  currHumid: number;
+};
+
+export default function Livedata(props: Props) {
 
   const tempData = {
-    labels: ["Temperature", "Blue"],
+    labels: ["Temperature", ""],
     datasets: [
       {
         label: "Temperature",
-        data: [29.2, 20.8],
+        data: [props.currTemp, 50 - props.currTemp],
         backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
         hoverOffset: 4,
         borderWidth: 0,
       },
     ],
-    options: {
-      plugins: {
-        legend: {
-          display: false,
-        },
+  };
+
+  const tempOption: any = {
+    legend: {
+      display: false,
+    },
+    plugins: {
+      doughnutlabel: {
+        labels: [
+          {
+            text: `${props.currTemp}℃`,
+            color: "#666666",
+            font: {
+              size: 30,
+            },
+          },
+        ],
       },
     },
   };
 
   const humidData = {
-    labels: ["Humidity", "Blue"],
+    labels: ["Humidity", ""],
     datasets: [
       {
-        label: "Temperature",
-        data: [68, 32],
+        label: "Humidity",
+        data: [props.currHumid, 100 - props.currHumid],
         backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
         hoverOffset: 4,
         borderWidth: 0,
@@ -40,21 +55,47 @@ export default function Livedata() {
     ],
   };
 
+  const humidOption = {
+    legend: {
+      display: false,
+    },
+    plugins: {
+      doughnutlabel: {
+        labels: [
+          {
+            text: `${props.currHumid}%`,
+            color: "#666666",
+            font: {
+              size: 30,
+            },
+          },
+        ],
+      },
+    },
+  }
+
   return (
     <div className={styles.livedata}>
       <div className={styles.temperature}>
         <h2>Temperature</h2>
-        <div>
-          <Doughnut height={300} width={300} data={tempData} id="temp-chart" />
+        <div className={styles.livedata__doughnut}>
+          <Doughnut
+            height={400}
+            width={400}
+            data={tempData}
+            options={tempOption}
+            id="temp-chart"
+          />
         </div>
       </div>
       <div className={styles.humidity}>
         <h2>Humidity</h2>
-        <div>
+        <div className={styles.livedata__doughnut}>
           <Doughnut
-            height={300}
-            width={300}
+            height={400}
+            width={400}
             data={humidData}
+            options={humidOption}
             id="humid-chart"
           />
         </div>
