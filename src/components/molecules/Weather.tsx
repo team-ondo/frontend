@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/molecules/Weather.module.scss";
+import axios from "axios";
 
-export default function Weather() {
-  const [lat, setLat] = useState<number | null>();
-  const [long, setLong] = useState<number | null>();
+type Props = {
+  lat: number | null;
+  long: number | null;
+}
+
+export default function Weather(props: Props) {
   const [data, setData] = useState<any>([]);
   const [day, setDay] = useState<string>("");
 
@@ -28,24 +32,17 @@ export default function Weather() {
   }, []);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLat(35.6579702);
-      setLong(139.7276486);
-
-      await fetch(
-        `${WEATHER_URL}?lat=${lat}&lon=${long}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API}`
+    axios
+      .get(
+        `${WEATHER_URL}?lat=${props.lat}&lon=${props.long}&units=metric&appid=${process.env.NEXT_PUBLIC_WEATHER_API}`
       )
-        .then((res) => res.json())
-        .then((result) => {
-          setData(result);
-          console.log(result);
-        });
-    };
-    fetchData();
+      .then((res) => {
+        setData(res.data);
+      });
+  }, [props.lat, props.long]);
 
-    console.log("Latitude is:", lat);
-    console.log("Longitude is:", long);
-  }, [lat, long]);
+  console.log("Latitude is:", props.lat);
+  console.log("Longitude is:", props.long);
 
   return (
     <div className={styles.weather}>
