@@ -15,7 +15,7 @@ export default function Top() {
   return (
     <div className={styles.top}>
       <div className={styles.top__inner}>
-        <Weather lat={lat} long={long}/>
+        <Weather lat={lat} long={long} />
         <Livedata />
       </div>
     </div>
