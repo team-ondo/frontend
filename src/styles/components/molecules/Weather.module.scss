@@ -4,6 +4,10 @@
 .weather {
   display: flex;
   align-items: center;
+  border: 1px solid var.$themeGray;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: var.$themeOrange;
 
   @include mi.mq {
     display: block;

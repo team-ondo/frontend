@@ -3,8 +3,8 @@ import styles from "@/styles/components/molecules/Weather.module.scss";
 import axios from "axios";
 
 type Props = {
-  lat: number | null;
-  long: number | null;
+  lat: number;
+  long: number;
 };
 
 export default function Weather(props: Props) {
@@ -25,10 +25,25 @@ export default function Weather(props: Props) {
       "Friday",
       "Saturday",
     ];
-    const month = date.getMonth() + 1;
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const month = months[date.getMonth()];
     const day = date.getDate();
     const year = date.getFullYear();
-    setDay(`${dayOfWeekStr[dayOfWeek]}, ${month}/${day}/${year}`);
+    setDay(`${dayOfWeekStr[dayOfWeek]}, ${month} ${day}, ${year}`);
   }, []);
 
   useEffect(() => {
