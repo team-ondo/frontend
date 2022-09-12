@@ -9,6 +9,7 @@
   align-items: center;
   width: 100%;
   min-width: var.$contentWidthPc;
+  background: var.$themeWhite;
 
 
   @include mi.mq {
