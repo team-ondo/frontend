@@ -5,7 +5,7 @@ import Image from "next/image";
 export default function Logo() {
   return (
     <div className={styles.logo}>
-      <Image src="/logo.png" width={450} height={150} alt="Ondo" />
+      <Image src="/logo.png" width={300} height={100} alt="Ondo" />
     </div>
   );
 }

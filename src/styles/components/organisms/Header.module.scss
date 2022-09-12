@@ -10,7 +10,7 @@
   width: 100%;
   min-width: var.$contentWidthPc;
   background: var.$themeWhite;
-
+  border-top: 10px solid var.$themeOrange;
 
   @include mi.mq {
     position: static;
