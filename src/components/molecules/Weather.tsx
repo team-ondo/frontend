@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/molecules/Weather.module.scss";
 import axios from "axios";
+import { SERVER_URL } from "@/config/index";
 
 type Props = {
   lat: number;
@@ -46,6 +47,7 @@ export default function Weather(props: Props) {
     setDay(`${dayOfWeekStr[dayOfWeek]}, ${month} ${day}, ${year}`);
   }, []);
 
+  // `${SERVER_URL}/en/1`
   useEffect(() => {
     axios
       .get(
