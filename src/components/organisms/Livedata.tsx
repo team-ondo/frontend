@@ -9,21 +9,21 @@ type Props = {
 };
 
 export default function Livedata(props: Props) {
-  const [tempColor, setTempColor] = useState<any>("rgb(255, 99, 132)");
-  const [humidColor, setHumidColor] = useState<any>("rgb(255, 99, 132)");
-  
+  const [tempColor, setTempColor] = useState<CanvasGradient | "rgb(255, 99, 132)">("rgb(255, 99, 132)");
+  const [humidColor, setHumidColor] = useState<CanvasGradient | "rgb(255, 99, 132)">("rgb(255, 99, 132)");
+
   useEffect(() => {
     const canvas = document.getElementById("temp-chart") as HTMLCanvasElement;
     const ctx = canvas?.getContext("2d");
-  
+
     let gradient = ctx?.createLinearGradient(0, 0, 0, 450) as CanvasGradient;
     gradient?.addColorStop(0, "rgba(255, 0, 0, 0)");
     gradient?.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
     gradient?.addColorStop(1, "rgba(255, 0,0, 0.5)");
-  
+
     const canvasH = document.getElementById("humid-chart") as HTMLCanvasElement;
     const ctxH = canvasH?.getContext("2d");
-  
+
     let gradientH = ctxH?.createLinearGradient(0, 0, 0, 450) as CanvasGradient;
     gradientH?.addColorStop(0, "rgba(255, 0, 0, 0)");
     gradientH?.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
@@ -31,8 +31,7 @@ export default function Livedata(props: Props) {
 
     setTempColor(gradient);
     setHumidColor(gradientH);
-
-  }, [])
+  }, []);
 
   const tempData = {
     labels: ["Temperature", ""],
