@@ -18,7 +18,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "@variables": ["./src/styles/variables.scss"],
-      "@mixin": ["./src/styles/mixin.scss"]
+      "@mixin": ["./src/styles/mixin.scss"],
+      "@/config/*": [
+        "config/*"
+      ]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
