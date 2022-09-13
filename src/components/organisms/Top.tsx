@@ -12,7 +12,7 @@ export default function Top() {
   useEffect(() => {
     setLat(35.6579702);
     setLong(139.7276486);
-    setCurrTemp(29.2);
+    setCurrTemp(35.2);
     setCurrHumid(68);
   }, []);
 
