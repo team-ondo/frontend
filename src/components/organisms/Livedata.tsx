@@ -9,6 +9,21 @@ type Props = {
 };
 
 export default function Livedata(props: Props) {
+  const canvas = document.getElementById("temp-chart") as HTMLCanvasElement;
+  const ctx = canvas?.getContext("2d");
+
+  let gradient = ctx?.createLinearGradient(0, 0, 0, 450) as CanvasGradient;
+  gradient?.addColorStop(0, "rgba(255, 0, 0, 0)");
+  gradient?.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
+  gradient?.addColorStop(1, "rgba(255, 0,0, 0.5)");
+
+  const canvasH = document.getElementById("humid-chart") as HTMLCanvasElement;
+  const ctxH = canvasH?.getContext("2d");
+
+  let gradientH = ctxH?.createLinearGradient(0, 0, 0, 450) as CanvasGradient;
+  gradientH?.addColorStop(0, "rgba(255, 0, 0, 0)");
+  gradientH?.addColorStop(0.5, "rgba(255, 0, 0, 0.25)");
+  gradientH?.addColorStop(1, "rgba(255, 0,0, 0.5)");
 
   const tempData = {
     labels: ["Temperature", ""],
@@ -16,7 +31,7 @@ export default function Livedata(props: Props) {
       {
         label: "Temperature",
         data: [props.currTemp, 50 - props.currTemp],
-        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+        backgroundColor: [gradient, "rgb(125, 125, 125, 0.25)"],
         hoverOffset: 4,
         borderWidth: 0,
       },
@@ -26,6 +41,11 @@ export default function Livedata(props: Props) {
   const tempOption: any = {
     legend: {
       display: false,
+    },
+    tooltip: {
+      filter: function (a: { label: string }, data: any) {
+        return a.label === "Temperature";
+      },
     },
     plugins: {
       doughnutlabel: {
@@ -48,7 +68,7 @@ export default function Livedata(props: Props) {
       {
         label: "Humidity",
         data: [props.currHumid, 100 - props.currHumid],
-        backgroundColor: ["rgb(255, 99, 132)", "rgb(54, 162, 235)"],
+        backgroundColor: [gradientH, "rgb(125, 125, 125, 0.25)"],
         hoverOffset: 4,
         borderWidth: 0,
       },
@@ -72,7 +92,7 @@ export default function Livedata(props: Props) {
         ],
       },
     },
-  }
+  };
 
   return (
     <div className={styles.livedata}>
