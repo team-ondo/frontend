@@ -9,8 +9,12 @@ type Props = {
 };
 
 export default function Livedata(props: Props) {
-  const [tempColor, setTempColor] = useState<CanvasGradient | "rgb(255, 99, 132)">("rgb(255, 99, 132)");
-  const [humidColor, setHumidColor] = useState<CanvasGradient | "rgb(255, 99, 132)">("rgb(255, 99, 132)");
+  const [tempColor, setTempColor] = useState<
+    CanvasGradient | "rgb(255, 99, 132)"
+  >("rgb(255, 99, 132)");
+  const [humidColor, setHumidColor] = useState<
+    CanvasGradient | "rgb(255, 99, 132)"
+  >("rgb(255, 99, 132)");
 
   useEffect(() => {
     const canvas = document.getElementById("temp-chart") as HTMLCanvasElement;
