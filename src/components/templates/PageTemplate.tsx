@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Header from "@/components/organisms/Header";
 
 type Props = {
   pageid: string;
@@ -14,12 +15,12 @@ export default function PageTemplate(props: Props) {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="description" content="description" />
         <meta property="og:site_name" content="site name" />
-        <meta property="og:title" content="title" />
+        <meta property="og:title" content="ONDO" />
         <meta property="og:type" content="website" />
         <meta property="og:description" content="description" />
-        <title>title</title>
+        <title>ONDO</title>
       </Head>
-      {/* <Header /> */}
+      <Header />
       <main>{props.children}</main>
       {/* <Footer /> */}
     </>

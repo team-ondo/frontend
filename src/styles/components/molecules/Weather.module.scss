@@ -1,0 +1,60 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.weather {
+  display: flex;
+  align-items: center;
+  border: 1px solid var.$themeGray;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: var.$themePaleOrange;
+
+  @include mi.mq {
+    display: block;
+  }
+
+  &__location {
+    font-size: 20px;
+    font-weight: bold;
+    color: var.$themeBlack;
+  }
+
+  &__date {
+    font-size: 20px;
+    font-weight: bold;
+    color: var.$themeBlack;
+    margin-left: 10px;
+  }
+
+  &__temperature {
+    font-size: 20px;
+    font-weight: bold;
+    color: var.$themeBlack;
+    margin-left: 10px;
+
+    @include mi.mq {
+      margin-left: 0;
+    }
+  }
+
+  &__humidity {
+    font-size: 20px;
+    font-weight: bold;
+    color: var.$themeBlack;
+    margin-left: 10px;
+  }
+}
+
+.location__info {
+  display: flex;
+  align-items: center;
+}
+
+.location__data {
+  display: flex;
+  align-items: center;
+
+  @include mi.mq {
+    margin-top: 5px;
+  }
+}

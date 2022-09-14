@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}' && next dev",
     "build": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}' && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "axios": "^0.27.2",
+    "chartjs-plugin-doughnutlabel": "^2.0.3",
     "next": "12.2.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -18,9 +20,11 @@
     "@types/node": "18.7.15",
     "@types/react": "18.0.18",
     "@types/react-dom": "18.0.6",
+    "chart.js": "^2.9.4",
     "eslint": "8.23.0",
     "eslint-config-next": "12.2.5",
     "prettier": "^2.7.1",
+    "react-chartjs-2": "^2.11.1",
     "typescript": "4.8.2"
   }
 }
