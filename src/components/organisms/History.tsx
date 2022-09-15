@@ -91,6 +91,7 @@ export const data_hum = {
       data: [82, 80, 78, 81, 75, 83, 74],
       borderColor: "rgb(255, 99, 132)",
       backgroundColor: "rgba(255, 99, 132, 0.5)",
+      fill: 1,
     },
     {
       label: "Min",
@@ -98,6 +99,7 @@ export const data_hum = {
       data: [72, 76, 75, 73, 71, 81, 72],
       borderColor: "rgb(53, 162, 235)",
       backgroundColor: "rgba(53, 162, 235, 0.5)",
+      fill: true,
     },
   ],
 };
@@ -106,6 +108,11 @@ export default function History() {
   return (
     <div className={styles.top}>
       <div className={styles.top__inner}>
+        <div className={styles["chart-navigation"]}>
+          <button className={styles["chart-button"]}>Day</button>
+          <button className={styles["chart-button"]}>Week</button>
+          <button className={styles["chart-button"]}>Month</button>
+        </div>
         <div className={styles.history}>
           <div className={styles.temperature}>
             <div className={styles.history__line}>
