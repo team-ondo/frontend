@@ -1,7 +1,5 @@
 import React from "react";
-
-// TS check
-
+import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,10 +9,9 @@ import {
   Title,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
-
-// 'not a function' - chart.js version issue?
+import styles from "@/styles/components/organisms/History.module.scss";
 
 ChartJS.register(
   CategoryScale,
@@ -23,10 +20,11 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  Filler
 );
 
-export const options = {
+export const options_temp = {
   responsive: true,
   plugins: {
     legend: {
@@ -34,7 +32,20 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Test",
+      text: "Test Temperature (C)",
+    },
+  },
+};
+
+export const options_hum = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top" as const,
+    },
+    title: {
+      display: true,
+      text: "Test Humidity (%)",
     },
   },
 };
@@ -49,7 +60,7 @@ const labels = [
   "Sunday",
 ];
 
-export const data = {
+export const data_temp = {
   labels,
   datasets: [
     {
@@ -58,11 +69,33 @@ export const data = {
       data: [34, 30, 28, 28, 30, 29, 25],
       borderColor: "rgb(255, 99, 132)",
       backgroundColor: "rgba(255, 99, 132, 0.5)",
+      fill: 1,
     },
     {
       label: "Min",
       // map here
       data: [20, 21, 22, 25, 23, 18, 16],
+      borderColor: "rgb(53, 162, 235)",
+      backgroundColor: "rgba(53, 162, 235, 0.5)",
+      fill: true,
+    },
+  ],
+};
+
+export const data_hum = {
+  labels,
+  datasets: [
+    {
+      label: "Max",
+      // map here
+      data: [82, 80, 78, 81, 75, 83, 74],
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+    },
+    {
+      label: "Min",
+      // map here
+      data: [72, 76, 75, 73, 71, 81, 72],
       borderColor: "rgb(53, 162, 235)",
       backgroundColor: "rgba(53, 162, 235, 0.5)",
     },
@@ -71,8 +104,21 @@ export const data = {
 
 export default function History() {
   return (
-    <div style={{ paddingTop: "100px", width: "600px", margin: "0 auto" }}>
-      <Line options={options} data={data} />
+    <div className={styles.top}>
+      <div className={styles.top__inner}>
+        <div className={styles.history}>
+          <div className={styles.temperature}>
+            <div className={styles.history__line}>
+              <Line options={options_temp} data={data_temp} />
+            </div>
+          </div>
+          <div className={styles.humidity}>
+            <div className={styles.history__line}>
+              <Line options={options_hum} data={data_hum} />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
