@@ -12,6 +12,7 @@ import {
   Filler,
 } from "chart.js";
 import styles from "@/styles/components/organisms/History.module.scss";
+import AlarmHistory from "./AlarmHistory";
 
 ChartJS.register(
   CategoryScale,
@@ -106,26 +107,31 @@ export const data_hum = {
 
 export default function History() {
   return (
-    <div className={styles.top}>
-      <div className={styles.top__inner}>
-        <div className={styles["chart-navigation"]}>
-          <button className={styles["chart-button"]}>Day</button>
-          <button className={styles["chart-button"]}>Week</button>
-          <button className={styles["chart-button"]}>Month</button>
-        </div>
-        <div className={styles.history}>
-          <div className={styles.temperature}>
-            <div className={styles.history__line}>
-              <Line options={options_temp} data={data_temp} />
+    <>
+      <div className={styles.top}>
+        <div className={styles.top__inner}>
+          <nav className={styles["chart-navigation"]}>
+            <button className={styles["chart-button"]}>Day</button>
+            <button className={styles["chart-button"]}>Week</button>
+            <button className={styles["chart-button"]}>Month</button>
+          </nav>
+          <div className={styles.history}>
+            <div className={styles.temperature}>
+              <div className={styles.history__line}>
+                <Line options={options_temp} data={data_temp} />
+              </div>
             </div>
-          </div>
-          <div className={styles.humidity}>
-            <div className={styles.history__line}>
-              <Line options={options_hum} data={data_hum} />
+            <div className={styles.humidity}>
+              <div className={styles.history__line}>
+                <Line options={options_hum} data={data_hum} />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <div className={styles["alarm-history-container"]}>
+        <AlarmHistory />
+      </div>
+    </>
   );
 }
