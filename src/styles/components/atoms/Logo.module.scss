@@ -2,8 +2,25 @@
 @use "@mixin" as mi;
 
 .logo {
-  @include mi.mq {
-    width: 200px;
-    height: auto;
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+
+  img {
+    @include mi.mq {
+      width: 50px;
+      height: 42px;
+    }
+  }
+
+  &__text {
+    color: var.$themeRealBrack;
+    font-size: 65px;
+    margin-left: 10px;
+    line-height: 1.5;
+
+    @include mi.mq {
+      font-size: 28px;
+    }
   }
 }
