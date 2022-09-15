@@ -19,9 +19,7 @@
       "@/*": ["./src/*"],
       "@variables": ["./src/styles/variables.scss"],
       "@mixin": ["./src/styles/mixin.scss"],
-      "@/config/*": [
-        "config/*"
-      ]
+      "@/config/*": ["config/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
