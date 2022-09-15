@@ -1,5 +1,7 @@
 import React from "react";
-// TODO TS check
+
+// TS check
+
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,15 +16,15 @@ import { Line } from "react-chartjs-2";
 
 // 'not a function' - chart.js version issue?
 
-// ChartJS.register(
-//   CategoryScale,
-//   LinearScale,
-//   PointElement,
-//   LineElement,
-//   Title,
-//   Tooltip,
-//   Legend
-// );
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export const options = {
   responsive: true,
@@ -37,20 +39,30 @@ export const options = {
   },
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const labels = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
 
 export const data = {
   labels,
   datasets: [
     {
-      label: "Temp Test",
-      data: [10, 20, 24, 40, 50, 20, 14],
+      label: "Max",
+      // map here
+      data: [34, 30, 28, 28, 30, 29, 25],
       borderColor: "rgb(255, 99, 132)",
       backgroundColor: "rgba(255, 99, 132, 0.5)",
     },
     {
-      label: "Humidity Test",
-      data: [20, 10, 34, 20, 55, 40, 24],
+      label: "Min",
+      // map here
+      data: [20, 21, 22, 25, 23, 18, 16],
       borderColor: "rgb(53, 162, 235)",
       backgroundColor: "rgba(53, 162, 235, 0.5)",
     },
