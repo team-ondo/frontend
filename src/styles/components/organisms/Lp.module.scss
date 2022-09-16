@@ -1,2 +1,41 @@
 @use "@variables" as var;
 @use "@mixin" as mi;
+
+.mv {
+  display: flex;
+  justify-content: center;
+  min-width: var.$contentWidthPc;
+  height: 845px;
+  background: #F4F7F1;
+
+  @include mi.mq {
+    min-width: auto;
+    height: mi.getvw(336);
+  }
+
+  &__bgArea {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    min-width: var.$contentWidthPc;
+    max-width: 1920px;
+    height: 100%;
+    background: center / cover no-repeat url('/mv.jpg');
+
+    @include mi.mq {
+      width: 100%;
+      min-width: auto;
+      background: center / cover no-repeat url('/mv.jpg');
+    }
+  }
+
+  &__inner {
+    position: relative;
+    width: var.$contentWidthPc;
+    padding-top: 16px;
+
+    @include mi.mq {
+      padding: 12px 10px 0;
+    }
+  }
+}
