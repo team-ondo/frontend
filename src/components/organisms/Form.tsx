@@ -179,7 +179,7 @@ const Form = () => (
           <Annotation>※Please the zip code of the house where you want to place the device.<br />※Please do not include hyphen.</Annotation>
         </Fieldset>
         <Flex css={{ marginTop: 20, justifyContent: "center" }}>
-          <Button variant="indigo">Save changes</Button>
+          <Button variant="indigo">Sign Up</Button>
         </Flex>
       </TabsContent>
       {/* Sign In */}
@@ -200,7 +200,7 @@ const Form = () => (
           <Input id="confirmPassword" type="password" />
         </Fieldset>
         <Flex css={{ marginTop: 20, justifyContent: "center" }}>
-          <Button variant="indigo">Change password</Button>
+          <Button variant="indigo">Sign In</Button>
         </Flex>
       </TabsContent>
     </Tabs>
