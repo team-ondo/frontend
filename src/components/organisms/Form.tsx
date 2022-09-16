@@ -2,6 +2,8 @@ import React from "react";
 import { styled } from "@stitches/react";
 import { indigo, mauve, blackA } from "@radix-ui/colors";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
+import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
+import { CheckIcon } from "@radix-ui/react-icons";
 
 const StyledTabs = styled(TabsPrimitive.Root, {
   display: "flex",
@@ -51,11 +53,30 @@ const StyledContent = styled(TabsPrimitive.Content, {
   outline: "none",
 });
 
+const StyledCheckbox = styled(CheckboxPrimitive.Root, {
+  all: "unset",
+  backgroundColor: "white",
+  width: 25,
+  height: 25,
+  borderRadius: 4,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  boxShadow: `0 2px 10px ${blackA.blackA7}`,
+  "&:hover": { backgroundColor: indigo.indigo3 },
+});
+
+const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
+  color: indigo.indigo11,
+});
+
 // Exports
 export const Tabs = StyledTabs;
 export const TabsList = StyledList;
 export const TabsTrigger = StyledTrigger;
 export const TabsContent = StyledContent;
+export const Checkbox = StyledCheckbox;
+export const CheckboxIndicator = StyledIndicator;
 
 const Box = styled("div", {
   display: "flex",
@@ -135,6 +156,13 @@ const Input = styled("input", {
   "&::placeholder": { color: mauve.mauve7 },
 });
 
+const FieldCheck = styled("fieldset", {
+  all: "unset",
+  width: "100%",
+  display: "flex",
+  alignItems: "center",
+});
+
 const Form = () => (
   <Box css={{}}>
     <Tabs defaultValue="tab1">
@@ -181,6 +209,16 @@ const Form = () => (
             ※Please do not include hyphen.
           </Annotation>
         </Fieldset>
+        <FieldCheck>
+          <Checkbox defaultChecked id="c1">
+            <CheckboxIndicator>
+              <CheckIcon />
+            </CheckboxIndicator>
+          </Checkbox>
+          <Label css={{ paddingLeft: 15, marginBottom: 0 }} htmlFor="c1">
+            Accept privacy policy.
+          </Label>
+        </FieldCheck>
         <Flex css={{ marginTop: 20, justifyContent: "center" }}>
           <Button variant="indigo">Sign Up</Button>
         </Flex>
