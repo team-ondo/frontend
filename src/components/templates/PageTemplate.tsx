@@ -14,7 +14,7 @@ export default function PageTemplate(props: Props) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="description" content="description" />
-        <meta property="og:site_name" content="site name" />
+        <meta property="og:site_name" content="ONDO" />
         <meta property="og:title" content="ONDO" />
         <meta property="og:type" content="website" />
         <meta property="og:description" content="description" />
