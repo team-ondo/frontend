@@ -75,7 +75,7 @@ const Annotation = styled("p", {
   color: mauve.mauve11,
   fontSize: 12,
   lineHeight: 1.5,
-})
+});
 
 const Button = styled("button", {
   all: "unset",
@@ -144,9 +144,7 @@ const Form = () => (
       </TabsList>
       {/* Sign Up */}
       <TabsContent value="tab1">
-        <Text>
-          Please register your account.
-        </Text>
+        <Text>Please register your account.</Text>
         <Fieldset>
           <Label htmlFor="firstname">First Name</Label>
           <Input id="firstname" placeholder="Yoshi" />
@@ -176,7 +174,12 @@ const Form = () => (
         <Fieldset>
           <Label htmlFor="zipcode">Zip Code</Label>
           <Input id="zipcode" />
-          <Annotation>※Please the zip code of the house where you want to place the device.<br />※Please do not include hyphen.</Annotation>
+          <Annotation>
+            ※Please the zip code of the house where you want to place the
+            device.
+            <br />
+            ※Please do not include hyphen.
+          </Annotation>
         </Fieldset>
         <Flex css={{ marginTop: 20, justifyContent: "center" }}>
           <Button variant="indigo">Sign Up</Button>
@@ -184,9 +187,7 @@ const Form = () => (
       </TabsContent>
       {/* Sign In */}
       <TabsContent value="tab2">
-        <Text>
-          If you already have account, please sign in here.
-        </Text>
+        <Text>If you already have account, please sign in here.</Text>
         <Fieldset>
           <Label htmlFor="email">Email</Label>
           <Input type="mail" id="email" placeholder="sample@example.com" />
