@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.header__inner}>
-        <Logo width={100} height={84}/>
+        <Logo width={100} height={84} />
       </div>
     </header>
   );
