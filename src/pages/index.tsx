@@ -1,13 +1,13 @@
 import React from "react";
-import PageTemplate from "@/components/templates/PageTemplate";
-import Top from "@/components/organisms/Top";
+import LandingPageTemplate from "@/components/templates/LandingPageTemplate";
+import Lp from "@/components/organisms/Form";
 
 export default function Index() {
   const pageid = "index";
 
   return (
-    <PageTemplate pageid={pageid}>
-      <Top />
-    </PageTemplate>
+    <LandingPageTemplate pageid={pageid}>
+      <Lp />
+    </LandingPageTemplate>
   );
 }
