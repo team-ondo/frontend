@@ -6,7 +6,6 @@
   justify-content: center;
   min-width: var.$contentWidthPc;
   background: #F4F7F1;
-  padding-bottom: 10px;
   height: 870px;
 
   @include mi.mq {
@@ -38,6 +37,7 @@
     position: relative;
 
     @include mi.mq {
+      display: block;
       padding: 12px 10px 0;
     }
   }
@@ -45,6 +45,12 @@
   &__text {
     width: 400px;
     margin-top: 100px;
+
+    @include mi.mq {
+      width: 100%;
+      padding: 0 10px;
+      margin: 40px auto 0;
+    }
   }
 
   &__textDetail {
@@ -65,5 +71,48 @@
     position: absolute;
     top: 10px;
     right: 0;
+
+    @include mi.mq {
+      display: none;
+    }
+  }
+}
+
+.introduction {
+  display: flex;
+  justify-content: center;
+  min-width: var.$contentWidthPc;
+  padding: 60px 0;
+
+  &__inner {
+    width: var.$contentWidthPc;
+  }
+
+  &__detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    width: 300px;
+  }
+
+  &__item {
+    margin-left: 30px;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  &__text {
+    font-size: 18px;
+    margin-top: 10px;
+    line-height: 1.5;
   }
 }
