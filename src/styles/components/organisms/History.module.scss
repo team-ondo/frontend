@@ -1,0 +1,82 @@
+// color
+@use "@variables" as var;
+// responsive
+@use "@mixin" as mi;
+
+.top {
+  display: flex;
+  justify-content: center;
+  min-width: var.$contentWidthPc;
+  padding: 10px 0;
+
+  @include mi.mq {
+    min-width: auto;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  &__inner {
+    width: var.$contentWidthPc;
+
+    @include mi.mq {
+      width: 100%;
+    }
+  }
+}
+
+.chart-navigation {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.chart-button {
+  border: none;
+  border-right: 1px solid #fff;
+  cursor: pointer;
+  padding: 10px 32px;
+  background-color: var.$themePaleOrange;
+}
+
+.chart-button:hover {
+  background-color: var.$themeOrange;
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mi.mq {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__line {
+    margin-top: 40px;
+  }
+}
+
+.temperature {
+  width: 100%;
+
+  @include mi.mq {
+    width: 95%;
+  }
+}
+
+.humidity {
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 100px;
+
+  @include mi.mq {
+    width: 95%;
+    margin-left: 0;
+    margin-top: 100px;
+  }
+}
+
+.alarm-history-container {
+  background-color: var.$themePaleOrange;
+}
