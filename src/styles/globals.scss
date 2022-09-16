@@ -35,4 +35,8 @@ main {
 
 .main--lp {
   padding-top: 0;
+
+  @include mi.mq {
+    padding: 0;
+  }
 }
