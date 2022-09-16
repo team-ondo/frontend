@@ -10,7 +10,12 @@ export default function Logo(props: Props) {
   return (
     <div className={styles.logo}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src="/logo.png" width={props.width} height={props.height} alt="Ondo" />
+      <img
+        src="/logo.png"
+        width={props.width}
+        height={props.height}
+        alt="Ondo"
+      />
       <p className={styles.logo__text}>ONDO</p>
     </div>
   );
