@@ -26,11 +26,10 @@ export default function Lp() {
           <div className={styles.mv__inner}>
             <div className={styles.mv__text}>
               <Logo width={100} height={84} />
-              <p className={styles.mv__textDetail}>
-                Ondo helps people!
-              </p>
+              <p className={styles.mv__textDetail}>Ondo helps people!</p>
               <p className={styles.mv__textDetailS}>
-                Ondo monitors the temperature and humidity of home in order to ensure safety during hotter month.
+                Ondo monitors the temperature and humidity of home in order to
+                ensure safety during hotter month.
               </p>
             </div>
             {width > 750 && <Form />}
