@@ -2,7 +2,7 @@
 
 // breakpoint
 $breakpoints: (
-  sp: 'screen and (max-width: 900px)',
+  sp: "screen and (max-width: 900px)",
 );
 
 // z-index
@@ -12,10 +12,11 @@ $z-dialogModal: 1000;
 // color
 $themeWhite: #fff;
 $themeBlack: #2a395c;
-$themeRealBrack: #000;
+$themeRealBlack: #000;
 $themeDarkGray: #666666;
 $themeGray: #dcdcdc;
 $themeOrange: #ffdba4;
+$themeDarkOrange: #dc8d16;
 $themePaleOrange: #fff2de;
 
 // width
