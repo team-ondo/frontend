@@ -1,0 +1,17 @@
+.item-container {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  padding: 24px 12px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.date {
+  font-weight: bold;
+}
+
+.time {
+  font-weight: bold;
+}
