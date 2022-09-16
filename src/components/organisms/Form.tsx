@@ -163,6 +163,12 @@ const FieldCheck = styled("fieldset", {
   alignItems: "center",
 });
 
+const CheckLink = styled("a", {
+  color: indigo.indigo11,
+  textDecoration: "underline",
+  "&:visited": { color: indigo.indigo11 },
+});
+
 const Form = () => (
   <Box css={{}}>
     <Tabs defaultValue="tab1">
@@ -210,13 +216,15 @@ const Form = () => (
           </Annotation>
         </Fieldset>
         <FieldCheck>
-          <Checkbox defaultChecked id="c1">
+          <Checkbox id="c1">
             <CheckboxIndicator>
               <CheckIcon />
             </CheckboxIndicator>
           </Checkbox>
           <Label css={{ paddingLeft: 15, marginBottom: 0 }} htmlFor="c1">
-            Accept privacy policy.
+            Accept <CheckLink
+          href="/privacy"
+        >privacy policy</CheckLink>.
           </Label>
         </FieldCheck>
         <Flex css={{ marginTop: 20, justifyContent: "center" }}>
