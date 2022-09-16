@@ -19,7 +19,7 @@ export default function PageTemplate(props: Props) {
         <meta property="og:description" content="Welcome to ONDO!" />
         <title>ONDO</title>
       </Head>
-      <main>{props.children}</main>
+      <main className="main--lp">{props.children}</main>
       {/* <Footer /> */}
     </>
   );
