@@ -7,6 +7,7 @@
   min-width: var.$contentWidthPc;
   background: #F4F7F1;
   padding-bottom: 10px;
+  height: 870px;
 
   @include mi.mq {
     min-width: auto;
@@ -30,11 +31,11 @@
   }
 
   &__inner {
-    position: relative;
     width: var.$contentWidthPc;
     padding: 16px 0;
     display: flex;
     justify-content: space-between;
+    position: relative;
 
     @include mi.mq {
       padding: 12px 10px 0;
@@ -58,5 +59,11 @@
     font-size: 20px;
     color: var.$themeDarkGray;
     line-height: 1.5;
+  }
+
+  &__form {
+    position: absolute;
+    top: 10px;
+    right: 0;
   }
 }

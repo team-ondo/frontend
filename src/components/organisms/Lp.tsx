@@ -32,7 +32,7 @@ export default function Lp() {
                 ensure safety during hotter month.
               </p>
             </div>
-            {width > 750 && <Form />}
+            {width > 750 && <div className={styles.mv__form}><Form /></div>}
           </div>
         </div>
       </section>
