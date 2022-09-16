@@ -4,7 +4,7 @@
 .logo {
   display: flex;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 
   img {
     @include mi.mq {
@@ -14,7 +14,7 @@
   }
 
   &__text {
-    color: var.$themeRealBrack;
+    color: var.$themeRealBlack;
     font-size: 65px;
     margin-left: 10px;
     line-height: 1.5;
