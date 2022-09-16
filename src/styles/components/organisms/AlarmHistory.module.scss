@@ -28,3 +28,14 @@
   margin: 32px 0;
   font-size: 18px;
 }
+
+.alarm-history-container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 24px;
+  height: 500px;
+  overflow: auto;
+  margin-bottom: 50px;
+}
