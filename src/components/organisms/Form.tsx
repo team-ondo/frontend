@@ -222,9 +222,7 @@ const Form = () => (
             </CheckboxIndicator>
           </Checkbox>
           <Label css={{ paddingLeft: 15, marginBottom: 0 }} htmlFor="c1">
-            Accept <CheckLink
-          href="/privacy"
-        >privacy policy</CheckLink>.
+            Accept <CheckLink href="/privacy">privacy policy</CheckLink>.
           </Label>
         </FieldCheck>
         <Flex css={{ marginTop: 20, justifyContent: "center" }}>
