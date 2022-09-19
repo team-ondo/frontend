@@ -6,7 +6,7 @@ type Props = {
   children: JSX.Element;
 };
 
-export default function PageTemplate(props: Props) {
+export default function PageTemplate({ pageid, children }: Props) {
   return (
     <>
       <Head>
@@ -19,7 +19,7 @@ export default function PageTemplate(props: Props) {
         <meta property="og:description" content="Welcome to ONDO!" />
         <title>ONDO</title>
       </Head>
-      <main className="main--lp">{props.children}</main>
+      <main className="main--lp">{children}</main>
       {/* <Footer /> */}
     </>
   );
