@@ -63,9 +63,13 @@ export default function Lp() {
                 ensure safety during hotter month.
               </p>
             </div>
-            {width < 900 ? "" : <div className={styles.mv__form}>
-              <Form />
-            </div>}
+            {width < 900 ? (
+              ""
+            ) : (
+              <div className={styles.mv__form}>
+                <Form />
+              </div>
+            )}
             <Scroll to="sp_form" smooth={true}>
               <div className={styles.mv__button}>Sign Up / Sign In</div>
             </Scroll>
@@ -127,11 +131,15 @@ export default function Lp() {
           {featurelist}
         </div>
       </section>
-      {width < 900 ? <section className={styles.form} id="sp_form">
-        <div className={styles.form__inner}>
-          <Form />
-        </div>
-      </section> : ""}
+      {width < 900 ? (
+        <section className={styles.form} id="sp_form">
+          <div className={styles.form__inner}>
+            <Form />
+          </div>
+        </section>
+      ) : (
+        ""
+      )}
     </>
   );
 }
