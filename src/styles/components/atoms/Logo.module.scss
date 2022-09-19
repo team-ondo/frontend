@@ -3,7 +3,6 @@
 
 .logo {
   display: flex;
-  align-items: center;
   font-family: "Montserrat", sans-serif;
 
   img {
@@ -18,6 +17,7 @@
     font-size: 65px;
     margin-left: 10px;
     line-height: 1.5;
+    font-weight: bold;
 
     @include mi.mq {
       font-size: 28px;
