@@ -7,7 +7,7 @@
   border: 1px solid var.$themeGray;
   border-radius: 10px;
   padding: 10px;
-  background-color: var.$themePaleOrange;
+  background-color: var.$themeDarkOrange;
 
   @include mi.mq {
     display: block;
@@ -16,20 +16,20 @@
   &__location {
     font-size: 20px;
     font-weight: bold;
-    color: var.$themeBlack;
+    color: var.$themeRealBlack;
   }
 
   &__date {
     font-size: 20px;
     font-weight: bold;
-    color: var.$themeBlack;
+    color: var.$themeRealBlack;
     margin-left: 10px;
   }
 
   &__temperature {
     font-size: 20px;
     font-weight: bold;
-    color: var.$themeBlack;
+    color: var.$themeRealBlack;
     margin-left: 10px;
 
     @include mi.mq {
@@ -40,7 +40,7 @@
   &__humidity {
     font-size: 20px;
     font-weight: bold;
-    color: var.$themeBlack;
+    color: var.$themeRealBlack;
     margin-left: 10px;
   }
 }
