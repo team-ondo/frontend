@@ -74,7 +74,7 @@ export default function Livedata(props: Props) {
         let fontSize = (height / 160).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "middle";
-        ctx.fillStyle = '#666666';
+        ctx.fillStyle = "#666666";
         let text = `${props.currTemp}℃`,
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 2;
@@ -102,14 +102,13 @@ export default function Livedata(props: Props) {
       legend: {
         display: false,
       },
-      tooltip: {
-        enabled: true,
-        callbacks: {
-          label: (context: any) => {
-            console.log(context);
-          }
-        }
-      }
+      // tooltip: {
+      //   callbacks: {
+      //     label: (context: any) => {
+      //       console.log(context);
+      //     },
+      //   },
+      // },
     },
   };
 
@@ -123,7 +122,7 @@ export default function Livedata(props: Props) {
         let fontSize = (height / 160).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "middle";
-        ctx.fillStyle = '#666666';
+        ctx.fillStyle = "#666666";
         let text = `${props.currHumid}%`,
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 2;
