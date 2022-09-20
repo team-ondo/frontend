@@ -2,24 +2,51 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/organisms/Top.module.scss";
 import Weather from "@/components/molecules/Weather";
 import Livedata from "./Livedata";
+import axios from "axios";
+
+export type WeatherData = {
+  location_name: string;
+  temperature_c: number;
+  temperature_f: number;
+  humidity: number;
+  weather_icon: string;
+};
 
 export default function Top() {
-  const [lat, setLat] = useState<number | null>();
-  const [long, setLong] = useState<number | null>();
   const [currTemp, setCurrTemp] = useState<number | null>();
   const [currHumid, setCurrHumid] = useState<number | null>();
+  const [deviceId, setDeviceId] = useState<string | null>();
+  const [weatherData, setWeatherData] = useState<WeatherData | null>();
 
   useEffect(() => {
-    setLat(35.6579702);
-    setLong(139.7276486);
     setCurrTemp(35.2);
     setCurrHumid(68);
+    setDeviceId("a7382f5c-3326-4cf8-b717-549affe1c2eb");
   }, []);
+
+  // ToDO -> implement catch
+  useEffect(() => {
+    axios
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/weather-info/en/${deviceId}`)
+      .then((res) => {
+        setWeatherData(res.data);
+      });
+  }, [deviceId]);
 
   return (
     <div className={styles.top}>
       <div className={styles.top__inner}>
-        {lat && long ? <Weather lat={lat} long={long} /> : <></>}
+        {weatherData ? (
+          <Weather
+            location_name={weatherData.location_name}
+            temperature_c={weatherData.temperature_c}
+            temperature_f={weatherData.temperature_f}
+            humidity={weatherData.humidity}
+            weather_icon={weatherData.weather_icon}
+          />
+        ) : (
+          <></>
+        )}
         {currTemp && currHumid ? (
           <Livedata currTemp={currTemp} currHumid={currHumid} />
         ) : (

@@ -1,0 +1,41 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.top {
+  display: flex;
+  justify-content: center;
+  min-width: var.$contentWidthPc;
+  padding: 10px 0;
+
+  @include mi.mq {
+    min-width: auto;
+    padding: 10px 0;
+    text-align: center;
+  }
+
+  &__inner {
+    width: var.$contentWidthPc;
+
+    @include mi.mq {
+      width: 100%;
+    }
+  }
+}
+
+.alarm-history-header {
+  text-align: center;
+  color: #444;
+  margin: 32px 0;
+  font-size: 18px;
+}
+
+.alarm-history-container {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 24px;
+  height: 500px;
+  overflow: auto;
+  margin-bottom: 50px;
+}

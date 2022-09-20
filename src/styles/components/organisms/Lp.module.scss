@@ -1,0 +1,250 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.mv {
+  display: flex;
+  justify-content: center;
+  min-width: var.$contentWidthPc;
+  background: #F4F7F1;
+  height: 870px;
+
+  @include mi.mq {
+    min-width: auto;
+    height: mi.getvw(700);
+  }
+
+  &__bgArea {
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+    min-width: var.$contentWidthPc;
+    max-width: 1920px;
+    height: 100%;
+    background: center / cover no-repeat url('/mv.jpg');
+
+    @include mi.mq {
+      width: 100%;
+      min-width: auto;
+      background: center / cover no-repeat url('/mv.jpg');
+    }
+  }
+
+  &__inner {
+    width: var.$contentWidthPc;
+    padding: 16px 0;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+
+    @include mi.mq {
+      display: block;
+      padding: 12px 10px 0;
+    }
+  }
+
+  &__text {
+    width: 400px;
+    margin-top: 100px;
+
+    @include mi.mq {
+      width: 100%;
+      padding: 0 10px;
+      margin: 40px auto 0;
+    }
+  }
+
+  &__textDetail {
+    margin-top: 40px;
+    font-size: 35px;
+    font-weight: bold;
+    color: var.$themeRealBlack;
+  }
+
+  &__textDetailS {
+    margin-top: 20px;
+    font-size: 20px;
+    color: var.$themeDarkGray;
+    line-height: 1.5;
+  }
+
+  &__form {
+    position: absolute;
+    top: 10px;
+    right: 0;
+  }
+
+  &__button {
+    display: none;
+
+    @include mi.mq {
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      font-weight: bold;
+      color: var.$themeWhite;
+      background: var.$themeDarkOrange;
+      padding: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 300px;
+      text-align: center;
+    }
+  }
+}
+
+.introduction {
+  display: flex;
+  justify-content: center;
+  min-width: var.$contentWidthPc;
+  padding: 60px 0;
+
+  @include mi.mq {
+    min-width: auto;
+    padding: 0px 10px 60px 10px;
+  }
+
+  &__inner {
+    width: var.$contentWidthPc;
+
+    @include mi.mq {
+      width: 100%;
+    }
+  }
+
+  &__detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include mi.mq {
+      flex-direction: column;
+    }
+  }
+
+  &__box {
+    display: flex;
+    align-items: center;
+    width: 300px;
+
+    @include mi.mq {
+      margin-top: 60px;
+    }
+  }
+
+  &__item {
+    margin-left: 30px;
+  }
+
+  &__title {
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  &__text {
+    font-size: 18px;
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+}
+
+.recommend {
+  display: flex;
+  justify-content: center;
+  min-width: var.$contentWidthPc;
+  padding: 60px 0;
+  text-align: center;
+  background: var.$themePaleOrange;
+
+  @include mi.mq {
+    min-width: auto;
+    padding: 50px 16px;
+  }
+
+  &__inner {
+      width: var.$contentWidthPc;
+  
+      @include mi.mq {
+        width: 100%;
+      }
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 1.5;
+    color: var.$themeBlack;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 80px;
+
+    @include mi.mq {
+      flex-direction: column;
+      margin-top: 60px;
+    }
+
+    &:nth-child(odd) {
+      flex-direction: row-reverse;
+
+      @include mi.mq {
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__itemText {
+    width: 500px;
+    text-align: left;
+
+    @include mi.mq {
+      width: 100%;
+    }
+  }
+
+  &__itemHeading {
+    font-size: 22px;
+    line-height: 1.5;
+
+    @include mi.mq {
+      font-size: 20px;
+    }
+  }
+
+  &__itemDescription1 {
+    margin-top: 10px;
+    font-size: 18px;
+    line-height: 1.5;
+
+    @include mi.mq {
+      margin-bottom: 30px;
+    }
+  }
+
+  &__itemImage {
+    @include mi.mq {
+      width: 355px;
+      height: auto;
+    }
+  }
+}
+
+.form {
+  @include mi.mq {
+    display: flex;
+    justify-content: center;
+    min-width: auto;
+    padding: 40px 10px;
+  }
+
+  &__inner {
+    @include mi.mq {
+      width: 100%;
+    }
+  }
+}
