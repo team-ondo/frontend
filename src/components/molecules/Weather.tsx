@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/molecules/Weather.module.scss";
-import axios from "axios";
 
 type Props = {
-  deviceId: number;
+  data: any;
 };
 
-export default function Weather({ deviceId }: Props) {
-  const [data, setData] = useState<any>([]);
+export default function Weather({ data }: Props) {
   const [day, setDay] = useState<string>("");
 
   useEffect(() => {
@@ -43,16 +41,11 @@ export default function Weather({ deviceId }: Props) {
     setDay(`${dayOfWeekStr[dayOfWeek]}, ${month} ${day}, ${year}`);
   }, []);
 
-  useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/weather-info/en/${deviceId}`)
-      .then((res) => {
-        setData(res.data);
-      });
-  }, [deviceId]);
 
-  const WEATHER_URL = data.weather_icon ? `http://openweathermap.org/img/wn/${data.weather_icon}.png` : "";
-  
+  const WEATHER_URL = data.weather_icon
+    ? `http://openweathermap.org/img/wn/${data.weather_icon}.png`
+    : "";
+
   return (
     <div className={styles.weather}>
       {typeof data != "undefined" ? (
@@ -67,12 +60,7 @@ export default function Weather({ deviceId }: Props) {
             </p>
             <p className={styles.weather__humidity}>{data.humidity}%</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={WEATHER_URL}
-              width={50}
-              height={50}
-              alt=""
-            />
+            <img src={WEATHER_URL} width={50} height={50} alt="" />
           </div>
         </>
       ) : (
