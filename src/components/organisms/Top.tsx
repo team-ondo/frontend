@@ -4,6 +4,14 @@ import Weather from "@/components/molecules/Weather";
 import Livedata from "./Livedata";
 import axios from "axios";
 
+export type WeatherData = {
+  location_name: string;
+  temperature_c: number;
+  temperature_f: number;
+  humidity: number;
+  weather_icon: string;
+};
+
 export default function Top() {
   const [currTemp, setCurrTemp] = useState<number | null>();
   const [currHumid, setCurrHumid] = useState<number | null>();
