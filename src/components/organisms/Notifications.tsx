@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/organisms/Notifications.module.scss";
 
-const notifiData = [
+const allNotifiData = [
   {
     id: 1,
     date: "01/01/22 14:30",
@@ -172,22 +172,54 @@ const notifiData = [
   },
 ];
 
+const handleClickMessage = (data: any) => {
+
+}
+
 export default function Notifications() {
+  const [readState, setReadState] = useState<string>("all");
+  const [notifiData, setNotifiData] = useState<any>([]);
+
+  useEffect(() => {
+    setNotifiData(allNotifiData);
+  }, []);
+
+  const handleClickState = (state: string) => {
+    setReadState(state);
+    switch (state) {
+      case "all":
+        setNotifiData(allNotifiData);
+        break;
+
+      case "unread":
+        const unreadData = allNotifiData.filter(elm => elm.is_read === 0);
+        setNotifiData(unreadData);
+        break;
+
+      case "read":
+        const readData = allNotifiData.filter(elm => elm.is_read === 1);
+        setNotifiData(readData);
+        break;
+    }
+  }
+
   return (
     <div className={styles.notifi}>
       <div className={styles.notifi__inner}>
         <nav className={styles.notifi__menu}>
-          <button className={styles.notifi__menuButton}>All</button>
-          <button className={styles.notifi__menuButton}>Unread</button>
-          <button className={styles.notifi__menuButton}>Read</button>
+          <button className={`${styles.notifi__menuButton} ${readState === "all" ? styles.notifi__read : ""}`} onClick={() => handleClickState("all")}>All</button>
+          <button className={`${styles.notifi__menuButton} ${readState === "unread" ? styles.notifi__read : ""}`} onClick={() => handleClickState("unread")}>Unread</button>
+          <button className={`${styles.notifi__menuButton} ${readState === "read" ? styles.notifi__read : ""}`} onClick={() => handleClickState("read")}>Read</button>
         </nav>
         <div className={styles.notifi__history}>
-          {notifiData.map((data) => {
+          {notifiData.map((data: any) => {
             return (
-              <div className={styles.notifi__item} key={data.id}>
+              <div className={styles.notifi__item} key={data.id}onClick={() => handleClickMessage(data)}>
                 <p className={styles.notifi__itemDate}>{data.date}</p>
                 <p
-                  className={`${styles.notifi__itemContent} data.is_read ? ${styles.notifi__itemRead} : ""`}
+                  className={`${styles.notifi__itemContent} ${
+                    data.is_read === 0 ? styles.notifi__itemRead : ""
+                  }`}
                 >
                   {data.content}
                 </p>

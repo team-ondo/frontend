@@ -40,4 +40,51 @@
       background-color: var.$themeOrange;
     }
   }
+  
+  &__read {
+    background-color: var.$themeOrange;
+  }
+
+  &__history {
+    width: 900px;
+    height: 500px;
+    overflow: auto;
+    margin-top: 50px;
+
+    @include mi.mq {
+      width: 350px;
+      height: 450px;
+    }
+  }
+
+  &__item {
+    padding: 10px;
+    border-bottom: 1px solid var.$themeGray;
+    cursor: pointer;
+  }
+
+  &__itemDate {
+    text-align: left;
+    font-size: 16px;
+    color: var.$themeDarkGray;
+    line-height: 1.5;
+  }
+
+  &__itemContent {
+    text-align: left;
+    font-size: 18px;
+    color: var.$themeBlack;
+    line-height: 1.5;
+
+    @include mi.mq {
+      width: 330px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__itemRead {
+    font-weight: bold;
+  }
 }
