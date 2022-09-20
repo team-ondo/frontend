@@ -123,8 +123,8 @@ export default function AlarmHistory() {
       <div className={styles.top__inner}>
         <h1 className={styles["alarm-history-header"]}>Alarm History:</h1>
         <div className={styles["alarm-history-container"]}>
-          {alarmData.map((data) => {
-            return <AlarmHistoryItem data={data} />;
+          {alarmData.map((data, i) => {
+            return <AlarmHistoryItem data={data} key={i} />;
           })}
         </div>
       </div>
