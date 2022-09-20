@@ -39,7 +39,7 @@ export default function Weather({
       "June.",
       "July.",
       "Aug.",
-      "Sept.",
+      "Sep.",
       "Oct.",
       "Nov.",
       "Dec.",
@@ -57,24 +57,16 @@ export default function Weather({
 
   return (
     <div className={styles.weather}>
-      {typeof data != "undefined" ? (
-        <>
-          <div className={styles.location__info}>
-            <p className={styles.weather__location}>{location_name}</p>
-            <p className={styles.weather__date}>{day}</p>
-          </div>
-          <div className={styles.location__data}>
-            <p className={styles.weather__temperature}>
-              {temperature_c}&#x2103;
-            </p>
-            <p className={styles.weather__humidity}>{humidity}%</p>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={WEATHER_ICON_URL} width={50} height={50} alt="" />
-          </div>
-        </>
-      ) : (
-        <div></div>
-      )}
+      <div className={styles.location__info}>
+        <p className={styles.weather__location}>{location_name}</p>
+        <p className={styles.weather__date}>{day}</p>
+      </div>
+      <div className={styles.location__data}>
+        <p className={styles.weather__temperature}>{temperature_c}&#x2103;</p>
+        <p className={styles.weather__humidity}>{humidity}%</p>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={WEATHER_ICON_URL} width={50} height={50} alt="" />
+      </div>
     </div>
   );
 }
