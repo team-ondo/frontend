@@ -1,13 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/molecules/Weather.module.scss";
-
-type WeatherData = {
-  location_name: string;
-  temperature_c: number;
-  temperature_f: number;
-  humidity: number;
-  weather_icon: string;
-};
+import { WeatherData } from "@/components/organisms/Top";
 
 export default function Weather({
   location_name,
