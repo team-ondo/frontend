@@ -27,7 +27,17 @@ export default function Top() {
   return (
     <div className={styles.top}>
       <div className={styles.top__inner}>
-        {data ? <Weather data={data} /> : <></>}
+        {data ? (
+          <Weather
+            location_name={data.location_name}
+            temperature_c={data.temperature_c}
+            temperature_f={data.temperature_f}
+            humidity={data.humidity}
+            weather_icon={data.weather_icon}
+          />
+        ) : (
+          <></>
+        )}
         {currTemp && currHumid ? (
           <Livedata currTemp={currTemp} currHumid={currHumid} />
         ) : (
