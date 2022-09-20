@@ -16,7 +16,7 @@ export default function Top() {
   const [currTemp, setCurrTemp] = useState<number | null>();
   const [currHumid, setCurrHumid] = useState<number | null>();
   const [deviceId, setDeviceId] = useState<string | null>();
-  const [weatherData, setWeatherData] = useState<WeatherData | []>([]);
+  const [weatherData, setWeatherData] = useState<WeatherData | null>();
 
   useEffect(() => {
     setCurrTemp(35.2);
