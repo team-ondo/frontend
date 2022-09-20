@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/organisms/Livedata.module.scss";
-import "chartjs-plugin-doughnutlabel";
 import { Doughnut } from "react-chartjs-2";
+import { Chart, ArcElement } from "chart.js";
+Chart.register(ArcElement);
 
 type Props = {
   currTemp: number;
@@ -44,35 +45,44 @@ export default function Livedata(props: Props) {
         label: "Temperature",
         data: [props.currTemp, 50 - props.currTemp],
         backgroundColor: [tempColor, "rgb(125, 125, 125, 0.25)"],
-        hoverOffset: 4,
+        hoverOffset: 0,
         borderWidth: 0,
       },
     ],
   };
 
-  const tempOption: any = {
-    legend: {
-      display: false,
-    },
-    tooltip: {
-      filter: function (a: { label: string }, data: any) {
-        return a.label === "Temperature";
+  // const tempOption: any = {
+  //   plugins: {
+  //     legend: {
+  //       display: false,
+  //     },
+  //     tooltip: {
+  //       filter: function (a: { label: string }, data: any) {
+  //         return a.label === "Temperature";
+  //       },
+  //     },
+  //   },
+  // };
+
+  const tempPlugins: any = [
+    {
+      beforeDraw: function (chart: any) {
+        let width = chart.width,
+          height = chart.height,
+          ctx = chart.ctx;
+        ctx.restore();
+        let fontSize = (height / 160).toFixed(2);
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#666666";
+        let text = `${props.currTemp}℃`,
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 2;
+        ctx.fillText(text, textX, textY);
+        ctx.save();
       },
     },
-    plugins: {
-      doughnutlabel: {
-        labels: [
-          {
-            text: `${props.currTemp}℃`,
-            color: "#666666",
-            font: {
-              size: 30,
-            },
-          },
-        ],
-      },
-    },
-  };
+  ];
 
   const humidData = {
     labels: ["Humidity", ""],
@@ -81,30 +91,46 @@ export default function Livedata(props: Props) {
         label: "Humidity",
         data: [props.currHumid, 100 - props.currHumid],
         backgroundColor: [humidColor, "rgb(125, 125, 125, 0.25)"],
-        hoverOffset: 4,
+        hoverOffset: 0,
         borderWidth: 0,
       },
     ],
   };
 
-  const humidOption = {
-    legend: {
-      display: false,
-    },
+  const humidOption: any = {
     plugins: {
-      doughnutlabel: {
-        labels: [
-          {
-            text: `${props.currHumid}%`,
-            color: "#666666",
-            font: {
-              size: 30,
-            },
-          },
-        ],
+      legend: {
+        display: false,
       },
+      // tooltip: {
+      //   callbacks: {
+      //     label: (context: any) => {
+      //       console.log(context);
+      //     },
+      //   },
+      // },
     },
   };
+
+  const humidPlugins: any = [
+    {
+      beforeDraw: function (chart: any) {
+        let width = chart.width,
+          height = chart.height,
+          ctx = chart.ctx;
+        ctx.restore();
+        let fontSize = (height / 160).toFixed(2);
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "middle";
+        ctx.fillStyle = "#666666";
+        let text = `${props.currHumid}%`,
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 2;
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+      },
+    },
+  ];
 
   return (
     <div className={styles.livedata}>
@@ -115,7 +141,8 @@ export default function Livedata(props: Props) {
             height={400}
             width={400}
             data={tempData}
-            options={tempOption}
+            // options={tempOption}
+            plugins={tempPlugins}
             id="temp-chart"
           />
         </div>
@@ -128,6 +155,7 @@ export default function Livedata(props: Props) {
             width={400}
             data={humidData}
             options={humidOption}
+            plugins={humidPlugins}
             id="humid-chart"
           />
         </div>
