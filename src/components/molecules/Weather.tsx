@@ -10,8 +10,6 @@ export default function Weather({ deviceId }: Props) {
   const [data, setData] = useState<any>([]);
   const [day, setDay] = useState<string>("");
 
-  const WEATHER_URL = "http://openweathermap.org/img/wn";
-
   useEffect(() => {
     const date = new Date();
     const dayOfWeek = date.getDay();
@@ -53,6 +51,8 @@ export default function Weather({ deviceId }: Props) {
       });
   }, [deviceId]);
 
+  const WEATHER_URL = data.weather_icon ? `http://openweathermap.org/img/wn/${data.weather_icon}.png` : "";
+  
   return (
     <div className={styles.weather}>
       {typeof data != "undefined" ? (
@@ -68,7 +68,7 @@ export default function Weather({ deviceId }: Props) {
             <p className={styles.weather__humidity}>{data.humidity}%</p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`${WEATHER_URL}/${data.weather_icon}.png`}
+              src={WEATHER_URL}
               width={50}
               height={50}
               alt=""
