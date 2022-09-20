@@ -7,33 +7,34 @@ import axios from "axios";
 export default function Top() {
   const [currTemp, setCurrTemp] = useState<number | null>();
   const [currHumid, setCurrHumid] = useState<number | null>();
-  const [deviceId, setDeviceId] = useState<number | null>(1);
-  const [data, setData] = useState<any>([]);
+  const [deviceId, setDeviceId] = useState<string | null>();
+  const [weatherData, setWeatherData] = useState<any>([]);
 
   useEffect(() => {
     setCurrTemp(35.2);
     setCurrHumid(68);
-    setDeviceId(1);
+    setDeviceId("a7382f5c-3326-4cf8-b717-549affe1c2eb");
   }, []);
 
+  // ToDO -> implement catch
   useEffect(() => {
     axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/weather-info/en/${deviceId}`)
       .then((res) => {
-        setData(res.data);
+        setWeatherData(res.data);
       });
   }, [deviceId]);
 
   return (
     <div className={styles.top}>
       <div className={styles.top__inner}>
-        {data ? (
+        {weatherData ? (
           <Weather
-            location_name={data.location_name}
-            temperature_c={data.temperature_c}
-            temperature_f={data.temperature_f}
-            humidity={data.humidity}
-            weather_icon={data.weather_icon}
+            location_name={weatherData.location_name}
+            temperature_c={weatherData.temperature_c}
+            temperature_f={weatherData.temperature_f}
+            humidity={weatherData.humidity}
+            weather_icon={weatherData.weather_icon}
           />
         ) : (
           <></>
