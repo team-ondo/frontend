@@ -6,8 +6,13 @@ import AnimationTrigger from "@/components/organisms/AnimationTrigger";
 import FeatureList from "@/components/organisms/Lp_featurelist";
 import { Link as Scroll } from "react-scroll";
 
-export default function Lp() {
+type Props = {
+  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Lp({ setLoggedin }: Props) {
   const [width, setWidth] = useState(0);
+
   useEffect(() => {
     // get the wiindow width
     function handleResize() {
@@ -67,7 +72,7 @@ export default function Lp() {
               ""
             ) : (
               <div className={styles.mv__form}>
-                <Form />
+                <Form setLoggedin={setLoggedin} />
               </div>
             )}
             <Scroll to="sp_form" smooth={true}>
@@ -134,7 +139,7 @@ export default function Lp() {
       {width < 900 ? (
         <section className={styles.form} id="sp_form">
           <div className={styles.form__inner}>
-            <Form />
+            <Form setLoggedin={setLoggedin} />
           </div>
         </section>
       ) : (
