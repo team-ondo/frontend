@@ -12,17 +12,20 @@ export type WeatherData = {
   weather_icon: string;
 };
 
-export default function Top() {
+export type LivaData = {
+  temperature_celsius: number;
+  humidity: number;
+}
+
+type Props = {
+  deviceId: string | null;
+}
+
+export default function Top({deviceId}: Props) {
   const [currTemp, setCurrTemp] = useState<number | null>();
   const [currHumid, setCurrHumid] = useState<number | null>();
-  const [deviceId, setDeviceId] = useState<string | null>();
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
-
-  useEffect(() => {
-    setCurrTemp(35.2);
-    setCurrHumid(68);
-    setDeviceId("a7382f5c-3326-4cf8-b717-549affe1c2eb");
-  }, []);
+  const [liveData, setLiveData] = useState<LivaData | null>();
 
   // ToDO -> implement catch
   useEffect(() => {
@@ -31,6 +34,14 @@ export default function Top() {
       .then((res) => {
         setWeatherData(res.data);
       });
+
+    // live data
+    // TODO Implement catch
+    axios
+    .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/device-data/${deviceId}/live`)
+    .then((res) => {
+      setLiveData(res.data);
+    });
   }, [deviceId]);
 
   return (
@@ -47,8 +58,8 @@ export default function Top() {
         ) : (
           <></>
         )}
-        {currTemp && currHumid ? (
-          <Livedata currTemp={currTemp} currHumid={currHumid} />
+        {liveData ? (
+          <Livedata temperature_celsius={liveData.temperature_celsius} humidity={liveData.humidity} />
         ) : (
           <></>
         )}
