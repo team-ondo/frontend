@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "@/styles/components/organisms/History.module.scss";
 import AlarmHistory from "./AlarmHistory";
+import axios from "axios";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -64,40 +65,30 @@ export default function History() {
     const url = "https://ondo-backend-test.onrender.com";
     const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    axios.get(`${url}/device-data/${device_id}/historical/week`).then((res) => {
+      let historicalData = res.data;
+      console.log("data: ", historicalData);
 
-    // TODO
-    const res = await fetch(
-      `${url}/device-data/${device_id}/historical/week`,
-      options
-    );
-    const data = await res.json();
-    console.log("data: ", data);
+      const tempMax: number[] = [];
+      const tempMin: number[] = [];
+      const humidMax: number[] = [];
+      const humidMin: number[] = [];
+      const label: string[] = [];
 
-    const tempMax: number[] = [];
-    const tempMin: number[] = [];
-    const humidMax: number[] = [];
-    const humidMin: number[] = [];
-    const label: string[] = [];
+      historicalData.forEach((day: any) => {
+        tempMax.push(day.max_temp);
+        tempMin.push(day.min_temp);
+        humidMax.push(day.max_humid);
+        humidMin.push(day.min_humid);
+        label.push(day.date);
+      });
 
-    data.forEach((day: any) => {
-      tempMax.push(day.max_temp);
-      tempMin.push(day.min_temp);
-      humidMax.push(day.max_humid);
-      humidMin.push(day.min_humid);
-      label.push(day.date);
+      setDataTempMax(tempMax);
+      setDataTempMin(tempMin);
+      setDataHumidMax(humidMax);
+      setDataHumidMin(humidMin);
+      setDataLabels(label);
     });
-
-    setDataTempMax(tempMax);
-    setDataTempMin(tempMin);
-    setDataHumidMax(humidMax);
-    setDataHumidMin(humidMin);
-    setDataLabels(label);
   };
 
   useEffect(() => {
