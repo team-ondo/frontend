@@ -174,7 +174,7 @@ const CheckLink = styled("a", {
 });
 
 const Form = ({ setLoggedin }: Props) => (
-  <Box css={{}}>
+  <Box>
     <Tabs defaultValue="tab1">
       <TabsList aria-label="Manage your account">
         <TabsTrigger value="tab1">Sign Up</TabsTrigger>
