@@ -138,14 +138,14 @@ export default function History() {
     datasets: [
       {
         label: "Max",
-        data: [82, 80, 78, 81, 75, 83, 74],
+        data: dataHumidMax,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         fill: 1,
       },
       {
         label: "Min",
-        data: [72, 76, 75, 73, 71, 81, 72],
+        data: dataHumidMin,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         fill: true,
