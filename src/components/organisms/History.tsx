@@ -52,13 +52,15 @@ export const options_hum = {
 };
 
 export default function History() {
+  // STATE
   const [dataTempMax, setDataTempMax] = useState([]);
   const [dataTempMin, setDataTempMin] = useState([]);
   const [dataHumidMax, setDataHumidMax] = useState([]);
   const [dataHumidMin, setDataHumidMin] = useState([]);
+  const [dataLabels, setDataLabels] = useState([]);
 
-  // FETCH DATA FROM BACKEND
-  const weekHandler = async () => {
+  // FETCH WEEK HELPER
+  const weekButtonHandler = async () => {
     const url = "https://ondo-backend-test.onrender.com";
     const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
@@ -88,28 +90,6 @@ export default function History() {
     "Saturday",
     "Sunday",
   ];
-
-  // export const data_temp = {
-  //   labels,
-  //   datasets: [
-  //     {
-  //       label: "Max",
-  //       // map here
-  //       data: [34, 30, 28, 28, 30, 29, 25],
-  //       borderColor: "rgb(255, 99, 132)",
-  //       backgroundColor: "rgba(255, 99, 132, 0.5)",
-  //       fill: 1,
-  //     },
-  //     {
-  //       label: "Min",
-  //       // map here
-  //       data: [20, 21, 22, 25, 23, 18, 16],
-  //       borderColor: "rgb(53, 162, 235)",
-  //       backgroundColor: "rgba(53, 162, 235, 0.5)",
-  //       fill: true,
-  //     },
-  //   ],
-  // };
 
   const data_temp = {
     labels,
@@ -152,8 +132,7 @@ export default function History() {
   };
 
   useEffect(() => {
-    const data = weekHandler();
-    setWeekData(weekData);
+    const data = weekButtonHandler();
   }, []);
 
   return (
@@ -162,7 +141,10 @@ export default function History() {
         <div className={styles.top__inner}>
           <nav className={styles["chart-navigation"]}>
             <button className={styles["chart-button"]}>Day</button>
-            <button className={styles["chart-button"]} onClick={weekHandler}>
+            <button
+              className={styles["chart-button"]}
+              onClick={weekButtonHandler}
+            >
               Week
             </button>
             <button className={styles["chart-button"]}>Month</button>
