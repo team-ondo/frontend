@@ -65,6 +65,7 @@ export default function History() {
     const url = "https://ondo-backend-test.onrender.com";
     const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
+    // TODO implement catch
     axios.get(`${url}/device-data/${device_id}/historical/week`).then((res) => {
       let historicalData = res.data;
       console.log("data: ", historicalData);
@@ -172,10 +173,3 @@ export default function History() {
     </>
   );
 }
-
-// data example - array of objects
-// date: "2022/09/18";
-// max_humid: 72;
-// max_temp: 31.7;
-// min_humid: 60;
-// min_temp: 25.6;
