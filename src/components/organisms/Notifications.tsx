@@ -8,6 +8,12 @@ export type NotificationsData = {
   is_read: boolean;
 };
 
+const ReadState = {
+  All: 0,
+  Unread: 1,
+  Read: 2,
+} as const;
+
 const allNotifiData = [
   {
     id: 1,
@@ -183,26 +189,26 @@ const allNotifiData = [
 const handleClickMessage = (data: any) => {};
 
 export default function Notifications() {
-  const [readState, setReadState] = useState<string>("all");
+  const [readState, setReadState] = useState<number>(ReadState.All);
   const [notifiData, setNotifiData] = useState<Array<NotificationsData> | undefined>([]);
 
   useEffect(() => {
     setNotifiData(allNotifiData);
   }, []);
 
-  const handleClickState = (state: string) => {
+  const handleClickState = (state: number) => {
     setReadState(state);
     switch (state) {
-      case "all":
+      case ReadState.All:
         setNotifiData(allNotifiData);
         break;
 
-      case "unread":
+      case ReadState.Unread:
         const unreadData = allNotifiData.filter((elm) => !elm.is_read);
         setNotifiData(unreadData);
         break;
 
-      case "read":
+      case ReadState.Read:
         const readData = allNotifiData.filter((elm) => elm.is_read);
         setNotifiData(readData);
         break;
@@ -215,25 +221,25 @@ export default function Notifications() {
         <nav className={styles.notifi__menu}>
           <button
             className={`${styles.notifi__menuButton} ${
-              readState === "all" ? styles.notifi__read : ""
+              readState === ReadState.All ? styles.notifi__read : ""
             }`}
-            onClick={() => handleClickState("all")}
+            onClick={() => handleClickState(ReadState.All)}
           >
             All
           </button>
           <button
             className={`${styles.notifi__menuButton} ${
-              readState === "unread" ? styles.notifi__read : ""
+              readState === ReadState.Unread ? styles.notifi__read : ""
             }`}
-            onClick={() => handleClickState("unread")}
+            onClick={() => handleClickState(ReadState.Unread)}
           >
             Unread
           </button>
           <button
             className={`${styles.notifi__menuButton} ${
-              readState === "read" ? styles.notifi__read : ""
+              readState === ReadState.Read ? styles.notifi__read : ""
             }`}
-            onClick={() => handleClickState("read")}
+            onClick={() => handleClickState(ReadState.Read)}
           >
             Read
           </button>
