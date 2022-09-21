@@ -53,11 +53,11 @@ export const options_hum = {
 
 export default function History() {
   // STATE
-  const [dataTempMax, setDataTempMax] = useState([]);
-  const [dataTempMin, setDataTempMin] = useState([]);
-  const [dataHumidMax, setDataHumidMax] = useState([]);
-  const [dataHumidMin, setDataHumidMin] = useState([]);
-  const [dataLabels, setDataLabels] = useState([]);
+  const [dataTempMax, setDataTempMax] = useState<number[]>([]);
+  const [dataTempMin, setDataTempMin] = useState<number[]>([]);
+  const [dataHumidMax, setDataHumidMax] = useState<number[]>([]);
+  const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
+  const [dataLabels, setDataLabels] = useState<string[]>([]);
 
   // FETCH WEEK HELPER
   const weekButtonHandler = async () => {
@@ -71,39 +71,61 @@ export default function History() {
       },
     };
 
+    // TODO
     const res = await fetch(
       `${url}/device-data/${device_id}/historical/week`,
       options
     );
     const data = await res.json();
-
     console.log("data: ", data);
+
+    const tempMax: number[] = [];
+    const tempMin: number[] = [];
+    const humidMax: number[] = [];
+    const humidMin: number[] = [];
+    const label: string[] = [];
+
+    data.forEach((day: any) => {
+      tempMax.push(day.max_temp);
+      tempMin.push(day.min_temp);
+      humidMax.push(day.max_humid);
+      humidMin.push(day.min_humid);
+      label.push(day.date);
+    });
+
+    setDataTempMax(tempMax);
+    setDataTempMin(tempMin);
+    setDataHumidMax(humidMax);
+    setDataHumidMin(humidMin);
+    setDataLabels(label);
   };
 
   // TODO change to actual dates from API - maybe convert dates to weekday
-  const labels = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
+  const labels = dataLabels;
+
+  // const labels = [
+  //   "Monday",
+  //   "Tuesday",
+  //   "Wednesday",
+  //   "Thursday",
+  //   "Friday",
+  //   "Saturday",
+  //   "Sunday",
+  // ];
 
   const data_temp = {
     labels,
     datasets: [
       {
         label: "Max",
-        data: [34, 30, 28, 28, 30, 29, 25],
+        data: dataTempMax,
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         fill: 1,
       },
       {
         label: "Min",
-        data: [20, 21, 22, 25, 23, 18, 16],
+        data: dataTempMin,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         fill: true,
@@ -130,10 +152,6 @@ export default function History() {
       },
     ],
   };
-
-  useEffect(() => {
-    const data = weekButtonHandler();
-  }, []);
 
   return (
     <>
@@ -169,3 +187,10 @@ export default function History() {
     </>
   );
 }
+
+// data example - array of objects
+// date: "2022/09/18";
+// max_humid: 72;
+// max_temp: 31.7;
+// min_humid: 60;
+// min_temp: 25.6;
