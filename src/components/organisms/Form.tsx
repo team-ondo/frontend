@@ -5,10 +5,6 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 
-type Props = {
-  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 const StyledTabs = styled(TabsPrimitive.Root, {
   display: "flex",
   flexDirection: "column",
@@ -173,7 +169,7 @@ const CheckLink = styled("a", {
   "&:visited": { color: indigo.indigo11 },
 });
 
-const Form = ({ setLoggedin }: Props) => (
+const Form = () => (
   <Box css={{}}>
     <Tabs defaultValue="tab1">
       <TabsList aria-label="Manage your account">
@@ -230,9 +226,7 @@ const Form = ({ setLoggedin }: Props) => (
           </Label>
         </FieldCheck>
         <Flex css={{ marginTop: 20, justifyContent: "center" }}>
-          <Button variant="indigo" onClick={() => setLoggedin(true)}>
-            Sign Up
-          </Button>
+          <Button variant="indigo">Sign Up</Button>
         </Flex>
       </TabsContent>
       {/* Sign In */}
@@ -251,9 +245,7 @@ const Form = ({ setLoggedin }: Props) => (
           <Input id="confirmPassword" type="password" />
         </Fieldset>
         <Flex css={{ marginTop: 20, justifyContent: "center" }}>
-          <Button variant="indigo" onClick={() => setLoggedin(true)}>
-            Sign In
-          </Button>
+          <Button variant="indigo">Sign In</Button>
         </Flex>
       </TabsContent>
     </Tabs>
