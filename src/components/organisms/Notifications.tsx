@@ -14,6 +14,8 @@ const ReadState = {
   Read: 2,
 } as const;
 
+type ReadState = typeof ReadState[keyof typeof ReadState];
+
 const allNotifiData = [
   {
     id: 1,
@@ -189,14 +191,14 @@ const allNotifiData = [
 const handleClickMessage = (data: any) => {};
 
 export default function Notifications() {
-  const [readState, setReadState] = useState<number>(ReadState.All);
+  const [readState, setReadState] = useState<ReadState>(ReadState.All);
   const [notifiData, setNotifiData] = useState<NotificationsData[]>([]);
 
   useEffect(() => {
     setNotifiData(allNotifiData);
   }, []);
 
-  const handleClickState = (state: number) => {
+  const handleClickState = (state: ReadState) => {
     setReadState(state);
     switch (state) {
       case ReadState.All:
@@ -245,24 +247,28 @@ export default function Notifications() {
           </button>
         </nav>
         <div className={styles.notifi__history}>
-          {notifiData ? notifiData.map((data: any) => {
-            return (
-              <div
-                className={styles.notifi__item}
-                key={data.id}
-                onClick={() => handleClickMessage(data)}
-              >
-                <p className={styles.notifi__itemDate}>{data.date}</p>
-                <p
-                  className={`${styles.notifi__itemContent} ${
-                    !data.is_read ? styles.notifi__itemRead : ""
-                  }`}
+          {notifiData ? (
+            notifiData.map((data: any) => {
+              return (
+                <div
+                  className={styles.notifi__item}
+                  key={data.id}
+                  onClick={() => handleClickMessage(data)}
                 >
-                  {data.content}
-                </p>
-              </div>
-            );
-          }) : <></>}
+                  <p className={styles.notifi__itemDate}>{data.date}</p>
+                  <p
+                    className={`${styles.notifi__itemContent} ${
+                      !data.is_read ? styles.notifi__itemRead : ""
+                    }`}
+                  >
+                    {data.content}
+                  </p>
+                </div>
+              );
+            })
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     </div>
