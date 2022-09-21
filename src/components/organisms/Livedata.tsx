@@ -2,14 +2,11 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/organisms/Livedata.module.scss";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
+import { LivaData } from "@/components/organisms/Top";
+
 Chart.register(ArcElement);
 
-type Props = {
-  currTemp: number;
-  currHumid: number;
-};
-
-export default function Livedata(props: Props) {
+export default function Livedata({temperature_celsius, humidity}: LivaData) {
   const [tempColor, setTempColor] = useState<
     CanvasGradient | "rgb(255, 99, 132)"
   >("rgb(255, 99, 132)");
@@ -43,7 +40,7 @@ export default function Livedata(props: Props) {
     datasets: [
       {
         label: "Temperature",
-        data: [props.currTemp, 50 - props.currTemp],
+        data: [temperature_celsius, 50 - temperature_celsius],
         backgroundColor: [tempColor, "rgb(125, 125, 125, 0.25)"],
         hoverOffset: 0,
         borderWidth: 0,
@@ -75,7 +72,7 @@ export default function Livedata(props: Props) {
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "middle";
         ctx.fillStyle = "#666666";
-        let text = `${props.currTemp}℃`,
+        let text = `${temperature_celsius}℃`,
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 2;
         ctx.fillText(text, textX, textY);
@@ -89,7 +86,7 @@ export default function Livedata(props: Props) {
     datasets: [
       {
         label: "Humidity",
-        data: [props.currHumid, 100 - props.currHumid],
+        data: [humidity, 100 - humidity],
         backgroundColor: [humidColor, "rgb(125, 125, 125, 0.25)"],
         hoverOffset: 0,
         borderWidth: 0,
@@ -123,7 +120,7 @@ export default function Livedata(props: Props) {
         ctx.font = fontSize + "em sans-serif";
         ctx.textBaseline = "middle";
         ctx.fillStyle = "#666666";
-        let text = `${props.currHumid}%`,
+        let text = `${humidity}%`,
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 2;
         ctx.fillText(text, textX, textY);
