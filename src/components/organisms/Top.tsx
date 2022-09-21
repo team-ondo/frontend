@@ -36,7 +36,6 @@ export default function Top({deviceId}: Props) {
       });
 
     // live data
-    // TODO Implement catch
     axios
     .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/device-data/${deviceId}/live`)
     .then((res) => {
