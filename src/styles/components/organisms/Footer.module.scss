@@ -1,0 +1,27 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.footer {
+  min-width: var.$contentWidthPc;
+
+  @include mi.mq {
+    min-width: auto;
+  }
+
+  &__inner {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__contentText {
+    margin-left: 10px;
+    font-size: 16px;
+    color: var.$themeRealBlack;
+  }
+}
