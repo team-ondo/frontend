@@ -190,7 +190,7 @@ const handleClickMessage = (data: any) => {};
 
 export default function Notifications() {
   const [readState, setReadState] = useState<number>(ReadState.All);
-  const [notifiData, setNotifiData] = useState<Array<NotificationsData> | undefined>([]);
+  const [notifiData, setNotifiData] = useState<NotificationsData[]>([]);
 
   useEffect(() => {
     setNotifiData(allNotifiData);
