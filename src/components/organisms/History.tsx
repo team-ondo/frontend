@@ -100,18 +100,12 @@ export default function History() {
     setDataLabels(label);
   };
 
+  useEffect(() => {
+    weekButtonHandler();
+  }, []);
+
   // TODO change to actual dates from API - maybe convert dates to weekday
   const labels = dataLabels;
-
-  // const labels = [
-  //   "Monday",
-  //   "Tuesday",
-  //   "Wednesday",
-  //   "Thursday",
-  //   "Friday",
-  //   "Saturday",
-  //   "Sunday",
-  // ];
 
   const data_temp = {
     labels,
