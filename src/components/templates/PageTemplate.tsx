@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Header from "@/components/organisms/Header";
+import Footer from "@/components/organisms/Footer";
 
 type Props = {
   pageid: string;
@@ -22,7 +23,7 @@ export default function PageTemplate(props: Props) {
       </Head>
       <Header />
       <main>{props.children}</main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

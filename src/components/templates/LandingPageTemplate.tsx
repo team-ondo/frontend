@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import Footer from "@/components/organisms/Footer";
 
 type Props = {
   pageid: string;
@@ -20,7 +21,7 @@ export default function PageTemplate({ pageid, children }: Props) {
         <title>ONDO</title>
       </Head>
       <main className="main--lp">{children}</main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
