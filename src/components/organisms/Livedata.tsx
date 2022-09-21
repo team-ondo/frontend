@@ -6,7 +6,7 @@ import { LivaData } from "@/components/organisms/Top";
 
 Chart.register(ArcElement);
 
-export default function Livedata({temperature_celsius, humidity}: LivaData) {
+export default function Livedata({ temperature_celsius, humidity }: LivaData) {
   const [tempColor, setTempColor] = useState<
     CanvasGradient | "rgb(255, 99, 132)"
   >("rgb(255, 99, 132)");

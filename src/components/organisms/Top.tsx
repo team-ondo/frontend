@@ -15,13 +15,13 @@ export type WeatherData = {
 export type LivaData = {
   temperature_celsius: number;
   humidity: number;
-}
+};
 
 type Props = {
   deviceId: string | null;
-}
+};
 
-export default function Top({deviceId}: Props) {
+export default function Top({ deviceId }: Props) {
   const [currTemp, setCurrTemp] = useState<number | null>();
   const [currHumid, setCurrHumid] = useState<number | null>();
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
@@ -38,10 +38,10 @@ export default function Top({deviceId}: Props) {
     // live data
     // TODO Implement catch
     axios
-    .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/device-data/${deviceId}/live`)
-    .then((res) => {
-      setLiveData(res.data);
-    });
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/device-data/${deviceId}/live`)
+      .then((res) => {
+        setLiveData(res.data);
+      });
   }, [deviceId]);
 
   return (
@@ -59,7 +59,10 @@ export default function Top({deviceId}: Props) {
           <></>
         )}
         {liveData ? (
-          <Livedata temperature_celsius={liveData.temperature_celsius} humidity={liveData.humidity} />
+          <Livedata
+            temperature_celsius={liveData.temperature_celsius}
+            humidity={liveData.humidity}
+          />
         ) : (
           <></>
         )}
