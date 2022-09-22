@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "@/styles/components/organisms/History.module.scss";
 import AlarmHistory from "./AlarmHistory";
-import axios from "axios";
+import api from "../../lib/axios_settings";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -60,13 +60,12 @@ export default function History() {
   const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
   const [dataLabels, setDataLabels] = useState<string[]>([]);
 
-  const url = "https://ondo-backend-test.onrender.com";
   const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
   // FETCH DAY HELPER
   const dayButtonHandler = async () => {
     // TODO implement catch
-    axios.get(`${url}/device-data/${device_id}/historical/day`).then((res) => {
+    api.get(`/device-data/${device_id}/historical/day`).then((res) => {
       let historicalData = res.data;
       console.log("dayData: ", historicalData);
 
@@ -95,7 +94,7 @@ export default function History() {
   // FETCH WEEK HELPER
   const weekButtonHandler = async () => {
     // TODO implement catch
-    axios.get(`${url}/device-data/${device_id}/historical/week`).then((res) => {
+    api.get(`/device-data/${device_id}/historical/week`).then((res) => {
       let historicalData = res.data;
       console.log("data: ", historicalData);
 
