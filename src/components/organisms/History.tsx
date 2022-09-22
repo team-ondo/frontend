@@ -60,15 +60,39 @@ export default function History() {
   const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
   const [dataLabels, setDataLabels] = useState<string[]>([]);
 
+  const url = "https://ondo-backend-test.onrender.com";
+  const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
+
   const dayButtonHandler = async () => {
-    // TODO
+    // TODO implement catch
+    axios.get(`${url}/device-data/${device_id}/historical/day`).then((res) => {
+      let historicalData = res.data;
+      console.log("dayData: ", historicalData);
+
+      const tempMax: number[] = [];
+      const tempMin: number[] = [];
+      const humidMax: number[] = [];
+      const humidMin: number[] = [];
+      const label: string[] = [];
+
+      historicalData.forEach((day: any) => {
+        tempMax.push(day.max_temp);
+        tempMin.push(day.min_temp);
+        humidMax.push(day.max_humid);
+        humidMin.push(day.min_humid);
+        label.push(day.date);
+      });
+
+      setDataTempMax(tempMax);
+      setDataTempMin(tempMin);
+      setDataHumidMax(humidMax);
+      setDataHumidMin(humidMin);
+      setDataLabels(label);
+    });
   };
 
   // FETCH WEEK HELPER
   const weekButtonHandler = async () => {
-    const url = "https://ondo-backend-test.onrender.com";
-    const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
-
     // TODO implement catch
     axios.get(`${url}/device-data/${device_id}/historical/week`).then((res) => {
       let historicalData = res.data;
@@ -96,9 +120,9 @@ export default function History() {
     });
   };
 
-  useEffect(() => {
-    weekButtonHandler();
-  }, []);
+  // useEffect(() => {
+  //   weekButtonHandler();
+  // }, []);
 
   // TODO change to actual dates from API - maybe convert dates to weekday
   const labels = dataLabels;
@@ -148,19 +172,19 @@ export default function History() {
       <div className={styles.top}>
         <div className={styles.top__inner}>
           <nav className={styles["chart-navigation"]}>
-            <button className={styles["chart-button"]}>Day</button>
+            <button
+              className={styles["chart-button"]}
+              onClick={dayButtonHandler}
+            >
+              Day
+            </button>
             <button
               className={styles["chart-button"]}
               onClick={weekButtonHandler}
             >
               Week
             </button>
-            <button
-              className={styles["chart-button"]}
-              onClick={dayButtonHandler}
-            >
-              Month
-            </button>
+            <button className={styles["chart-button"]}>Month</button>
           </nav>
           <div className={styles.history}>
             <div className={styles.temperature}>
