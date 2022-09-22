@@ -63,6 +63,7 @@ export default function History() {
   const url = "https://ondo-backend-test.onrender.com";
   const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
+  // FETCH DAY HELPER
   const dayButtonHandler = async () => {
     // TODO implement catch
     axios.get(`${url}/device-data/${device_id}/historical/day`).then((res) => {
@@ -120,9 +121,10 @@ export default function History() {
     });
   };
 
-  // useEffect(() => {
-  //   weekButtonHandler();
-  // }, []);
+  // load week by default
+  useEffect(() => {
+    weekButtonHandler();
+  }, []);
 
   // TODO change to actual dates from API - maybe convert dates to weekday
   const labels = dataLabels;
