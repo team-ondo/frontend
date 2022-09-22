@@ -1482,6 +1482,11 @@ micromatch@^4.0.4:
     braces "^3.0.2"
     picomatch "^2.3.1"
 
+middleware-axios@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/middleware-axios/-/middleware-axios-2.1.2.tgz#48d02bcdad80aa1821625dd74ceb49f900e5deb1"
+  integrity sha512-Qce/gNQ0LSPIpV+/EUD/mf34YAI8zePDtAN3d9y9YovefmJ/1vwB13P9zuSZhs9YjMDN2eop1TGYvUnNnQcfbw==
+
 mime-db@1.52.0:
   version "1.52.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.52.0.tgz#bbabcdc02859f4987301c856e3387ce5ec43bf70"

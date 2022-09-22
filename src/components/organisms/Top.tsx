@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/organisms/Top.module.scss";
 import Weather from "@/components/molecules/Weather";
 import Livedata from "./Livedata";
-import axios from "axios";
+import api from "../../lib/axios_settings";
 
 export type WeatherData = {
   location_name: string;
@@ -29,19 +29,15 @@ export default function Top({ deviceId }: Props) {
 
   // ToDO -> implement catch
   useEffect(() => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/weather-info/en/${deviceId}`)
-      .then((res) => {
-        setWeatherData(res.data);
-      });
+    api.get(`/weather-info/en/${deviceId}`).then((res) => {
+      setWeatherData(res.data);
+    });
 
     // live data
     // TODO Implement catch
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/device-data/${deviceId}/live`)
-      .then((res) => {
-        setLiveData(res.data);
-      });
+    api.get(`/device-data/${deviceId}/live`).then((res) => {
+      setLiveData(res.data);
+    });
   }, [deviceId]);
 
   return (

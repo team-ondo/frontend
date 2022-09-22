@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "@/styles/components/organisms/History.module.scss";
 import AlarmHistory from "./AlarmHistory";
-import axios from "axios";
+import api from "../../lib/axios_settings";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -60,13 +60,41 @@ export default function History() {
   const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
   const [dataLabels, setDataLabels] = useState<string[]>([]);
 
+  const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
+
+  // FETCH DAY HELPER
+  const dayButtonHandler = async () => {
+    // TODO implement catch
+    api.get(`/device-data/${device_id}/historical/day`).then((res) => {
+      let historicalData = res.data;
+      console.log("dayData: ", historicalData);
+
+      const tempMax: number[] = [];
+      const tempMin: number[] = [];
+      const humidMax: number[] = [];
+      const humidMin: number[] = [];
+      const label: string[] = [];
+
+      historicalData.forEach((day: any) => {
+        tempMax.push(day.max_temp);
+        tempMin.push(day.min_temp);
+        humidMax.push(day.max_humid);
+        humidMin.push(day.min_humid);
+        label.push(day.date);
+      });
+
+      setDataTempMax(tempMax);
+      setDataTempMin(tempMin);
+      setDataHumidMax(humidMax);
+      setDataHumidMin(humidMin);
+      setDataLabels(label);
+    });
+  };
+
   // FETCH WEEK HELPER
   const weekButtonHandler = async () => {
-    const url = "https://ondo-backend-test.onrender.com";
-    const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
-
     // TODO implement catch
-    axios.get(`${url}/device-data/${device_id}/historical/week`).then((res) => {
+    api.get(`/device-data/${device_id}/historical/week`).then((res) => {
       let historicalData = res.data;
       console.log("data: ", historicalData);
 
@@ -92,6 +120,7 @@ export default function History() {
     });
   };
 
+  // load week by default
   useEffect(() => {
     weekButtonHandler();
   }, []);
@@ -144,7 +173,12 @@ export default function History() {
       <div className={styles.top}>
         <div className={styles.top__inner}>
           <nav className={styles["chart-navigation"]}>
-            <button className={styles["chart-button"]}>Day</button>
+            <button
+              className={styles["chart-button"]}
+              onClick={dayButtonHandler}
+            >
+              Day
+            </button>
             <button
               className={styles["chart-button"]}
               onClick={weekButtonHandler}
