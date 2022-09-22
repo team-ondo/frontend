@@ -107,6 +107,7 @@ export default function History() {
     // TODO implement catch
     api.get(`/device-data/${device_id}/historical/month`).then((res) => {
       let historicalData = res.data;
+
       updateDataState(historicalData);
     });
   };
