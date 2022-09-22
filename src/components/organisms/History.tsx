@@ -60,6 +60,10 @@ export default function History() {
   const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
   const [dataLabels, setDataLabels] = useState<string[]>([]);
 
+  const dayButtonHandler = async () => {
+    // TODO
+  };
+
   // FETCH WEEK HELPER
   const weekButtonHandler = async () => {
     const url = "https://ondo-backend-test.onrender.com";
@@ -151,7 +155,12 @@ export default function History() {
             >
               Week
             </button>
-            <button className={styles["chart-button"]}>Month</button>
+            <button
+              className={styles["chart-button"]}
+              onClick={dayButtonHandler}
+            >
+              Month
+            </button>
           </nav>
           <div className={styles.history}>
             <div className={styles.temperature}>
