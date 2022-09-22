@@ -62,19 +62,27 @@ export default function History() {
 
   const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
-  const updateDataState = (data: []) => {
+  type DeviceData = {
+    max_temp: number;
+    min_temp: number;
+    max_humid: number;
+    min_humid: number;
+    date: string;
+  };
+
+  const updateDataState = (deviceDataSet: DeviceData[]) => {
     const tempMax: number[] = [];
     const tempMin: number[] = [];
     const humidMax: number[] = [];
     const humidMin: number[] = [];
     const label: string[] = [];
 
-    data.forEach((day: any) => {
-      tempMax.push(day.max_temp);
-      tempMin.push(day.min_temp);
-      humidMax.push(day.max_humid);
-      humidMin.push(day.min_humid);
-      label.push(day.date);
+    deviceDataSet.forEach((deviceData: DeviceData) => {
+      tempMax.push(deviceData.max_temp);
+      tempMin.push(deviceData.min_temp);
+      humidMax.push(deviceData.max_humid);
+      humidMin.push(deviceData.min_humid);
+      label.push(deviceData.date);
     });
 
     setDataTempMax(tempMax);
