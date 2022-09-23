@@ -117,7 +117,9 @@ export default function Login({ setLoggedin }: Props) {
     api
       .post("/login", formData)
       .then((res) => {
-        Cookies.set("access_token", res.data.access_token);
+        Cookies.set("access_token", res.data.access_token, {
+          sameSite: "lax",
+        });
         setLoggedin(true);
       })
       .catch((error: any) => {
