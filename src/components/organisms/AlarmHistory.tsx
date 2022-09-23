@@ -5,7 +5,6 @@ import api from "../../lib/axios_settings";
 import styles from "@/styles/components/organisms/AlarmHistory.module.scss";
 
 type AlarmData = {
-  is_alarm: boolean;
   date: string;
   hour: string;
 };
@@ -21,12 +20,7 @@ export default function AlarmHistory() {
   useEffect(() => {
     api.get(`/device-data/${device_id}/historical/alarm`).then((res) => {
       const historicalAlarmData = res.data;
-
-      const filteredAlarmData = historicalAlarmData.filter(
-        (row: AlarmData) => row.is_alarm
-      );
-
-      setDataAlarm(filteredAlarmData);
+      setDataAlarm(historicalAlarmData);
     });
   }, []);
 
