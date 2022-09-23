@@ -122,6 +122,7 @@ import styles from "@/styles/components/organisms/AlarmHistory.module.scss";
 type AlarmData = {
   is_alarm: boolean;
   date: string;
+  hour: string;
 };
 
 export default function AlarmHistory() {
@@ -135,7 +136,6 @@ export default function AlarmHistory() {
   useEffect(() => {
     api.get(`/device-data/${device_id}/historical/alarm`).then((res) => {
       let historicalAlarmData = res.data;
-
       setDataAlarm(historicalAlarmData);
     });
   }, []);
