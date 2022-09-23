@@ -3,13 +3,11 @@ import styles from "@/styles/components/molecules/AlarmHistoryItem.module.scss";
 
 type Props = {
   data: {
-    is_alarm: boolean;
     date: string;
     hour: string;
   };
 };
 
-// TODO add hour once backend data updated
 export default function AlarmHistoryItem({ data }: Props) {
   return (
     <div className={styles["item-container"]}>
