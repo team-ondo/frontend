@@ -13,7 +13,6 @@ type Props = {
 interface LoginFormInput {
   email: string;
   loginPassword: string;
-  confirmPassword: string;
 }
 
 const StyledContent = styled(TabsPrimitive.Content, {
@@ -106,7 +105,6 @@ export default function Login({ setLoggedin }: Props) {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
   } = useForm<LoginFormInput>();
   const [errMessage, setErrMessage] = useState<string | null>();
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
@@ -116,13 +114,15 @@ export default function Login({ setLoggedin }: Props) {
     formData.append("username", data.email);
     formData.append("password", data.loginPassword);
 
-    api.post("/login", formData).then((res) => {
-      Cookies.set("access_token", res.data.access_token);
-      setLoggedin(true);
-    }).catch((error: any) => {
-      Cookies.remove("access_token");
-      setErrMessage(error.response.data.detail);
-    });
+    api
+      .post("/login", formData)
+      .then((res) => {
+        Cookies.set("access_token", res.data.access_token);
+        setLoggedin(true);
+      })
+      .catch((error: any) => {
+        setErrMessage(error.response.data.detail);
+      });
   };
 
   return (
@@ -162,23 +162,6 @@ export default function Login({ setLoggedin }: Props) {
               })}
             />
             <ErrorMsg>{errors.loginPassword?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input
-              id="confirmPassword"
-              type="password"
-              {...register("confirmPassword", {
-                required: "* This field is required",
-                validate: (value) => {
-                  return (
-                    value === getValues("loginPassword") ||
-                    "* Fields do not match"
-                  );
-                },
-              })}
-            />
-            <ErrorMsg>{errors.confirmPassword?.message}</ErrorMsg>
           </Fieldset>
           <Flex css={{ marginTop: 20, justifyContent: "center" }}>
             <Button css={{ cursor: "pointer" }} variant="indigo">
