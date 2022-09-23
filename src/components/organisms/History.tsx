@@ -58,7 +58,7 @@ export default function History() {
   const [dataTempMin, setDataTempMin] = useState<number[]>([]);
   const [dataHumidMax, setDataHumidMax] = useState<number[]>([]);
   const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
-  const [dataLabels, setDataLabels] = useState<string[]>([]);
+  const [labels, setLabels] = useState<string[]>([]);
 
   const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
@@ -89,7 +89,7 @@ export default function History() {
     setDataTempMin(tempMin);
     setDataHumidMax(humidMax);
     setDataHumidMin(humidMin);
-    setDataLabels(label);
+    setLabels(label);
   };
 
   // FETCH DAY HELPER
@@ -120,12 +120,10 @@ export default function History() {
     });
   };
 
-  // load week by default
+  // WEEK AS DEFAULT ON LOAD
   useEffect(() => {
     weekButtonHandler();
   }, []);
-
-  const labels = dataLabels;
 
   const data_temp = {
     labels,
