@@ -3,8 +3,8 @@ import styles from "@/styles/components/molecules/AlarmHistoryItem.module.scss";
 
 type Props = {
   data: {
+    is_alarm: boolean;
     date: string;
-    time: string;
   };
 };
 
@@ -13,8 +13,7 @@ export default function AlarmHistoryItem({ data }: Props) {
     <div className={styles["item-container"]}>
       <p>The alarm was triggered on:</p>
       <p>
-        <span className={styles.date}>{data.date}</span> at{" "}
-        <span className={styles.time}>{data.time}</span>
+        <span className={styles.date}>{data.date}</span>
       </p>
     </div>
   );
