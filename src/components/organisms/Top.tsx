@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/organisms/Top.module.scss";
 import Weather from "@/components/molecules/Weather";
 import Livedata from "./Livedata";
-import api from "../../lib/axios_settings";
+import api from "@/lib/axios_settings";
 
 export type WeatherData = {
   location_name: string;
