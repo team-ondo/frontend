@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "@stitches/react";
 import { indigo, mauve, tomato } from "@radix-ui/colors";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { useForm, SubmitHandler } from "react-hook-form";
+import api from "@/lib/axios_settings";
+import Cookies from "js-cookie";
 
 type Props = {
   setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -106,10 +108,21 @@ export default function Login({ setLoggedin }: Props) {
     formState: { errors },
     getValues,
   } = useForm<LoginFormInput>();
+  const [errMessage, setErrMessage] = useState<string | null>();
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
-    console.log(data);
-    setLoggedin(true);
-    alert("ok");
+    setErrMessage("");
+
+    const formData = new FormData();
+    formData.append("username", data.email);
+    formData.append("password", data.loginPassword);
+
+    api.post("/login", formData).then((res) => {
+      Cookies.set("access_token", res.data.access_token);
+      setLoggedin(true);
+    }).catch((error: any) => {
+      Cookies.remove("access_token");
+      setErrMessage(error.response.data.detail);
+    });
   };
 
   return (
@@ -118,6 +131,11 @@ export default function Login({ setLoggedin }: Props) {
       <form onSubmit={handleSubmit(onSubmit)}>
         <TabsContent value="tab2">
           <Text>If you already have account, please sign in here.</Text>
+          {errMessage ? (
+            <ErrorMsg css={{ marginBottom: 10 }}>{errMessage}</ErrorMsg>
+          ) : (
+            ""
+          )}
           <Fieldset>
             <Label htmlFor="email">Email</Label>
             <Input
