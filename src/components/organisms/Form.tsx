@@ -20,7 +20,7 @@ interface SignupFormInput {
   confirmPassword: string;
   serialnumber: string;
   zipcode: string;
-  c1: boolean;
+  ppcheck: boolean;
 }
 
 const StyledTabs = styled(TabsPrimitive.Root, {
@@ -327,19 +327,19 @@ export default function Form({ setLoggedin }: Props) {
               <ErrorMsg>{errors.zipcode?.message}</ErrorMsg>
             </Fieldset>
             <FieldCheck>
-              <Checkbox id="c1">
-                <CheckboxIndicator
-                  onClick={() => handleCheckClick()}
-                  {...register("c1")}
-                >
+              <Checkbox id="ppcheck" onChange={() => handleCheckClick}>
+                <CheckboxIndicator>
                   <CheckIcon />
                 </CheckboxIndicator>
               </Checkbox>
-              <Label css={{ paddingLeft: 15, marginBottom: 0 }} htmlFor="c1">
+              <Label
+                css={{ paddingLeft: 15, marginBottom: 0 }}
+                htmlFor="ppcheck"
+              >
                 Accept <CheckLink href="/privacy">privacy policy</CheckLink>.
               </Label>
             </FieldCheck>
-            <ErrorMsg>{errors.c1?.message}</ErrorMsg>
+            <ErrorMsg>{errors.ppcheck?.message}</ErrorMsg>
             <Flex css={{ marginTop: 20, justifyContent: "center" }}>
               <Button variant="indigo">Sign Up</Button>
             </Flex>
