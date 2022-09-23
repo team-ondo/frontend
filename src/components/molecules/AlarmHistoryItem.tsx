@@ -8,7 +8,7 @@ type Props = {
   };
 };
 
-// TODO add hour
+// TODO add hour once backend data updated
 export default function AlarmHistoryItem({ data }: Props) {
   return (
     <div className={styles["item-container"]}>
