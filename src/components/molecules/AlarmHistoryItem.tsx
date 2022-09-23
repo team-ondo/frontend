@@ -5,6 +5,7 @@ type Props = {
   data: {
     is_alarm: boolean;
     date: string;
+    hour: string;
   };
 };
 
@@ -14,7 +15,8 @@ export default function AlarmHistoryItem({ data }: Props) {
     <div className={styles["item-container"]}>
       <p>The alarm was triggered on:</p>
       <p>
-        <span className={styles.date}>{data.date}</span>
+        <span className={styles["date-time"]}>{data.date}</span> at{" "}
+        <span className={styles["date-time"]}>{data.hour}</span>
       </p>
     </div>
   );
