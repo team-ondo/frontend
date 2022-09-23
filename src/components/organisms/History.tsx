@@ -26,7 +26,7 @@ ChartJS.register(
   Filler
 );
 
-export const options_temp = {
+const options_temp = {
   responsive: true,
   plugins: {
     legend: {
@@ -39,7 +39,7 @@ export const options_temp = {
   },
 };
 
-export const options_hum = {
+const options_hum = {
   responsive: true,
   plugins: {
     legend: {
@@ -62,32 +62,42 @@ export default function History() {
 
   const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
+  type DeviceData = {
+    max_temp: number;
+    min_temp: number;
+    max_humid: number;
+    min_humid: number;
+    date: string;
+  };
+
+  const updateDataState = (deviceDataSet: DeviceData[]) => {
+    const tempMax: number[] = [];
+    const tempMin: number[] = [];
+    const humidMax: number[] = [];
+    const humidMin: number[] = [];
+    const label: string[] = [];
+
+    deviceDataSet.forEach((deviceData: DeviceData) => {
+      tempMax.push(deviceData.max_temp);
+      tempMin.push(deviceData.min_temp);
+      humidMax.push(deviceData.max_humid);
+      humidMin.push(deviceData.min_humid);
+      label.push(deviceData.date);
+    });
+
+    setDataTempMax(tempMax);
+    setDataTempMin(tempMin);
+    setDataHumidMax(humidMax);
+    setDataHumidMin(humidMin);
+    setDataLabels(label);
+  };
+
   // FETCH DAY HELPER
   const dayButtonHandler = async () => {
     // TODO implement catch
     api.get(`/device-data/${device_id}/historical/day`).then((res) => {
       let historicalData = res.data;
-      console.log("dayData: ", historicalData);
-
-      const tempMax: number[] = [];
-      const tempMin: number[] = [];
-      const humidMax: number[] = [];
-      const humidMin: number[] = [];
-      const label: string[] = [];
-
-      historicalData.forEach((day: any) => {
-        tempMax.push(day.max_temp);
-        tempMin.push(day.min_temp);
-        humidMax.push(day.max_humid);
-        humidMin.push(day.min_humid);
-        label.push(day.date);
-      });
-
-      setDataTempMax(tempMax);
-      setDataTempMin(tempMin);
-      setDataHumidMax(humidMax);
-      setDataHumidMin(humidMin);
-      setDataLabels(label);
+      updateDataState(historicalData);
     });
   };
 
@@ -96,27 +106,17 @@ export default function History() {
     // TODO implement catch
     api.get(`/device-data/${device_id}/historical/week`).then((res) => {
       let historicalData = res.data;
-      console.log("data: ", historicalData);
+      updateDataState(historicalData);
+    });
+  };
 
-      const tempMax: number[] = [];
-      const tempMin: number[] = [];
-      const humidMax: number[] = [];
-      const humidMin: number[] = [];
-      const label: string[] = [];
+  // FETCH MONTH HELPER
+  const monthButtonHandler = async () => {
+    // TODO implement catch
+    api.get(`/device-data/${device_id}/historical/month`).then((res) => {
+      let historicalData = res.data;
 
-      historicalData.forEach((day: any) => {
-        tempMax.push(day.max_temp);
-        tempMin.push(day.min_temp);
-        humidMax.push(day.max_humid);
-        humidMin.push(day.min_humid);
-        label.push(day.date);
-      });
-
-      setDataTempMax(tempMax);
-      setDataTempMin(tempMin);
-      setDataHumidMax(humidMax);
-      setDataHumidMin(humidMin);
-      setDataLabels(label);
+      updateDataState(historicalData);
     });
   };
 
@@ -125,7 +125,6 @@ export default function History() {
     weekButtonHandler();
   }, []);
 
-  // TODO change to actual dates from API - maybe convert dates to weekday
   const labels = dataLabels;
 
   const data_temp = {
@@ -185,7 +184,12 @@ export default function History() {
             >
               Week
             </button>
-            <button className={styles["chart-button"]}>Month</button>
+            <button
+              className={styles["chart-button"]}
+              onClick={monthButtonHandler}
+            >
+              Month
+            </button>
           </nav>
           <div className={styles.history}>
             <div className={styles.temperature}>
