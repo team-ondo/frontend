@@ -4,6 +4,7 @@ import { indigo, mauve, blackA } from "@radix-ui/colors";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
+import Login from "@/components/molecules/Login";
 
 type Props = {
   setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -173,7 +174,8 @@ const CheckLink = styled("a", {
   "&:visited": { color: indigo.indigo11 },
 });
 
-const Form = ({ setLoggedin }: Props) => (
+export default function Form({ setLoggedin }: Props) {
+  return (
   <Box>
     <Tabs defaultValue="tab1">
       <TabsList aria-label="Manage your account">
@@ -236,28 +238,8 @@ const Form = ({ setLoggedin }: Props) => (
         </Flex>
       </TabsContent>
       {/* Sign In */}
-      <TabsContent value="tab2">
-        <Text>If you already have account, please sign in here.</Text>
-        <Fieldset>
-          <Label htmlFor="email">Email</Label>
-          <Input type="mail" id="email" placeholder="sample@example.com" />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="loginPassword">Password</Label>
-          <Input id="loginPassword" type="password" />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="confirmPassword">Confirm Password</Label>
-          <Input id="confirmPassword" type="password" />
-        </Fieldset>
-        <Flex css={{ marginTop: 20, justifyContent: "center" }}>
-          <Button variant="indigo" onClick={() => setLoggedin(true)}>
-            Sign In
-          </Button>
-        </Flex>
-      </TabsContent>
+      <Login setLoggedin={setLoggedin} />
     </Tabs>
   </Box>
-);
-
-export default Form;
+  );
+}

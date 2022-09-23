@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "@/styles/components/organisms/History.module.scss";
 import AlarmHistory from "./AlarmHistory";
-import axios from "axios";
+import api from "../../lib/axios_settings";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,7 +26,7 @@ ChartJS.register(
   Filler
 );
 
-export const options_temp = {
+const options_temp = {
   responsive: true,
   plugins: {
     legend: {
@@ -39,7 +39,7 @@ export const options_temp = {
   },
 };
 
-export const options_hum = {
+const options_hum = {
   responsive: true,
   plugins: {
     legend: {
@@ -58,46 +58,72 @@ export default function History() {
   const [dataTempMin, setDataTempMin] = useState<number[]>([]);
   const [dataHumidMax, setDataHumidMax] = useState<number[]>([]);
   const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
-  const [dataLabels, setDataLabels] = useState<string[]>([]);
+  const [labels, setLabels] = useState<string[]>([]);
 
-  // FETCH WEEK HELPER
-  const weekButtonHandler = async () => {
-    const url = "https://ondo-backend-test.onrender.com";
-    const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
+  const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
+  type DeviceData = {
+    max_temp: number;
+    min_temp: number;
+    max_humid: number;
+    min_humid: number;
+    date: string;
+  };
+
+  const updateDataState = (deviceDataSet: DeviceData[]) => {
+    const tempMax: number[] = [];
+    const tempMin: number[] = [];
+    const humidMax: number[] = [];
+    const humidMin: number[] = [];
+    const label: string[] = [];
+
+    deviceDataSet.forEach((deviceData: DeviceData) => {
+      tempMax.push(deviceData.max_temp);
+      tempMin.push(deviceData.min_temp);
+      humidMax.push(deviceData.max_humid);
+      humidMin.push(deviceData.min_humid);
+      label.push(deviceData.date);
+    });
+
+    setDataTempMax(tempMax);
+    setDataTempMin(tempMin);
+    setDataHumidMax(humidMax);
+    setDataHumidMin(humidMin);
+    setLabels(label);
+  };
+
+  // FETCH DAY HELPER
+  const dayButtonHandler = async () => {
     // TODO implement catch
-    axios.get(`${url}/device-data/${device_id}/historical/week`).then((res) => {
+    api.get(`/device-data/${device_id}/historical/day`).then((res) => {
       let historicalData = res.data;
-      console.log("data: ", historicalData);
-
-      const tempMax: number[] = [];
-      const tempMin: number[] = [];
-      const humidMax: number[] = [];
-      const humidMin: number[] = [];
-      const label: string[] = [];
-
-      historicalData.forEach((day: any) => {
-        tempMax.push(day.max_temp);
-        tempMin.push(day.min_temp);
-        humidMax.push(day.max_humid);
-        humidMin.push(day.min_humid);
-        label.push(day.date);
-      });
-
-      setDataTempMax(tempMax);
-      setDataTempMin(tempMin);
-      setDataHumidMax(humidMax);
-      setDataHumidMin(humidMin);
-      setDataLabels(label);
+      updateDataState(historicalData);
     });
   };
 
+  // FETCH WEEK HELPER
+  const weekButtonHandler = async () => {
+    // TODO implement catch
+    api.get(`/device-data/${device_id}/historical/week`).then((res) => {
+      let historicalData = res.data;
+      updateDataState(historicalData);
+    });
+  };
+
+  // FETCH MONTH HELPER
+  const monthButtonHandler = async () => {
+    // TODO implement catch
+    api.get(`/device-data/${device_id}/historical/month`).then((res) => {
+      let historicalData = res.data;
+
+      updateDataState(historicalData);
+    });
+  };
+
+  // WEEK AS DEFAULT ON LOAD
   useEffect(() => {
     weekButtonHandler();
   }, []);
-
-  // TODO change to actual dates from API - maybe convert dates to weekday
-  const labels = dataLabels;
 
   const data_temp = {
     labels,
@@ -144,14 +170,24 @@ export default function History() {
       <div className={styles.top}>
         <div className={styles.top__inner}>
           <nav className={styles["chart-navigation"]}>
-            <button className={styles["chart-button"]}>Day</button>
+            <button
+              className={styles["chart-button"]}
+              onClick={dayButtonHandler}
+            >
+              Day
+            </button>
             <button
               className={styles["chart-button"]}
               onClick={weekButtonHandler}
             >
               Week
             </button>
-            <button className={styles["chart-button"]}>Month</button>
+            <button
+              className={styles["chart-button"]}
+              onClick={monthButtonHandler}
+            >
+              Month
+            </button>
           </nav>
           <div className={styles.history}>
             <div className={styles.temperature}>
