@@ -190,16 +190,26 @@ const ErrorMsg = styled("p", {
   color: tomato.tomato8,
   fontSize: 12,
   marginTop: 5,
-})
+});
 
 export default function Form({ setLoggedin }: Props) {
-  const { register, handleSubmit, formState: { errors }, } = useForm<SignupFormInput>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<SignupFormInput>();
+  const [isChecked, setChecked] = useState<boolean>(false);
 
-  const signupOnSubmit: SubmitHandler<SignupFormInput> = (data) =>  {
+  const signupOnSubmit: SubmitHandler<SignupFormInput> = (data) => {
     console.log(data);
-    setLoggedin(true)
-    alert('ok');
-  }
+    setLoggedin(true);
+    alert("ok");
+  };
+
+  const handleCheckClick = () => {
+    isChecked ? setChecked(false) : setChecked(true);
+  };
 
   return (
     <Box>
@@ -210,90 +220,116 @@ export default function Form({ setLoggedin }: Props) {
         </TabsList>
         {/* Sign Up */}
         <form onSubmit={handleSubmit(signupOnSubmit)}>
-        <TabsContent value="tab1">
-          <Text>Please register your account.</Text>
-          <Fieldset>
-            <Label htmlFor="firstname">First Name</Label>
-            <Input id="firstname" placeholder="Yoshi" {...register("firstname", {
-                  required: '* This field is required',
-                })} />
-            <ErrorMsg>{errors.firstname?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="lastname">Last Name</Label>
-            <Input id="lastname" placeholder="Kimura" {...register("lastname", {
-                  required: '* This field is required',
-                })} />
-            <ErrorMsg>{errors.lastname?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="email">Email</Label>
-            <Input type="mail" id="email" placeholder="sample@example.com" {...register("email", {
-                  required: '* This field is required',
+          <TabsContent value="tab1">
+            <Text>Please register your account.</Text>
+            <Fieldset>
+              <Label htmlFor="firstname">First Name</Label>
+              <Input
+                id="firstname"
+                placeholder="Yoshi"
+                {...register("firstname", {
+                  required: "* This field is required",
+                })}
+              />
+              <ErrorMsg>{errors.firstname?.message}</ErrorMsg>
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="lastname">Last Name</Label>
+              <Input
+                id="lastname"
+                placeholder="Kimura"
+                {...register("lastname", {
+                  required: "* This field is required",
+                })}
+              />
+              <ErrorMsg>{errors.lastname?.message}</ErrorMsg>
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="mail"
+                id="email"
+                placeholder="sample@example.com"
+                {...register("email", {
+                  required: "* This field is required",
                   pattern: {
                     value: /^[\w\-._]+@[\w\-._]+\.[A-Za-z]+/,
-                    message: '* Invalid email address'
+                    message: "* Invalid email address",
                   },
-                })} />
-            <ErrorMsg>{errors.email?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input id="phone" {...register("phone", {
-                  required: '* This field is required',
-                })} />
-            <Annotation>※Please include hyphen.</Annotation>
-            <ErrorMsg>{errors.phone?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" {...register("password", {
-                  required: '* This field is required',
-                })} />
-            <ErrorMsg>{errors.password?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="serialnumber">Serial Number</Label>
-            <Input id="serialnumber" {...register("serialnumber", {
-                  required: '* This field is required',
-                })} />
-            <Annotation>※Please enter the number on the device.</Annotation>
-            <ErrorMsg>{errors.serialnumber?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="zipcode">Zip Code</Label>
-            <Input id="zipcode" {...register("zipcode", {
-                  required: '* This field is required',
-                })} />
-            <Annotation>
-              ※Please the zip code of the house where you want to place the device.
-              <br />
-              ※Please do not include hyphen.
-            </Annotation>
-            <ErrorMsg>{errors.zipcode?.message}</ErrorMsg>
-          </Fieldset>
-          <FieldCheck>
-            <Checkbox id="c1" >
-              <CheckboxIndicator {...register("c1", {
-                required: "* Please checke a box",
-              })}>
-                <CheckIcon />
-              </CheckboxIndicator>
-            </Checkbox>
-            <Label css={{ paddingLeft: 15, marginBottom: 0 }} htmlFor="c1">
-              Accept <CheckLink href="/privacy">privacy policy</CheckLink>.
-            </Label>
-          </FieldCheck>
-          <ErrorMsg>{errors.c1?.message}</ErrorMsg>
-          <Flex css={{ marginTop: 20, justifyContent: "center" }}>
-            <Button variant="indigo">
-              Sign Up
-            </Button>
-          </Flex>
-        </TabsContent>
+                })}
+              />
+              <ErrorMsg>{errors.email?.message}</ErrorMsg>
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                {...register("phone", {
+                  required: "* This field is required",
+                })}
+              />
+              <Annotation>※Please include hyphen.</Annotation>
+              <ErrorMsg>{errors.phone?.message}</ErrorMsg>
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                {...register("password", {
+                  required: "* This field is required",
+                })}
+              />
+              <ErrorMsg>{errors.password?.message}</ErrorMsg>
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="serialnumber">Serial Number</Label>
+              <Input
+                id="serialnumber"
+                {...register("serialnumber", {
+                  required: "* This field is required",
+                })}
+              />
+              <Annotation>※Please enter the number on the device.</Annotation>
+              <ErrorMsg>{errors.serialnumber?.message}</ErrorMsg>
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="zipcode">Zip Code</Label>
+              <Input
+                id="zipcode"
+                {...register("zipcode", {
+                  required: "* This field is required",
+                })}
+              />
+              <Annotation>
+                ※Please the zip code of the house where you want to place the
+                device.
+                <br />
+                ※Please do not include hyphen.
+              </Annotation>
+              <ErrorMsg>{errors.zipcode?.message}</ErrorMsg>
+            </Fieldset>
+            <FieldCheck>
+              <Checkbox id="c1">
+                <CheckboxIndicator
+                  onClick={() => handleCheckClick()}
+                  {...register("c1")}
+                >
+                  <CheckIcon />
+                </CheckboxIndicator>
+              </Checkbox>
+              <Label css={{ paddingLeft: 15, marginBottom: 0 }} htmlFor="c1">
+                Accept <CheckLink href="/privacy">privacy policy</CheckLink>.
+              </Label>
+            </FieldCheck>
+            <ErrorMsg>{errors.c1?.message}</ErrorMsg>
+            <Flex css={{ marginTop: 20, justifyContent: "center" }}>
+              <Button variant="indigo">Sign Up</Button>
+            </Flex>
+          </TabsContent>
         </form>
         {/* Sign In */}
-        <Login setLoggedin={setLoggedin}/>
+        <Login setLoggedin={setLoggedin} />
       </Tabs>
     </Box>
   );
