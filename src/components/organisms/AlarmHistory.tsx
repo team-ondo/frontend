@@ -20,8 +20,13 @@ export default function AlarmHistory() {
   // EXECUTE ONCE ON LOAD
   useEffect(() => {
     api.get(`/device-data/${device_id}/historical/alarm`).then((res) => {
-      let historicalAlarmData = res.data;
-      setDataAlarm(historicalAlarmData);
+      const historicalAlarmData = res.data;
+
+      const filteredAlarmData = historicalAlarmData.filter(
+        (row: AlarmData) => row.is_alarm
+      );
+
+      setDataAlarm(filteredAlarmData);
     });
   }, []);
 
