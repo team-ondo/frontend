@@ -8,6 +8,7 @@ type Props = {
   };
 };
 
+// TODO add hour
 export default function AlarmHistoryItem({ data }: Props) {
   return (
     <div className={styles["item-container"]}>
