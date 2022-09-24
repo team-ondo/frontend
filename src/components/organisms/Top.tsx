@@ -22,23 +22,44 @@ type Props = {
 };
 
 export default function Top({ deviceId }: Props) {
-  const [currTemp, setCurrTemp] = useState<number | null>();
-  const [currHumid, setCurrHumid] = useState<number | null>();
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
   const [liveData, setLiveData] = useState<LivaData | null>();
 
-  // ToDO -> implement catch
   useEffect(() => {
-    api.get(`/weather-info/en/${deviceId}`).then((res) => {
-      setWeatherData(res.data);
-    });
+    // weather data
+    api
+      .get(`/weather-info/en/${deviceId}`)
+      .then((res) => {
+        setWeatherData(res.data);
+      })
+      .catch((error: any) => {
+        setWeatherData(null);
+      });
 
     // live data
-    // TODO Implement catch
-    api.get(`/device-data/${deviceId}/live`).then((res) => {
-      setLiveData(res.data);
-    });
+    api
+      .get(`/device-data/${deviceId}/live`)
+      .then((res) => {
+        setLiveData(res.data);
+      })
+      .catch((error: any) => {
+        setLiveData(null);
+      });
   }, [deviceId]);
+
+  const updateLivedata = () => {
+    api
+      .get(`/device-data/${deviceId}/live`)
+      .then((res) => {
+        setLiveData(res.data);
+      })
+      .catch((error: any) => {
+        setLiveData(null);
+      });
+  };
+
+  // update Livedata every 2 minitues
+  setInterval(updateLivedata, 120000);
 
   return (
     <div className={styles.top}>
@@ -52,7 +73,9 @@ export default function Top({ deviceId }: Props) {
             weather_icon={weatherData.weather_icon}
           />
         ) : (
-          <></>
+          <div className={styles.top__weather}>
+            Failed to retrieve the weather data.
+          </div>
         )}
         {liveData ? (
           <Livedata
@@ -60,7 +83,9 @@ export default function Top({ deviceId }: Props) {
             humidity={liveData.humidity}
           />
         ) : (
-          <></>
+          <div className={styles.top__livedata}>
+            Failed to retrieve the temperature and humidity data.
+          </div>
         )}
       </div>
     </div>
