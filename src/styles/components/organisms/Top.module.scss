@@ -20,4 +20,34 @@
             width: 100%;
         }
     }
+
+    &__weather {
+        border: 1px solid var.$themeGray;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: var.$themePaleBlue;
+        font-size: 18px;
+        color: var.$themeRealBlack;
+        line-height: 1.5;
+
+        @include mi.mq {
+            font-size: 16px;
+            text-align: left;
+        }
+    }
+
+    &__livedata {
+        margin-top: 40px;
+        color: var.$themeBlack;
+        font-size: 22px;
+        text-align: center;
+        line-height: 1.5;
+        padding: 80px 0 200px;
+
+        @include mi.mq {
+            font-size: 18px;
+            padding: 60px 20px;
+            text-align: left;
+        }
+    }
 }
