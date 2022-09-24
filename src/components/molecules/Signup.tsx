@@ -6,6 +6,7 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/lib/axios_settings";
+import Cookies from "js-cookie";
 
 type Props = {
   setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -159,25 +160,48 @@ export default function Form({ setLoggedin }: Props) {
 
   const signupOnSubmit: SubmitHandler<SignupFormInput> = (data) => {
     setErrMessage("");
-    console.log(data);
-      const sendData = JSON.stringify({first_name: data.firstname, last_name: data.lastname, email: data.email, phone_number: data.phone, zip_code: data.zipcode, serial_number: data.serialnumber, password: data.password});
+    const sendData = JSON.stringify({
+      first_name: data.firstname,
+      last_name: data.lastname,
+      email: data.email,
+      phone_number: data.phone,
+      zip_code: data.zipcode,
+      serial_number: data.serialnumber,
+      password: data.password,
+    });
 
-      const customConfig = {
-        headers: {
-        'Content-Type': 'application/json'
-        }
+    const customConfig = {
+      headers: {
+        "Content-Type": "application/json",
+      },
     };
 
-      api.post("/signup", sendData, customConfig).then((res) => {
-        setLoggedin(true);
-        alert("ok");
-      }).catch((error: any) => {
+    const formData = new FormData();
+    formData.append("username", data.email);
+    formData.append("password", data.password);
+
+    api
+      .post("/signup", sendData, customConfig)
+      .then((res) => {
+        api
+          .post("/login", formData)
+          .then((res) => {
+            Cookies.set("access_token", res.data.access_token, {
+              sameSite: "lax",
+            });
+            setLoggedin(true);
+          })
+          .catch((error: any) => {
+            setErrMessage(error.response.data.detail);
+          });
+      })
+      .catch((error: any) => {
         if (error.response.status === 400) {
           setErrMessage(error.response.data.detail);
         } else if (error.response.status === 422) {
           setErrMessage(error.response.data.detail[0].msg);
         }
-      })
+      });
   };
 
   const handleCheckClick = () => {
