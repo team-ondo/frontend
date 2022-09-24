@@ -160,7 +160,7 @@ export default function Form({ setLoggedin }: Props) {
 
   const signupOnSubmit: SubmitHandler<SignupFormInput> = (data) => {
     setErrMessage("");
-    const sendData = JSON.stringify({
+    const sendData = {
       first_name: data.firstname,
       last_name: data.lastname,
       email: data.email,
@@ -168,16 +168,10 @@ export default function Form({ setLoggedin }: Props) {
       zip_code: data.zipcode,
       serial_number: data.serialnumber,
       password: data.password,
-    });
-
-    const customConfig = {
-      headers: {
-        "Content-Type": "application/json",
-      },
     };
 
     api
-      .post("/signup", sendData, customConfig)
+      .post("/signup", sendData)
       .then((res) => {
         const formData = new FormData();
         formData.append("username", data.email);
