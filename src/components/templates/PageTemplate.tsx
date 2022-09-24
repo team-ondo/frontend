@@ -9,7 +9,7 @@ type Props = {
   children: JSX.Element;
 };
 
-export default function PageTemplate({pageid, setLoggedin, children}: Props) {
+export default function PageTemplate({ pageid, setLoggedin, children }: Props) {
   return (
     <>
       <Head>
@@ -22,7 +22,7 @@ export default function PageTemplate({pageid, setLoggedin, children}: Props) {
         <meta property="og:description" content="description" />
         <title>ONDO</title>
       </Head>
-      <Header setLoggedin={setLoggedin}/>
+      <Header setLoggedin={setLoggedin} />
       <main>{children}</main>
       <Footer />
     </>
