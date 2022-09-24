@@ -5,6 +5,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 import { useForm, SubmitHandler } from "react-hook-form";
+import api from "@/lib/axios_settings";
 
 type Props = {
   setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -154,11 +155,29 @@ export default function Form({ setLoggedin }: Props) {
     getValues,
   } = useForm<SignupFormInput>();
   const [isChecked, setChecked] = useState<boolean>(false);
+  const [errMessage, setErrMessage] = useState<string | null>();
 
   const signupOnSubmit: SubmitHandler<SignupFormInput> = (data) => {
+    setErrMessage("");
     console.log(data);
-    setLoggedin(true);
-    alert("ok");
+      const sendData = JSON.stringify({first_name: data.firstname, last_name: data.lastname, email: data.email, phone_number: data.phone, zip_code: data.zipcode, serial_number: data.serialnumber, password: data.password});
+
+      const customConfig = {
+        headers: {
+        'Content-Type': 'application/json'
+        }
+    };
+
+      api.post("/signup", sendData, customConfig).then((res) => {
+        setLoggedin(true);
+        alert("ok");
+      }).catch((error: any) => {
+        if (error.response.status === 400) {
+          setErrMessage(error.response.data.detail);
+        } else if (error.response.status === 422) {
+          setErrMessage(error.response.data.detail[0].msg);
+        }
+      })
   };
 
   const handleCheckClick = () => {
@@ -170,6 +189,11 @@ export default function Form({ setLoggedin }: Props) {
       <form onSubmit={handleSubmit(signupOnSubmit)}>
         <TabsContent value="tab1">
           <Text>Please register your account.</Text>
+          {errMessage ? (
+            <ErrorMsg css={{ marginBottom: 10 }}>{errMessage}</ErrorMsg>
+          ) : (
+            ""
+          )}
           <Fieldset>
             <Label htmlFor="firstname">First Name</Label>
             <Input
