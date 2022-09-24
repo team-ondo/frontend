@@ -176,13 +176,13 @@ export default function Form({ setLoggedin }: Props) {
       },
     };
 
-    const formData = new FormData();
-    formData.append("username", data.email);
-    formData.append("password", data.password);
-
     api
       .post("/signup", sendData, customConfig)
       .then((res) => {
+        const formData = new FormData();
+        formData.append("username", data.email);
+        formData.append("password", data.password);
+
         api
           .post("/login", formData)
           .then((res) => {
