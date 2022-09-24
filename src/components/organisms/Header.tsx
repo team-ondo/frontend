@@ -40,7 +40,7 @@ export default function Header({ setLoggedin }: Props) {
   const handleClickLogout = () => {
     Cookies.remove("access_token");
     setLoggedin(false);
-  }
+  };
 
   return (
     <>
@@ -86,7 +86,10 @@ export default function Header({ setLoggedin }: Props) {
                     </Link>
                   </li>
                   <li className={styles.header__menuItem}>
-                    <div className={styles.header__logout} onClick={handleClickLogout}>
+                    <div
+                      className={styles.header__logout}
+                      onClick={handleClickLogout}
+                    >
                       Logout
                     </div>
                   </li>
@@ -112,7 +115,10 @@ export default function Header({ setLoggedin }: Props) {
             <Link href="/settings">
               <a className={styles.hamburger__contentItem}>Settings</a>
             </Link>
-            <div className={styles.hamburger__contentItem} onClick={handleClickLogout}>
+            <div
+              className={styles.hamburger__contentItem}
+              onClick={handleClickLogout}
+            >
               Logout
             </div>
           </nav>
