@@ -207,9 +207,6 @@ export default function SettingsRead({
     });
   }, []);
 
-  // console.log("🟩 USER DATA", userData);
-  console.log("🔴 DEVICE DATA", deviceData);
-
   const openSettingsChange = () => {
     setSettingsView("change settings");
   };
@@ -219,13 +216,10 @@ export default function SettingsRead({
   } else {
       return (
         <>
-        {/* <div className={styles.top}>
-          <div className={styles.top__inner}></div> */}
         <div className="user-settings">
           <h2>User Settings</h2>
           <br></br>
           <Text>First Name: {userData.first_name}</Text>
-          {/* <Text>First Name: {userData.first_name}</Text> */}
           <Text>Last Name: {userData.last_name}</Text>
           <Text>Email: {userData.email}</Text>
           <Text>Phone Number: {userData.phone_number}</Text>
@@ -242,7 +236,6 @@ export default function SettingsRead({
           </Text>
           <Button onClick={() => openSettingsChange()}>Change Settings</Button>
         </div>
-        {/* </div> */}
       </>
     );
   }
