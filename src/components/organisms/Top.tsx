@@ -33,6 +33,7 @@ export default function Top({ deviceId }: Props) {
         setWeatherData(res.data);
       })
       .catch((error: any) => {
+        // TODO Implement each status code
         setWeatherData(null);
       });
 
@@ -43,6 +44,7 @@ export default function Top({ deviceId }: Props) {
         setLiveData(res.data);
       })
       .catch((error: any) => {
+        // TODO Implement each status code
         setLiveData(null);
       });
   }, [deviceId]);
@@ -54,6 +56,7 @@ export default function Top({ deviceId }: Props) {
         setLiveData(res.data);
       })
       .catch((error: any) => {
+        // TODO Implement each status code
         setLiveData(null);
       });
   };
