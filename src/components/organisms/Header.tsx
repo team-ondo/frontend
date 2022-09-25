@@ -5,13 +5,13 @@ import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { loginState } from "@/globalStates/atoms/Auth";
 
 export default function Header() {
   const [width, setWidth] = useState<number>(0);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const [isLoggedin, setLoggedin] = useRecoilState<boolean>(loginState);
+  const setLoggedin = useSetRecoilState<boolean>(loginState);
 
   useEffect(() => {
     // get the wiindow width

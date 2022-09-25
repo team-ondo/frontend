@@ -7,7 +7,7 @@ import { CheckIcon } from "@radix-ui/react-icons";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/lib/axios_settings";
 import Cookies from "js-cookie";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { loginState } from "@/globalStates/atoms/Auth";
 
 interface SignupFormInput {
@@ -155,7 +155,7 @@ export default function Form() {
   } = useForm<SignupFormInput>();
   const [isChecked, setChecked] = useState<boolean>(false);
   const [errMessage, setErrMessage] = useState<string | null>();
-  const [isLoggedin, setLoggedin] = useRecoilState<boolean>(loginState);
+  const setLoggedin = useSetRecoilState<boolean>(loginState);
 
   const signupOnSubmit: SubmitHandler<SignupFormInput> = (data) => {
     setErrMessage("");
