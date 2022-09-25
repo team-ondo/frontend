@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "@/styles/components/organisms/History.module.scss";
 import AlarmHistory from "./AlarmHistory";
-import api from "../../lib/axios_settings";
+import api from "@/lib/axios_settings";
 import {
   Chart as ChartJS,
   CategoryScale,
