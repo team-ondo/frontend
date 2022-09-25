@@ -171,70 +171,78 @@ const CheckLink = styled("a", {
   "&:visited": { color: indigo.indigo11 },
 });
 
-
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<string>>;
   settingsView: React.Dispatch<React.SetStateAction<string>>;
+  selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
+  selectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
+  deviceData: React.Dispatch<React.SetStateAction<[]>>;
+  userData: React.Dispatch<React.SetStateAction<{}>>;
+  isLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export default function SettingsRead({
-  setSettingsView: setSettingsView,
-  settingsView: settingsView,
+  setSettingsView,
+  settingsView,
+  selectedDeviceName,
+  selectedDeviceIndex,
+  deviceData,
+  userData,
+  isLoading,
 }: Props) {
+  
+  // useEffect(() => {
+  //   let index: number = Number(selectedDeviceIndex);
+  //   console.log(deviceData[index]);
+  // }, []);
 
-  const [userData, setUserData] = useState<any>({});
-  const [deviceData, setDeviceData] = useState<any>({});
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  // console.log(settingsView);
 
-  useEffect(() => {
-    sessionStorage.setItem(
-      "ondo-token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjM4Mjk3MDd9.7fYABOWQe5WCpdnQ1Mjef3JMuqus21c6acwW4nL7Kj4"
-    );
-    api.get(`/settings/user`).then((res) => {
-      setUserData(res.data);
-    });
-  }, []);
+  // const setIndex = () => {
+  //   let index: number = Number(selectedDeviceIndex);
+  //   // let device: {} = dataArray[index];
+  //   console.log(deviceData[index]);
+  // };
 
-  useEffect(() => {
-    sessionStorage.setItem(
-      "ondo-token",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE2NjM4Mjk3MDd9.7fYABOWQe5WCpdnQ1Mjef3JMuqus21c6acwW4nL7Kj4"
-    );
-    api.get(`/settings/device/`).then((res) => {
-      setDeviceData(res.data);
-      setIsLoading(false);
-    });
-  }, []);
+  // setIndex();
 
   const openSettingsChange = () => {
+    console.log("HELLO JOE");
     setSettingsView("change settings");
   };
 
   if (isLoading === true) {
-    return <div className="loading">Loading...</div>
+    return <div className="loading">Loading...</div>;
   } else {
-      return (
-        <>
-        <div className="user-settings">
-          <h2>User Settings</h2>
-          <br></br>
-          <Text>First Name: {userData.first_name}</Text>
-          <Text>Last Name: {userData.last_name}</Text>
-          <Text>Email: {userData.email}</Text>
-          <Text>Phone Number: {userData.phone_number}</Text>
-        </div>
-        <div className="device-settings">
-          <h2>Device Settings</h2>
-          <br></br>
-          <Text>Device ID: {deviceData[0].device_id}</Text>
-          <Text>Device Name: {deviceData[0].device_name}</Text>
-          <Text>Device Location: {deviceData[0].zip_code}</Text>
-          <Text>Hot Temperature Limit: {deviceData[0].temperature_upper_limit}</Text>
-          <Text>
-            Cold Temperature Limit: {deviceData[0].temperature_lower_limit}
-          </Text>
-          <Button onClick={() => openSettingsChange()}>Change Settings</Button>
+    return (
+      <>
+        <div className={styles.top}>
+          <div className={styles.top__inner}></div>
+          <div className="user-settings">
+            <h2>User Settings</h2>
+            <br></br>
+            <Text>First Name: {userData.first_name}</Text>
+            <Text>Last Name: {userData.last_name}</Text>
+            <Text>Email: {userData.email}</Text>
+            <Text>Password: *****</Text>
+            <Text>Phone Number: {userData.phone_number}</Text>
+          </div>
+          <div className="device-settings">
+            <h2>Device Settings</h2>
+            <br></br>
+            <Text>Device ID: {deviceData[0].device_id}</Text>
+            <Text>Device Name: {deviceData[0].device_name}</Text>
+            <Text>Device Location: {deviceData[0].zip_code}</Text>
+            <Text>
+              Hot Temperature Limit: {deviceData[0].temperature_upper_limit}
+            </Text>
+            <Text>
+              Cold Temperature Limit: {deviceData[0].temperature_lower_limit}
+            </Text>
+            <Button onClick={() => openSettingsChange()}>
+              Change Settings
+            </Button>
+          </div>
         </div>
       </>
     );
