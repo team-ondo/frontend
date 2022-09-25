@@ -6,11 +6,7 @@ import AnimationTrigger from "@/components/organisms/AnimationTrigger";
 import FeatureList from "@/components/organisms/Lp_featurelist";
 import { Link as Scroll } from "react-scroll";
 
-type Props = {
-  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export default function Lp({ setLoggedin }: Props) {
+export default function Lp() {
   const [width, setWidth] = useState(0);
 
   useEffect(() => {
@@ -72,7 +68,7 @@ export default function Lp({ setLoggedin }: Props) {
               ""
             ) : (
               <div className={styles.mv__form}>
-                <Form setLoggedin={setLoggedin} />
+                <Form />
               </div>
             )}
             <Scroll to="sp_form" smooth={true}>
@@ -139,7 +135,7 @@ export default function Lp({ setLoggedin }: Props) {
       {width < 900 ? (
         <section className={styles.form} id="sp_form">
           <div className={styles.form__inner}>
-            <Form setLoggedin={setLoggedin} />
+            <Form />
           </div>
         </section>
       ) : (
