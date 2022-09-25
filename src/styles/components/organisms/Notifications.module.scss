@@ -114,3 +114,34 @@
     font-weight: bold;
   }
 }
+
+.modal {
+  &__item {
+    height: 200px;
+  }
+
+  &__itemContent {
+    text-align: left;
+    font-size: 18px;
+    color: var.$themeBlack;
+    line-height: 1.5;
+    margin-top: 30px;
+  }
+
+  &__btnArea {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__closebtn {
+    font-size: 14px;
+    font-weight: bold;
+    color: var.$themeBlack;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background: var.$themeOrange;
+    cursor: pointer;
+  }
+}
