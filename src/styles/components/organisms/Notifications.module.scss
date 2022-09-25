@@ -63,6 +63,11 @@
     cursor: pointer;
   }
 
+  &__itemInfo {
+    display: flex;
+    align-items: center;
+  }
+
   &__itemDate {
     text-align: left;
     font-size: 16px;
@@ -70,11 +75,32 @@
     line-height: 1.5;
   }
 
+  &__itemType {
+    font-size: 14px;
+    color: var.$themeBlack;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  &__itemType--alarm {
+    background: var.$themePink;
+  }
+
+  &__itemType--snooze {
+    background: var.$themePaleOrange;
+  }
+
+  &__itemType--out {
+    background: var.$themePaleBlue;
+  }
+
   &__itemContent {
     text-align: left;
     font-size: 18px;
     color: var.$themeBlack;
     line-height: 1.5;
+    margin-top: 10px;
 
     @include mi.mq {
       width: 330px;
@@ -86,5 +112,36 @@
 
   &__itemRead {
     font-weight: bold;
+  }
+}
+
+.modal {
+  &__item {
+    height: 200px;
+  }
+
+  &__itemContent {
+    text-align: left;
+    font-size: 18px;
+    color: var.$themeBlack;
+    line-height: 1.5;
+    margin-top: 30px;
+  }
+
+  &__btnArea {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__closebtn {
+    font-size: 14px;
+    font-weight: bold;
+    color: var.$themeBlack;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background: var.$themeOrange;
+    cursor: pointer;
   }
 }

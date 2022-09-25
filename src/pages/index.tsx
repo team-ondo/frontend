@@ -19,7 +19,7 @@ export default function Index() {
         .get("/user/devices")
         .then((res) => {
           setPage(
-            <PageTemplate pageid={pageid}>
+            <PageTemplate pageid={pageid} setLoggedin={setLoggedin}>
               <Top deviceId={res.data[0].device_id} />
             </PageTemplate>
           );

@@ -5,10 +5,11 @@ import Footer from "@/components/organisms/Footer";
 
 type Props = {
   pageid: string;
+  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
   children: JSX.Element;
 };
 
-export default function PageTemplate(props: Props) {
+export default function PageTemplate({ pageid, setLoggedin, children }: Props) {
   return (
     <>
       <Head>
@@ -21,8 +22,8 @@ export default function PageTemplate(props: Props) {
         <meta property="og:description" content="description" />
         <title>ONDO</title>
       </Head>
-      <Header />
-      <main>{props.children}</main>
+      <Header setLoggedin={setLoggedin} />
+      <main>{children}</main>
       <Footer />
     </>
   );

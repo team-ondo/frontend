@@ -4,8 +4,13 @@ import Logo from "@/components/atoms/Logo";
 import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
-export default function Header() {
+type Props = {
+  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export default function Header({ setLoggedin }: Props) {
   const [width, setWidth] = useState<number>(0);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
 
@@ -30,6 +35,12 @@ export default function Header() {
 
   // slide css
   const slideCss = `.react-slidedown.my-dropdown-slidedown {transition-duration: .2s;}`;
+
+  // click logout button
+  const handleClickLogout = () => {
+    Cookies.remove("access_token");
+    setLoggedin(false);
+  };
 
   return (
     <>
@@ -70,9 +81,17 @@ export default function Header() {
                     </Link>
                   </li>
                   <li className={styles.header__menuItem}>
-                    <Link href="/setting">
-                      <a className={styles.header__menuItemLink}>Setting</a>
+                    <Link href="/settings">
+                      <a className={styles.header__menuItemLink}>Settings</a>
                     </Link>
+                  </li>
+                  <li className={styles.header__menuItem}>
+                    <div
+                      className={styles.header__logout}
+                      onClick={handleClickLogout}
+                    >
+                      Logout
+                    </div>
                   </li>
                 </ul>
               </div>
@@ -93,9 +112,15 @@ export default function Header() {
             <Link href="/notifications">
               <a className={styles.hamburger__contentItem}>Notifications</a>
             </Link>
-            <Link href="/setting">
-              <a className={styles.hamburger__contentItem}>Setting</a>
+            <Link href="/settings">
+              <a className={styles.hamburger__contentItem}>Settings</a>
             </Link>
+            <div
+              className={styles.hamburger__contentItem}
+              onClick={handleClickLogout}
+            >
+              Logout
+            </div>
           </nav>
         ) : null}
       </SlideDown>
