@@ -194,38 +194,46 @@ export default function SettingsChange({
   setUserData,
   isLoading,
 }: Props) {
-  const openSettingsChange = () => {
-    setSettingsView("change settings");
-  };
 
   const submitSettingsChange = () => {
-    const updatedUserSettings: {} = {
-      first_name: "Akemi",
-      last_name: "Kimura",
-      email: "test@test.com",
-      phone_number: "090-0000-0000", //090-0000-0000
-      old_password: "secretPassword",
-      new_password: "secretPassword",
+    let firstName: string = document.getElementById('firstName').value;
+    let lastName: string = document.getElementById('lastName').value;
+    let email: string = document.getElementById('email').value;
+    let phoneNumber: string = document.getElementById('phoneNumber').value;
+    let oldPassword: string = document.getElementById('oldPassword').value;
+    let newPassword: string = document.getElementById('newPassword').value;
+
+    let deviceName: string = document.getElementById('deviceName').value;
+    let hotTempSetting: number = document.getElementById('hotTempSetting').value;
+    let coldTempSetting: number = document.getElementById('coldTempSetting').value;
+    let zipcode: string = document.getElementById('zipcode').value;
+
+    const updatedUserSettings: {} = { // comments contain original data
+      first_name: firstName ? firstName : userData.first_name, // Akemi
+      last_name: lastName ? lastName : userData.last_name, // Kimura
+      email: email ? email : userData.email, //test@test.com
+      phone_number: phoneNumber ? phoneNumber : userData.phone_number, //090-0000-0000 
+      old_password: oldPassword ? oldPassword : userData.old_password, //secretPassword
+      new_password: newPassword ? newPassword : "secretPassword"
     };
 
     const updatedDeviceSettings: {} = {
-      device_name: "Nishi_Azabu_Device",
-      temperature_upper_limit: 30.2,
-      temperature_lower_limit: 29.2,
-      zip_code: "1001701",
+      device_name: deviceName ? deviceName : deviceData[0].device_name, //Roppongi_Device
+      temperature_upper_limit: hotTempSetting ? hotTempSetting : deviceData[0].temperature_upper_limit, //30.2
+      temperature_lower_limit: coldTempSetting ? coldTempSetting : deviceData[0].temperature_lower_limit, //27?
+      zip_code: zipcode ? zipcode : deviceData[0].zip_code //1001701
     };
 
     api.put(`/settings/user/`, updatedUserSettings).then((res) => {
       console.log(res.data);
     });
-
+    
     api.put(`/settings/device/`, updatedDeviceSettings).then((res) => {
       console.log(res.data);
     });
-
     setSettingsView("read settings");
   };
-
+  
   console.log("CHANGE", setSettingsView);
   console.log("CHANGE", deviceData);
 

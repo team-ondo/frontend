@@ -190,7 +190,7 @@ export default function SettingsRead({
   userData,
   isLoading,
 }: Props) {
-  
+
   // useEffect(() => {
   //   let index: number = Number(selectedDeviceIndex);
   //   console.log(deviceData[index]);
@@ -207,7 +207,6 @@ export default function SettingsRead({
   // setIndex();
 
   const openSettingsChange = () => {
-    console.log("HELLO JOE");
     setSettingsView("change settings");
   };
 
