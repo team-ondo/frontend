@@ -5,14 +5,13 @@ import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import { useSetRecoilState } from "recoil";
+import { loginState } from "@/globalStates/atoms/Auth";
 
-type Props = {
-  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export default function Header({ setLoggedin }: Props) {
+export default function Header() {
   const [width, setWidth] = useState<number>(0);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const setLoggedin = useSetRecoilState<boolean>(loginState);
 
   useEffect(() => {
     // get the wiindow width
@@ -40,7 +39,7 @@ export default function Header({ setLoggedin }: Props) {
   const handleClickLogout = () => {
     Cookies.remove("access_token");
     setLoggedin(false);
-  }
+  };
 
   return (
     <>
@@ -86,7 +85,10 @@ export default function Header({ setLoggedin }: Props) {
                     </Link>
                   </li>
                   <li className={styles.header__menuItem}>
-                    <div className={styles.header__logout} onClick={handleClickLogout}>
+                    <div
+                      className={styles.header__logout}
+                      onClick={handleClickLogout}
+                    >
                       Logout
                     </div>
                   </li>
@@ -112,7 +114,10 @@ export default function Header({ setLoggedin }: Props) {
             <Link href="/settings">
               <a className={styles.hamburger__contentItem}>Settings</a>
             </Link>
-            <div className={styles.hamburger__contentItem} onClick={handleClickLogout}>
+            <div
+              className={styles.hamburger__contentItem}
+              onClick={handleClickLogout}
+            >
               Logout
             </div>
           </nav>
