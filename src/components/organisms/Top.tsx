@@ -24,6 +24,8 @@ type Props = {
 export default function Top({ deviceId }: Props) {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
   const [liveData, setLiveData] = useState<LivaData | null>();
+  const [weatherErrMessage, setWeatherErrMessage] = useState<string | null>();
+  const [liveErrMessage, setLiveErrMessage] = useState<string | null>();
 
   useEffect(() => {
     // weather data
@@ -34,7 +36,7 @@ export default function Top({ deviceId }: Props) {
       })
       .catch((error: any) => {
         // TODO Implement each status code
-        setWeatherData(null);
+        setWeatherErrMessage("Failed to retrieve the weather data.");
       });
 
     // live data
@@ -45,7 +47,9 @@ export default function Top({ deviceId }: Props) {
       })
       .catch((error: any) => {
         // TODO Implement each status code
-        setLiveData(null);
+        setLiveErrMessage(
+          "Failed to retrieve the temperature and humidity data."
+        );
       });
   }, [deviceId]);
 
@@ -57,7 +61,9 @@ export default function Top({ deviceId }: Props) {
       })
       .catch((error: any) => {
         // TODO Implement each status code
-        setLiveData(null);
+        setLiveErrMessage(
+          "Failed to retrieve the temperature and humidity data."
+        );
       });
   };
 
@@ -75,19 +81,25 @@ export default function Top({ deviceId }: Props) {
             humidity={weatherData.humidity}
             weather_icon={weatherData.weather_icon}
           />
-        ) : (
+        ) : weatherErrMessage ? (
           <div className={styles.top__weather}>
             Failed to retrieve the weather data.
           </div>
+        ) : (
+          <div className={styles.top__weather}>Loading the weather data.</div>
         )}
         {liveData ? (
           <Livedata
             temperature_celsius={liveData.temperature_celsius}
             humidity={liveData.humidity}
           />
-        ) : (
+        ) : liveErrMessage ? (
           <div className={styles.top__livedata}>
             Failed to retrieve the temperature and humidity data.
+          </div>
+        ) : (
+          <div className={styles.top__livedata}>
+            Loading the temperature and humidity data.
           </div>
         )}
       </div>
