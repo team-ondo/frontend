@@ -190,7 +190,6 @@ export default function SettingsRead({
   userData,
   isLoading,
 }: Props) {
-
   // useEffect(() => {
   //   let index: number = Number(selectedDeviceIndex);
   //   console.log(deviceData[index]);
