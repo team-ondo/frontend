@@ -4,14 +4,13 @@ import PageTemplate from "@/components/templates/PageTemplate";
 import Lp from "@/components/organisms/Lp";
 import Top from "@/components/organisms/Top";
 import api from "@/lib/axios_settings";
-import Cookies from "js-cookie";
+import { useRecoilState } from "recoil";
+import { loginState } from "@/globalStates/atoms/Auth";
 
 export default function Index() {
   const pageid = "index";
-  const [isLoggedin, setLoggedin] = useState<boolean>(
-    Cookies.get("access_token") ? true : false
-  );
   const [page, setPage] = useState<any>();
+  const [isLoggedin, setLoggedin] = useRecoilState<boolean>(loginState);
 
   useEffect(() => {
     if (isLoggedin) {
@@ -19,7 +18,7 @@ export default function Index() {
         .get("/user/devices")
         .then((res) => {
           setPage(
-            <PageTemplate pageid={pageid} setLoggedin={setLoggedin}>
+            <PageTemplate pageid={pageid}>
               <Top deviceId={res.data[0].device_id} />
             </PageTemplate>
           );
@@ -30,7 +29,7 @@ export default function Index() {
     } else {
       setPage(
         <LandingPageTemplate pageid={pageid}>
-          <Lp setLoggedin={setLoggedin} />
+          <Lp />
         </LandingPageTemplate>
       );
     }
