@@ -1,0 +1,21 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.setting {
+    display: flex;
+    justify-content: center;
+    min-width: var.$contentWidthPc;
+  
+    @include mi.mq {
+      min-width: auto;
+      text-align: center;
+    }
+  
+    &__inner {
+      width: var.$contentWidthPc;
+  
+      @include mi.mq {
+        width: 100%;
+      }
+    }
+  }
