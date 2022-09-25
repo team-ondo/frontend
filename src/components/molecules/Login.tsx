@@ -5,7 +5,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/lib/axios_settings";
 import Cookies from "js-cookie";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { loginState } from "@/globalStates/atoms/Auth";
 
 interface LoginFormInput {
@@ -105,7 +105,7 @@ export default function Login() {
     formState: { errors },
   } = useForm<LoginFormInput>();
   const [errMessage, setErrMessage] = useState<string | null>();
-  const [isLoggedin, setLoggedin] = useRecoilState<boolean>(loginState);
+  const setLoggedin = useSetRecoilState<boolean>(loginState);
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
     setErrMessage("");
 
