@@ -5,10 +5,8 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/lib/axios_settings";
 import Cookies from "js-cookie";
-
-type Props = {
-  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { useRecoilState } from "recoil";
+import { loginState } from "@/globalStates/atoms/Auth";
 
 interface LoginFormInput {
   email: string;
@@ -100,13 +98,14 @@ const ErrorMsg = styled("p", {
   marginTop: 5,
 });
 
-export default function Login({ setLoggedin }: Props) {
+export default function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormInput>();
   const [errMessage, setErrMessage] = useState<string | null>();
+  const [isLoggedin, setLoggedin] = useRecoilState<boolean>(loginState);
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
     setErrMessage("");
 
@@ -123,7 +122,9 @@ export default function Login({ setLoggedin }: Props) {
         setLoggedin(true);
       })
       .catch((error: any) => {
-        setErrMessage(error.response.data.detail);
+        if (error.response.data) {
+          setErrMessage(error.response.data.detail);
+        }
       });
   };
 
