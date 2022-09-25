@@ -5,10 +5,6 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import Login from "@/components/molecules/Login";
 import Signup from "@/components/molecules/Signup";
 
-type Props = {
-  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
 const StyledTabs = styled(TabsPrimitive.Root, {
   display: "flex",
   flexDirection: "column",
@@ -58,7 +54,7 @@ const Box = styled("div", {
   justifyContent: "center",
 });
 
-export default function Form({ setLoggedin }: Props) {
+export default function Form() {
   return (
     <Box>
       <Tabs defaultValue="tab1">
@@ -67,9 +63,9 @@ export default function Form({ setLoggedin }: Props) {
           <TabsTrigger value="tab2">Sign In</TabsTrigger>
         </TabsList>
         {/* Sign Up */}
-        <Signup setLoggedin={setLoggedin} />
+        <Signup />
         {/* Sign In */}
-        <Login setLoggedin={setLoggedin} />
+        <Login />
       </Tabs>
     </Box>
   );
