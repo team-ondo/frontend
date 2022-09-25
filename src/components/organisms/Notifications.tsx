@@ -52,10 +52,10 @@ export default function Notifications() {
   const [modalData, setModalData] = useState<any>();
 
   useEffect(() => {
-    api.get('/notifications').then((res) => {
+    api.get("/notifications").then((res) => {
       setAllNotifiData(res.data);
       setNotifiData(res.data);
-    })
+    });
   }, []);
 
   const handleClickState = (state: ReadState) => {
@@ -79,37 +79,42 @@ export default function Notifications() {
 
   const handleClickMessage = (data: NotificationsData) => {
     setIsOpen(true);
-    setModalData(<><div className={styles.modal__item}>
-      <div className={styles.notifi__itemInfo}>
-        <div
-        className={`${styles.notifi__itemType} ${
-          data.content_type === typeAlarm
-            ? styles["notifi__itemType--alarm"]
-            : data.content_type === typeSnooze
-            ? styles["notifi__itemType--snooze"]
-            : styles["notifi__itemType--out"]
-        }`}
-      >
-        {data.content_type}
-      </div>
-      <p className={styles.notifi__itemDate}>{data.date}</p>
-      </div>
-      <p className={styles.modal__itemContent}>{data.content}</p>
-    </div>
-    <div className={styles.modal__btnArea}>
-      <button className={styles.modal__closebtn} onClick={closeModal}>close</button>
-    </div>
-    </>);
+    setModalData(
+      <>
+        <div className={styles.modal__item}>
+          <div className={styles.notifi__itemInfo}>
+            <div
+              className={`${styles.notifi__itemType} ${
+                data.content_type === typeAlarm
+                  ? styles["notifi__itemType--alarm"]
+                  : data.content_type === typeSnooze
+                  ? styles["notifi__itemType--snooze"]
+                  : styles["notifi__itemType--out"]
+              }`}
+            >
+              {data.content_type}
+            </div>
+            <p className={styles.notifi__itemDate}>{data.date}</p>
+          </div>
+          <p className={styles.modal__itemContent}>{data.content}</p>
+        </div>
+        <div className={styles.modal__btnArea}>
+          <button className={styles.modal__closebtn} onClick={closeModal}>
+            close
+          </button>
+        </div>
+      </>
+    );
 
     // update notifications table
-    // if (!data.is_read) {
-    //   api.post("/notifications", data.id).then((res) => {
-    //     api.get('/notifications').then((res) => {
-    //       setAllNotifiData(res.data);
-    //       setNotifiData(res.data);
-    //     });
-    //   });
-    // }
+    if (!data.is_read) {
+      api.put(`/notifications/${data.id}`).then((res) => {
+        api.get("/notifications").then((res) => {
+          setAllNotifiData(res.data);
+          setNotifiData(res.data);
+        });
+      });
+    }
   };
 
   const closeModal = () => {
