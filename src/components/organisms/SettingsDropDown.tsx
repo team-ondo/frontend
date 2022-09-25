@@ -174,33 +174,45 @@ const CheckLink = styled("a", {
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<string>>;
   settingsView: React.Dispatch<React.SetStateAction<string>>;
-  setDeviceSelection: React.Dispatch<React.SetStateAction<string>>;
-  deviceSelection: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
+  selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
+  selectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
+  setDeviceData: React.Dispatch<React.SetStateAction<[]>>;
+  deviceData: React.Dispatch<React.SetStateAction<[]>>;
+  isLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-
-export default function DropDownSettings(
-  { setSettingsView, settingsView, setDeviceSelection, deviceSelection }: Props,
-) {
-  const [deviceData, setDeviceData] = useState<any>({});
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    api.get(`/settings/device/`).then((res) => {
-      setDeviceData(res.data);
-      setIsLoading(false);
-    });
-  }, []);
-
+export default function DropDownSettings({
+  setSettingsView,
+  settingsView,
+  setSelectedDeviceName,
+  selectedDeviceName,
+  selectedDeviceIndex,
+  setSelectedDeviceIndex,
+  deviceData,
+  setDeviceData,
+  isLoading,
+  setIsLoading,
+}: Props) {
   const getDeviceName = () => {
     let dropDownText = document.getElementById("drop_menu_settings");
     let selectedText = dropDownText.options[dropDownText.selectedIndex].text;
-    return setDeviceSelection(selectedText);
+    return setSelectedDeviceName(selectedText);
   };
+
+  // useEffect(() => {
+  //   const index: number = deviceData.findIndex((e: {}) => e.device_name === selectedDeviceName);
+  //   console.log(index);
+  //   setSelectedDeviceIndex(index);
+  // }, [deviceData])
 
   const settingsViewChange = () => {
     getDeviceName();
     setSettingsView("read settings");
+    // console.log("DROPDOWN", deviceData);
+    console.log("DROPDOWN", selectedDeviceIndex);
   };
 
   if (isLoading === true) {
@@ -209,21 +221,20 @@ export default function DropDownSettings(
     return (
       <>
         <div className={styles.top}>
-        <div className={styles.top__inner}></div>
-        <div className="select_device">
-          <h3>Please select your device:</h3>
-          <select className="drop_menu" id="drop_menu_settings">
-            {deviceData.map((obj: any) => {
-              return <option value={obj.device_name}>{obj.device_name}</option>; // Options don't show in dropdown
-            })}
-          </select>
-        </div>
-        <Button
-          title={"Submit"}
-          onClick={() => settingsViewChange()}
-        >
-          Submit
-        </Button>
+          <div className={styles.top__inner}></div>
+          <div className="select_device">
+            <h3>Please select your device:</h3>
+            <select className="drop_menu" id="drop_menu_settings">
+              {deviceData.map((obj: any) => {
+                return (
+                  <option value={obj.device_name}>{obj.device_name}</option>
+                );
+              })}
+            </select>
+          </div>
+          <Button title={"Submit"} onClick={() => settingsViewChange()}>
+            Submit
+          </Button>
         </div>
       </>
     );
