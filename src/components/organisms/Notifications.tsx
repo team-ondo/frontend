@@ -109,10 +109,7 @@ export default function Notifications() {
     // update notifications table
     if (!data.is_read) {
       api.put(`/notifications/${data.id}`).then((res) => {
-        api.get("/notifications").then((res) => {
-          setAllNotifiData(res.data);
-          setNotifiData(res.data);
-        });
+        data.is_read = true;
       });
     }
   };
