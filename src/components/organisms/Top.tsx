@@ -12,9 +12,10 @@ export type WeatherData = {
   weather_icon: string;
 };
 
-export type LivaData = {
+export type LiveData = {
   temperature_celsius: number;
   humidity: number;
+  alarm: boolean;
 };
 
 type Props = {
@@ -23,7 +24,7 @@ type Props = {
 
 export default function Top({ deviceId }: Props) {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
-  const [liveData, setLiveData] = useState<LivaData | null>();
+  const [liveData, setLiveData] = useState<LiveData | null>();
   const [weatherErrMessage, setWeatherErrMessage] = useState<string | null>();
   const [liveErrMessage, setLiveErrMessage] = useState<string | null>();
   const [alarmIsRinging, setAlarmIsRinging] = useState<boolean>(false);
@@ -71,12 +72,13 @@ export default function Top({ deviceId }: Props) {
       });
   };
 
-  // run each time liveData is set
+  // check alarm when liveData is updated
   useEffect(() => {
-    console.log("livedata", liveData);
-    // check alarm status
-    // if true, set alarmIsRinging to true
-    // if false, set alarmIsRinging to false
+    if (liveData.alarm) {
+      setAlarmIsRinging(true);
+    } else {
+      setAlarmIsRinging(false);
+    }
   }, [liveData]);
 
   // update Livedata every 2 minitues
@@ -86,6 +88,7 @@ export default function Top({ deviceId }: Props) {
     <div className={styles.top}>
       <div className={styles.top__inner}>
         {alarmIsRinging && <button>TEST</button>}
+
         {weatherData ? (
           <Weather
             location_name={weatherData.location_name}
