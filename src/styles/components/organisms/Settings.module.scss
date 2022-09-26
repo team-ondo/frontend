@@ -36,7 +36,15 @@
     from {opacity: 0;}
     to {opacity: 100;}
   }
+  
   .settings_updated {
+    animation-name: updating;
+    animation-duration: 500ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+  }
+
+  .loading {
     animation-name: updating;
     animation-duration: 500ms;
     animation-direction: alternate;

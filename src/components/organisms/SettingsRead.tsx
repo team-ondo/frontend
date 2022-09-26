@@ -174,33 +174,34 @@ const CheckLink = styled("a", {
 
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
-  settingsView: React.Dispatch<React.SetStateAction<number>>;
-  selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
   selectedDeviceIndex: number;
   deviceData: DeviceData;
   userData: UserData;
   isLoading: boolean;
 };
 
-const SettingsViewState = { DropDown: 0, Read: 1, Change: 2, Updated: 3 } as const; 
-type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState];
+const SettingsViewState = {
+  DropDown: 0,
+  Read: 1,
+  Change: 2,
+  Updated: 3,
+} as const;
+type SettingViewState =
+  typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function SettingsRead({
   setSettingsView,
-  settingsView,
-  selectedDeviceName,
   selectedDeviceIndex,
   deviceData,
   userData,
   isLoading,
 }: Props) {
-
   const openSettingsChange = () => {
     setSettingsView(SettingsViewState.Change);
   };
 
   if (isLoading) {
-    return <div className="loading">Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   } else {
     return (
       <>
@@ -218,14 +219,22 @@ export default function SettingsRead({
             <div className={styles.device_settings}>
               <h2>Device Settings</h2>
               <br></br>
-              <Text>Device ID: {deviceData[selectedDeviceIndex].device_id}</Text>
-              <Text>Device Name: {deviceData[selectedDeviceIndex].device_name}</Text>
-              <Text>Device Location: {deviceData[selectedDeviceIndex].zip_code}</Text>
               <Text>
-                Hot Temperature Limit: {deviceData[selectedDeviceIndex].temperature_upper_limit}
+                Device ID: {deviceData[selectedDeviceIndex].device_id}
               </Text>
               <Text>
-                Cold Temperature Limit: {deviceData[selectedDeviceIndex].temperature_lower_limit}
+                Device Name: {deviceData[selectedDeviceIndex].device_name}
+              </Text>
+              <Text>
+                Device Location: {deviceData[selectedDeviceIndex].zip_code}
+              </Text>
+              <Text>
+                Hot Temperature Limit:{" "}
+                {deviceData[selectedDeviceIndex].temperature_upper_limit}
+              </Text>
+              <Text>
+                Cold Temperature Limit:{" "}
+                {deviceData[selectedDeviceIndex].temperature_lower_limit}
               </Text>
               <Button onClick={() => openSettingsChange()}>
                 Change Settings

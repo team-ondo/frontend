@@ -173,44 +173,38 @@ const CheckLink = styled("a", {
 
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
-  settingsView: React.Dispatch<React.SetStateAction<number>>;
-  // selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
   selectedDeviceIndex: number;
   deviceData: React.Dispatch<React.SetStateAction<[]>>;
-  setDeviceData: React.Dispatch<React.SetStateAction<[]>>;
   userData: React.Dispatch<React.SetStateAction<{}>>;
-  setUserData: React.Dispatch<React.SetStateAction<{}>>;
-  isLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SettingsViewState = { DropDown: 0, Read: 1, Change: 2, Updated: 3 } as const; 
-type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState];
+const SettingsViewState = {
+  DropDown: 0,
+  Read: 1,
+  Change: 2,
+  Updated: 3,
+} as const;
+type SettingViewState =
+  typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function SettingsChange({
   setSettingsView,
-  settingsView,
   deviceData,
-  setDeviceData,
   selectedDeviceIndex,
   userData,
-  setUserData,
-  isLoading,
 }: Props) {
-
   const submitSettingsChange = () => {
-    let firstName: string = document.getElementById("firstName").value;
-    let lastName: string = document.getElementById("lastName").value;
-    let email: string = document.getElementById("email").value;
-    let phoneNumber: string = document.getElementById("phoneNumber").value;
-    let oldPassword: string = document.getElementById("oldPassword").value;
-    let newPassword: string = document.getElementById("newPassword").value;
+    let firstName = (document.getElementById("firstName") as HTMLInputElement).value;
+    let lastName = (document.getElementById("lastName") as HTMLInputElement).value;
+    let email = (document.getElementById("email") as HTMLInputElement).value;
+    let phoneNumber = (document.getElementById("phoneNumber") as HTMLInputElement).value;
+    let oldPassword = (document.getElementById("oldPassword") as HTMLInputElement).value;
+    let newPassword = (document.getElementById("newPassword") as HTMLInputElement).value;
 
-    let deviceName: string = document.getElementById("deviceName").value;
-    let hotTempSetting: number =
-      document.getElementById("hotTempSetting").value;
-    let coldTempSetting: number =
-      document.getElementById("coldTempSetting").value;
-    let zipcode: string = document.getElementById("zipcode").value;
+    let deviceName = (document.getElementById("deviceName") as HTMLInputElement).value;
+    let hotTempSetting = (document.getElementById("hotTempSetting") as HTMLInputElement).value;
+    let coldTempSetting = (document.getElementById("coldTempSetting") as HTMLInputElement).value;
+    let zipcode = (document.getElementById("zipcode") as HTMLInputElement).value;
 
     const updatedUserSettings: {} = {
       // comments contain original data
@@ -223,7 +217,9 @@ export default function SettingsChange({
     };
 
     const updatedDeviceSettings: {} = {
-      device_name: deviceName ? deviceName : deviceData[selectedDeviceIndex].device_name, //Roppongi_Device
+      device_name: deviceName
+        ? deviceName
+        : deviceData[selectedDeviceIndex].device_name, //Roppongi_Device
       temperature_upper_limit: hotTempSetting
         ? hotTempSetting
         : deviceData[selectedDeviceIndex].temperature_upper_limit, //30.2
@@ -237,11 +233,11 @@ export default function SettingsChange({
       console.log(res.data);
       location.reload();
     });
-    
+
     api.put(`/settings/device/`, updatedDeviceSettings).then((res) => {
       console.log(res.data);
     });
-    setSettingsView(SettingsViewState.Updated)
+    setSettingsView(SettingsViewState.Updated);
   };
 
   return (
@@ -276,24 +272,24 @@ export default function SettingsChange({
           <h2>Device Settings</h2>
           <Fieldset>
             <Label htmlFor="deviceName">Device Name</Label>
-            <Input id="deviceName" placeholder={deviceData[0].device_name} />
+            <Input id="deviceName" placeholder={deviceData[selectedDeviceIndex].device_name} />
           </Fieldset>
           <Fieldset>
             <Label htmlFor="zipcode">Zip Code (Device Location)</Label>
-            <Input id="zipcode" placeholder={deviceData[0].zip_code} />
+            <Input id="zipcode" placeholder={deviceData[selectedDeviceIndex].zip_code} />
           </Fieldset>
           <Fieldset>
             <Label htmlFor="hotTempSetting">Hot Temperature Setting</Label>
             <Input
               id="hotTempSetting"
-              placeholder={deviceData[0].temperature_upper_limit}
+              placeholder={deviceData[selectedDeviceIndex].temperature_upper_limit}
             />
           </Fieldset>
           <Fieldset>
             <Label htmlFor="coldTempSetting">Cold Temperature Setting</Label>
             <Input
               id="coldTempSetting"
-              placeholder={deviceData[0].temperature_lower_limit}
+              placeholder={deviceData[selectedDeviceIndex].temperature_lower_limit}
             />
           </Fieldset>
           <Button onClick={() => submitSettingsChange()}>Submit</Button>

@@ -21,11 +21,19 @@ export type DeviceData = {
   temperature_lower_limit: number;
 };
 
-const SettingsViewState = { DropDown: 0, Read: 1, Change: 2, Updated: 3 } as const; 
-type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState];
+const SettingsViewState = {
+  DropDown: 0,
+  Read: 1,
+  Change: 2,
+  Updated: 3,
+} as const;
+type SettingViewState =
+  typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function SettingsIndex() {
-  const [settingsView, setSettingsView] = useState<number>(SettingsViewState.DropDown);
+  const [settingsView, setSettingsView] = useState<number>(
+    SettingsViewState.DropDown
+  );
   const [userData, setUserData] = useState<{}>({});
   const [deviceData, setDeviceData] = useState<[]>([]);
   const [selectedDeviceName, setSelectedDeviceName] = useState<string>("");
@@ -46,8 +54,8 @@ export default function SettingsIndex() {
 
   useEffect(() => {
     let index: number = deviceData.findIndex(
-        (e: any) => e.device_name === selectedDeviceName
-      );
+      (e: {device_name: string}) => e.device_name === selectedDeviceName
+    );
     if (index === -1) {
       index = 0;
     }
@@ -56,47 +64,48 @@ export default function SettingsIndex() {
 
   return (
     <PageTemplate pageid={pageid}>
-        {settingsView === SettingsViewState.Read ? (
-          <SettingsRead
-            setSettingsView={setSettingsView}
-            settingsView={settingsView}
-            selectedDeviceName={selectedDeviceName}
-            selectedDeviceIndex={selectedDeviceIndex}
-            deviceData={deviceData}
-            userData={userData}
-            isLoading={isLoading}
-          />
-        ) : settingsView === SettingsViewState.Change ? (
-          <SettingsChange
-            setSettingsView={setSettingsView}
-            settingsView={settingsView}
-            selectedDeviceName={selectedDeviceName}
-            selectedDeviceIndex={selectedDeviceIndex}
-            deviceData={deviceData}
-            userData={userData}
-            isLoading={isLoading}
-          />
-        ) : settingsView === SettingsViewState.Updated ? (
-          <div className={styles.settings_updated}>
-            Settings Updated!
-            <br></br><br></br> Please wait a moment...
-          </div>
-        ) : (
-          <SettingsDropDown
-            setSettingsView={setSettingsView}
-            settingsView={settingsView}
-            setSelectedDeviceName={setSelectedDeviceName}
-            selectedDeviceName={selectedDeviceName}
-            selectedDeviceIndex={selectedDeviceIndex}
-            setSelectedDeviceIndex={setSelectedDeviceIndex}
-            setDeviceData={setDeviceData}
-            deviceData={deviceData}
-            userData={userData}
-            deviceData={deviceData}
-            setIsLoading={setIsLoading}
-            isLoading={isLoading}
-          />
-        )}
+      {settingsView === SettingsViewState.Read ? (
+        <SettingsRead
+          setSettingsView={setSettingsView}
+          settingsView={settingsView}
+          selectedDeviceName={selectedDeviceName}
+          selectedDeviceIndex={selectedDeviceIndex}
+          deviceData={deviceData}
+          userData={userData}
+          isLoading={isLoading}
+        />
+      ) : settingsView === SettingsViewState.Change ? (
+        <SettingsChange
+          setSettingsView={setSettingsView}
+          settingsView={settingsView}
+          selectedDeviceName={selectedDeviceName}
+          selectedDeviceIndex={selectedDeviceIndex}
+          deviceData={deviceData}
+          userData={userData}
+          isLoading={isLoading}
+        />
+      ) : settingsView === SettingsViewState.Updated ? (
+        <div className={styles.settings_updated}>
+          Settings Updated
+          <br></br>
+          <br></br> Please wait a moment...
+        </div>
+      ) : (
+        <SettingsDropDown
+          setSettingsView={setSettingsView}
+          settingsView={settingsView}
+          setSelectedDeviceName={setSelectedDeviceName}
+          selectedDeviceName={selectedDeviceName}
+          selectedDeviceIndex={selectedDeviceIndex}
+          setSelectedDeviceIndex={setSelectedDeviceIndex}
+          setDeviceData={setDeviceData}
+          deviceData={deviceData}
+          userData={userData}
+          deviceData={deviceData}
+          setIsLoading={setIsLoading}
+          isLoading={isLoading}
+        />
+      )}
     </PageTemplate>
   );
 }

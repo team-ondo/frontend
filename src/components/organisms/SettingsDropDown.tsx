@@ -5,7 +5,6 @@ import { indigo, mauve, blackA } from "@radix-ui/colors";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
-import api from "../../lib/axios_settings";
 
 const StyledTabs = styled(TabsPrimitive.Root, {
   display: "flex",
@@ -173,37 +172,32 @@ const CheckLink = styled("a", {
 
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
-  settingsView: React.Dispatch<React.SetStateAction<number>>;
   setSelectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
-  selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
-  selectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
-  setSelectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
-  setDeviceData: React.Dispatch<React.SetStateAction<[]>>;
   deviceData: React.Dispatch<React.SetStateAction<[]>>;
   isLoading: boolean;
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SettingsViewState = { DropDown: 0, Read: 1, Change: 2, Updated: 3 } as const; 
-type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState];
+const SettingsViewState = {
+  DropDown: 0,
+  Read: 1,
+  Change: 2,
+  Updated: 3,
+} as const;
+type SettingViewState =
+  typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function DropDownSettings({
   setSettingsView,
-  settingsView,
   setSelectedDeviceName,
-  selectedDeviceName,
-  selectedDeviceIndex,
-  setSelectedDeviceIndex,
   deviceData,
-  setDeviceData,
   isLoading,
-  setIsLoading,
 }: Props) {
-
   const getDeviceName = () => {
-    let dropDownText = document.getElementById("drop_menu_settings");
-    let selectedText = dropDownText.options[dropDownText.selectedIndex].text;
-    return setSelectedDeviceName(selectedText);
+    let dropDownText = document.getElementById("drop_menu_settings") as HTMLSelectElement | null;;
+    let selectedText = dropDownText?.options[dropDownText.selectedIndex].text;
+    if(selectedText) {
+      return setSelectedDeviceName(selectedText);
+    }
   };
 
   const settingsViewChange = () => {
@@ -212,7 +206,7 @@ export default function DropDownSettings({
   };
 
   if (isLoading) {
-    return <div className="loading">Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   } else {
     return (
       <>
@@ -223,7 +217,9 @@ export default function DropDownSettings({
               <select className="drop_menu" id="drop_menu_settings">
                 {deviceData.map((obj: any, i: number) => {
                   return (
-                    <option key={i} value={obj.device_name}>{obj.device_name}</option>
+                    <option key={i} value={obj.device_name}>
+                      {obj.device_name}
+                    </option>
                   );
                 })}
               </select>
