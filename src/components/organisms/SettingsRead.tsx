@@ -186,7 +186,7 @@ const SettingsViewState = {
   Change: 2,
   Updated: 3,
 } as const;
-type SettingViewState =
+type SettingsViewState =
   typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function SettingsRead({
@@ -201,15 +201,21 @@ export default function SettingsRead({
   };
 
   if (isLoading) {
-    return <div className={styles.loading}>Loading...</div>;
+    return (
+      <div className={styles.top}>
+        <div className={styles.top__inner}>
+          <div className={styles.loading}>Loading...</div>
+        </div>
+      </div>
+    );
   } else {
     return (
       <>
         <div className={styles.top}>
           <div className={styles.top__inner}>
+            <div className={styles.top__contents}>
             <div className={styles.user_settings}>
-              <h2>User Settings</h2>
-              <br></br>
+              <h2 className={styles.user_settings__heading}>User Settings</h2>
               <Text>First Name: {userData.first_name}</Text>
               <Text>Last Name: {userData.last_name}</Text>
               <Text>Email: {userData.email}</Text>
@@ -217,8 +223,7 @@ export default function SettingsRead({
               <Text>Phone Number: {userData.phone_number}</Text>
             </div>
             <div className={styles.device_settings}>
-              <h2>Device Settings</h2>
-              <br></br>
+              <h2 className={styles.user_settings__heading}>Device Settings</h2>
               <Text>
                 Device ID: {deviceData[selectedDeviceIndex].device_id}
               </Text>
@@ -236,10 +241,13 @@ export default function SettingsRead({
                 Cold Temperature Limit:{" "}
                 {deviceData[selectedDeviceIndex].temperature_lower_limit}
               </Text>
-              <Button onClick={() => openSettingsChange()}>
-                Change Settings
-              </Button>
-            </div>
+              </div>
+              </div>
+              <div className={styles.user_settings__button}>
+                <Button onClick={() => openSettingsChange()}>
+                  Change Settings
+                </Button>
+              </div>
           </div>
         </div>
       </>
