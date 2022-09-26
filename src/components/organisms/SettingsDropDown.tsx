@@ -15,6 +15,7 @@ const Button = styled("button", {
   fontWeight: 500,
   height: 35,
   width: 100,
+  cursor: "pointer",
 
   variants: {
     variant: {

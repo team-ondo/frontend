@@ -5,12 +5,10 @@
     display: flex;
     justify-content: center;
     min-width: var.$contentWidthPc;
-    height: 70vh;
   
     @include mi.mq {
       min-width: auto;
       text-align: center;
-      height: 100vh;
     }
   
     &__inner {
@@ -22,13 +20,12 @@
     }
 
     &__contents {
-      display: flex;
-      justify-content: space-evenly;
       margin-top: 30px;
       text-align: left;
+      display: flex;
+      justify-content: center;
 
       @include mi.mq {
-        display: block;
         padding: 0 10px;
       }
     }
@@ -85,14 +82,47 @@
     }
 
     &__button {
+      margin-top: 20px;
       display: flex;
       justify-content: center;
-      margin-top: 20px;
     }
   }
 
-  .device_settings {
-    
+  .change {
+    display: flex;
+    justify-content: center;
+    min-width: var.$contentWidthPc;
+  
+    @include mi.mq {
+      min-width: auto;
+      text-align: center;
+    }
+  
+    &__inner {
+      width: var.$contentWidthPc;
+      display: flex;
+      justify-content: center;
+  
+      @include mi.mq {
+        width: 100%;
+      }
+    }
+
+    &__heading {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+
+    &__contents {
+      width: 400px;
+      text-align: left;
+    }
+
+    &__button {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
   }
  
   @keyframes updating {
