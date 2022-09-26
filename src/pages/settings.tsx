@@ -54,7 +54,7 @@ export default function SettingsIndex() {
 
   useEffect(() => {
     let index: number = deviceData.findIndex(
-      (e: {device_name: string}) => e.device_name === selectedDeviceName
+      (e: { device_name: string }) => e.device_name === selectedDeviceName
     );
     if (index === -1) {
       index = 0;

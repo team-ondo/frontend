@@ -173,7 +173,7 @@ const CheckLink = styled("a", {
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
   setSelectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
-  deviceData: React.Dispatch<React.SetStateAction<[]>>;
+  deviceData: any;
   isLoading: boolean;
 };
 
@@ -192,11 +192,12 @@ export default function DropDownSettings({
   deviceData,
   isLoading,
 }: Props) {
-  
   const getDeviceName = () => {
-    let dropDownText = document.getElementById("drop_menu_settings") as HTMLSelectElement | null;;
+    let dropDownText = document.getElementById(
+      "drop_menu_settings"
+    ) as HTMLSelectElement | null;
     let selectedText = dropDownText?.options[dropDownText.selectedIndex].text;
-    if(selectedText) {
+    if (selectedText) {
       return setSelectedDeviceName(selectedText);
     }
   };

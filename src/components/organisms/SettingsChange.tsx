@@ -193,19 +193,32 @@ export default function SettingsChange({
   selectedDeviceIndex,
   userData,
 }: Props) {
-  
   const submitSettingsChange = () => {
-    let firstName = (document.getElementById("firstName") as HTMLInputElement).value;
-    let lastName = (document.getElementById("lastName") as HTMLInputElement).value;
+    let firstName = (document.getElementById("firstName") as HTMLInputElement)
+      .value;
+    let lastName = (document.getElementById("lastName") as HTMLInputElement)
+      .value;
     let email = (document.getElementById("email") as HTMLInputElement).value;
-    let phoneNumber = (document.getElementById("phoneNumber") as HTMLInputElement).value;
-    let oldPassword = (document.getElementById("oldPassword") as HTMLInputElement).value;
-    let newPassword = (document.getElementById("newPassword") as HTMLInputElement).value;
+    let phoneNumber = (
+      document.getElementById("phoneNumber") as HTMLInputElement
+    ).value;
+    let oldPassword = (
+      document.getElementById("oldPassword") as HTMLInputElement
+    ).value;
+    let newPassword = (
+      document.getElementById("newPassword") as HTMLInputElement
+    ).value;
 
-    let deviceName = (document.getElementById("deviceName") as HTMLInputElement).value;
-    let hotTempSetting = (document.getElementById("hotTempSetting") as HTMLInputElement).value;
-    let coldTempSetting = (document.getElementById("coldTempSetting") as HTMLInputElement).value;
-    let zipcode = (document.getElementById("zipcode") as HTMLInputElement).value;
+    let deviceName = (document.getElementById("deviceName") as HTMLInputElement)
+      .value;
+    let hotTempSetting = (
+      document.getElementById("hotTempSetting") as HTMLInputElement
+    ).value;
+    let coldTempSetting = (
+      document.getElementById("coldTempSetting") as HTMLInputElement
+    ).value;
+    let zipcode = (document.getElementById("zipcode") as HTMLInputElement)
+      .value;
 
     const updatedUserSettings: {} = {
       // comments contain original data
@@ -273,24 +286,34 @@ export default function SettingsChange({
           <h2>Device Settings</h2>
           <Fieldset>
             <Label htmlFor="deviceName">Device Name</Label>
-            <Input id="deviceName" placeholder={deviceData[selectedDeviceIndex].device_name} />
+            <Input
+              id="deviceName"
+              placeholder={deviceData[selectedDeviceIndex].device_name}
+            />
           </Fieldset>
           <Fieldset>
             <Label htmlFor="zipcode">Zip Code (Device Location)</Label>
-            <Input id="zipcode" placeholder={deviceData[selectedDeviceIndex].zip_code} />
+            <Input
+              id="zipcode"
+              placeholder={deviceData[selectedDeviceIndex].zip_code}
+            />
           </Fieldset>
           <Fieldset>
             <Label htmlFor="hotTempSetting">Hot Temperature Setting</Label>
             <Input
               id="hotTempSetting"
-              placeholder={deviceData[selectedDeviceIndex].temperature_upper_limit}
+              placeholder={
+                deviceData[selectedDeviceIndex].temperature_upper_limit
+              }
             />
           </Fieldset>
           <Fieldset>
             <Label htmlFor="coldTempSetting">Cold Temperature Setting</Label>
             <Input
               id="coldTempSetting"
-              placeholder={deviceData[selectedDeviceIndex].temperature_lower_limit}
+              placeholder={
+                deviceData[selectedDeviceIndex].temperature_lower_limit
+              }
             />
           </Fieldset>
           <Button onClick={() => submitSettingsChange()}>Submit</Button>
