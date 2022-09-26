@@ -13,6 +13,8 @@
   
     &__inner {
       width: var.$contentWidthPc;
+      display: flex;
+      justify-content: center;
   
       @include mi.mq {
         width: 100%;
@@ -20,8 +22,48 @@
     }
   }
 
-  .select_device {
+  .device {
+    display: flex;
+    justify-content: center;
+    min-width: var.$contentWidthPc;
+    height: 70vh;
+  
+    @include mi.mq {
+      min-width: auto;
+      text-align: center;
+      height: 78vh;
+    }
+  
+    &__inner {
+      width: var.$contentWidthPc;
+      display: flex;
+      justify-content: center;
+  
+      @include mi.mq {
+        width: 100%;
+      }
+    }
+}
 
+  .select_device {
+    margin-top: 30px;
+
+    &__heading {
+      font-size: 20px;
+      text-align: center;
+    }
+
+    &__menu {
+      margin-top: 10px;
+      width: 250px;
+      padding: 10px 0 10px 10px;
+    }
+
+    &__button {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
   }
 
   .user_settings{

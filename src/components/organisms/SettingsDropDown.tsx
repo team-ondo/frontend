@@ -110,6 +110,7 @@ const Button = styled("button", {
   lineHeight: 1,
   fontWeight: 500,
   height: 35,
+  width: 100,
 
   variants: {
     variant: {
@@ -183,7 +184,7 @@ const SettingsViewState = {
   Change: 2,
   Updated: 3,
 } as const;
-type SettingViewState =
+type SettingsViewState =
   typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function DropDownSettings({
@@ -212,11 +213,12 @@ export default function DropDownSettings({
   } else {
     return (
       <>
-        <div className={styles.top}>
-          <div className={styles.top__inner}>
+        <div className={styles.device}>
+          <div className={styles.device__inner}>
+            <div className={styles.top__device}>
             <div className={styles.select_device}>
-              <h3>Please select your device:</h3>
-              <select className="drop_menu" id="drop_menu_settings">
+              <h3 className={styles.select_device__heading}>Please select your device:</h3>
+              <select className={styles.select_device__menu} id="drop_menu_settings">
                 {deviceData.map((obj: any, i: number) => {
                   return (
                     <option key={i} value={obj.device_name}>
@@ -226,9 +228,12 @@ export default function DropDownSettings({
                 })}
               </select>
             </div>
+            <div className={styles.select_device__button}>
             <Button title={"Select"} onClick={() => settingsViewChange()}>
               Select
             </Button>
+            </div>
+            </div>
           </div>
         </div>
       </>
