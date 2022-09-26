@@ -1,53 +1,65 @@
 @use "@variables" as var;
 @use "@mixin" as mi;
 
+.alarm-button {
+  border: 1px solid var.$themeGray;
+  cursor: pointer;
+  background-color: var.$themePink;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 42px 24px;
+  width: 100%;
+  margin-bottom: 24px;
+  border-radius: 10px;
+}
+
 .top {
-    display: flex;
-    justify-content: center;
-    min-width: var.$contentWidthPc;
+  display: flex;
+  justify-content: center;
+  min-width: var.$contentWidthPc;
+  padding: 10px 0;
+
+  @include mi.mq {
+    min-width: auto;
     padding: 10px 0;
+    text-align: center;
+  }
+
+  &__inner {
+    width: var.$contentWidthPc;
 
     @include mi.mq {
-        min-width: auto;
-        padding: 10px 0;
-        text-align: center;
+      width: 100%;
     }
+  }
 
-    &__inner {
-        width: var.$contentWidthPc;
+  &__weather {
+    border: 1px solid var.$themeGray;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: var.$themePaleBlue;
+    font-size: 18px;
+    color: var.$themeRealBlack;
+    line-height: 1.5;
 
-        @include mi.mq {
-            width: 100%;
-        }
+    @include mi.mq {
+      font-size: 16px;
+      text-align: left;
     }
+  }
 
-    &__weather {
-        border: 1px solid var.$themeGray;
-        border-radius: 10px;
-        padding: 10px;
-        background-color: var.$themePaleBlue;
-        font-size: 18px;
-        color: var.$themeRealBlack;
-        line-height: 1.5;
+  &__livedata {
+    margin-top: 40px;
+    color: var.$themeBlack;
+    font-size: 22px;
+    text-align: center;
+    line-height: 1.5;
+    padding: 80px 0 200px;
 
-        @include mi.mq {
-            font-size: 16px;
-            text-align: left;
-        }
+    @include mi.mq {
+      font-size: 18px;
+      padding: 60px 20px;
+      text-align: left;
     }
-
-    &__livedata {
-        margin-top: 40px;
-        color: var.$themeBlack;
-        font-size: 22px;
-        text-align: center;
-        line-height: 1.5;
-        padding: 80px 0 200px;
-
-        @include mi.mq {
-            font-size: 18px;
-            padding: 60px 20px;
-            text-align: left;
-        }
-    }
+  }
 }
