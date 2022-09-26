@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import styles from "@/styles/components/organisms/Settings.module.scss";
 import PageTemplate from "@/components/templates/PageTemplate";
 import SettingsRead from "@/components/organisms/SettingsRead";
 import SettingsChange from "@/components/organisms/SettingsChange";
@@ -79,7 +80,7 @@ export default function SettingsIndex() {
             isLoading={isLoading}
           />
         ) : settingsView === SettingsViewState.Updated ? (
-          <div className="settings_updated">
+          <div className={styles.settings_updated}>
             Settings Updated!
             <br></br><br></br> Please wait a moment...
           </div>
