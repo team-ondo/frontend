@@ -8,7 +8,7 @@ import Signup from "@/components/molecules/Signup";
 const StyledTabs = styled(TabsPrimitive.Root, {
   display: "flex",
   flexDirection: "column",
-  width: 350,
+  width: 700,
   boxShadow: `0 2px 10px ${blackA.blackA4}`,
   borderRadius: 4,
 });
