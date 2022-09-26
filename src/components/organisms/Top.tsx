@@ -22,8 +22,6 @@ type Props = {
   deviceId: string | null;
 };
 
-const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
-
 export default function Top({ deviceId }: Props) {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
   const [liveData, setLiveData] = useState<LiveData | null>();
@@ -85,7 +83,7 @@ export default function Top({ deviceId }: Props) {
 
   const toggleAlarmHandler = async () => {
     // Ping server to switch alarm off
-    api.get(`/devices/${device_id}/alarm/off`).then((res) => {
+    api.get(`/devices/${deviceId}/alarm/off`).then((res) => {
       let response = res.data;
       console.log(response);
       // reset local alarm status to false
