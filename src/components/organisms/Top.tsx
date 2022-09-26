@@ -32,6 +32,7 @@ export default function Top({ deviceId }: Props) {
     api
       .get(`/weather-info/en/${deviceId}`)
       .then((res) => {
+        setWeatherErrMessage(null);
         setWeatherData(res.data);
       })
       .catch((error: any) => {
@@ -43,6 +44,7 @@ export default function Top({ deviceId }: Props) {
     api
       .get(`/device-data/${deviceId}/live`)
       .then((res) => {
+        setLiveErrMessage(null);
         setLiveData(res.data);
       })
       .catch((error: any) => {
@@ -57,6 +59,7 @@ export default function Top({ deviceId }: Props) {
     api
       .get(`/device-data/${deviceId}/live`)
       .then((res) => {
+        setLiveErrMessage(null);
         setLiveData(res.data);
       })
       .catch((error: any) => {
@@ -82,9 +85,7 @@ export default function Top({ deviceId }: Props) {
             weather_icon={weatherData.weather_icon}
           />
         ) : weatherErrMessage ? (
-          <div className={styles.top__weather}>
-            Failed to retrieve the weather data.
-          </div>
+          <div className={styles.top__weather}>{weatherErrMessage}</div>
         ) : (
           <div className={styles.top__weather}>Loading the weather data.</div>
         )}
@@ -94,9 +95,7 @@ export default function Top({ deviceId }: Props) {
             humidity={liveData.humidity}
           />
         ) : liveErrMessage ? (
-          <div className={styles.top__livedata}>
-            Failed to retrieve the temperature and humidity data.
-          </div>
+          <div className={styles.top__livedata}>{liveErrMessage}</div>
         ) : (
           <div className={styles.top__livedata}>
             Loading the temperature and humidity data.
