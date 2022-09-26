@@ -7,6 +7,7 @@ import api from "@/lib/axios_settings";
 import Cookies from "js-cookie";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "@/globalStates/atoms/Auth";
+import styles from "@/styles/components/molecules/Login.module.scss";
 
 interface LoginFormInput {
   email: string;
@@ -139,6 +140,7 @@ export default function Login() {
           ) : (
             ""
           )}
+          <div className={styles.login}>
           <Fieldset>
             <Label htmlFor="email">Email</Label>
             <Input
@@ -166,6 +168,7 @@ export default function Login() {
             />
             <ErrorMsg>{errors.loginPassword?.message}</ErrorMsg>
           </Fieldset>
+          </div>
           <Flex css={{ marginTop: 20, justifyContent: "center" }}>
             <Button css={{ cursor: "pointer" }} variant="indigo">
               Sign In
