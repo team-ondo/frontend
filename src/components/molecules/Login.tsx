@@ -141,33 +141,33 @@ export default function Login() {
             ""
           )}
           <div className={styles.login}>
-          <Fieldset>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              type="mail"
-              id="email"
-              placeholder="sample@example.com"
-              {...register("email", {
-                required: "* This field is required",
-                pattern: {
-                  value: /^[\w\-._]+@[\w\-._]+\.[A-Za-z]+/,
-                  message: "* Invalid email address",
-                },
-              })}
-            />
-            <ErrorMsg>{errors.email?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="loginPassword">Password</Label>
-            <Input
-              id="loginPassword"
-              type="password"
-              {...register("loginPassword", {
-                required: "* This field is required",
-              })}
-            />
-            <ErrorMsg>{errors.loginPassword?.message}</ErrorMsg>
-          </Fieldset>
+            <Fieldset>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                type="mail"
+                id="email"
+                placeholder="sample@example.com"
+                {...register("email", {
+                  required: "* This field is required",
+                  pattern: {
+                    value: /^[\w\-._]+@[\w\-._]+\.[A-Za-z]+/,
+                    message: "* Invalid email address",
+                  },
+                })}
+              />
+              <ErrorMsg>{errors.email?.message}</ErrorMsg>
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="loginPassword">Password</Label>
+              <Input
+                id="loginPassword"
+                type="password"
+                {...register("loginPassword", {
+                  required: "* This field is required",
+                })}
+              />
+              <ErrorMsg>{errors.loginPassword?.message}</ErrorMsg>
+            </Fieldset>
           </div>
           <Flex css={{ marginTop: 20, justifyContent: "center" }}>
             <Button css={{ cursor: "pointer" }} variant="indigo">

@@ -15,7 +15,7 @@ export type WeatherData = {
 export type LiveData = {
   temperature_celsius: number;
   humidity: number;
-  alarm: boolean;
+  alarm?: boolean;
 };
 
 type Props = {
