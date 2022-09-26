@@ -29,7 +29,7 @@ export default function Top({ deviceId }: Props) {
   const [liveData, setLiveData] = useState<LiveData | null>();
   const [weatherErrMessage, setWeatherErrMessage] = useState<string | null>();
   const [liveErrMessage, setLiveErrMessage] = useState<string | null>();
-  const [alarmIsRinging, setAlarmIsRinging] = useState<boolean>(true);
+  const [alarmIsRinging, setAlarmIsRinging] = useState<boolean>(false);
 
   useEffect(() => {
     // weather data
@@ -76,11 +76,11 @@ export default function Top({ deviceId }: Props) {
 
   // check alarm when liveData is updated
   useEffect(() => {
-    // if (liveData?.alarm) {
-    //   setAlarmIsRinging(true);
-    // } else {
-    //   setAlarmIsRinging(false);
-    // }
+    if (liveData?.alarm) {
+      setAlarmIsRinging(true);
+    } else {
+      setAlarmIsRinging(false);
+    }
   }, [liveData]);
 
   const toggleAlarmHandler = async () => {
@@ -93,7 +93,7 @@ export default function Top({ deviceId }: Props) {
     });
   };
 
-  // update Livedata every 2 minitues
+  // update Livedata every 2 minutes
   setInterval(updateLivedata, 120000);
 
   return (
