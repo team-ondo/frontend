@@ -22,12 +22,14 @@ type Props = {
   deviceId: string | null;
 };
 
+const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
+
 export default function Top({ deviceId }: Props) {
   const [weatherData, setWeatherData] = useState<WeatherData | null>();
   const [liveData, setLiveData] = useState<LiveData | null>();
   const [weatherErrMessage, setWeatherErrMessage] = useState<string | null>();
   const [liveErrMessage, setLiveErrMessage] = useState<string | null>();
-  const [alarmIsRinging, setAlarmIsRinging] = useState<boolean>(false);
+  const [alarmIsRinging, setAlarmIsRinging] = useState<boolean>(true);
 
   useEffect(() => {
     // weather data
@@ -74,12 +76,22 @@ export default function Top({ deviceId }: Props) {
 
   // check alarm when liveData is updated
   useEffect(() => {
-    if (liveData.alarm) {
-      setAlarmIsRinging(true);
-    } else {
-      setAlarmIsRinging(false);
-    }
+    // if (liveData?.alarm) {
+    //   setAlarmIsRinging(true);
+    // } else {
+    //   setAlarmIsRinging(false);
+    // }
   }, [liveData]);
+
+  const toggleAlarmHandler = async () => {
+    // Ping server to switch alarm off
+    api.get(`/devices/${device_id}/alarm/off`).then((res) => {
+      let response = res.data;
+      console.log(response);
+      // reset local alarm status to false
+      setAlarmIsRinging(false);
+    });
+  };
 
   // update Livedata every 2 minitues
   setInterval(updateLivedata, 120000);
@@ -87,7 +99,14 @@ export default function Top({ deviceId }: Props) {
   return (
     <div className={styles.top}>
       <div className={styles.top__inner}>
-        {alarmIsRinging && <button>TEST</button>}
+        {alarmIsRinging && (
+          <button
+            className={styles["alarm-button"]}
+            onClick={toggleAlarmHandler}
+          >
+            Device Alarm is Ringing | Please Check and Click to Reset Device.
+          </button>
+        )}
 
         {weatherData ? (
           <Weather
