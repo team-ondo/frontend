@@ -1,0 +1,11 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.login {
+  width: 400px;
+  margin: 0 auto;
+
+  @include mi.mq {
+    width: auto;
+  }
+}
