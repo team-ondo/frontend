@@ -1,0 +1,52 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.top {
+    display: flex;
+    justify-content: center;
+    min-width: var.$contentWidthPc;
+  
+    @include mi.mq {
+      min-width: auto;
+      text-align: center;
+    }
+  
+    &__inner {
+      width: var.$contentWidthPc;
+  
+      @include mi.mq {
+        width: 100%;
+      }
+    }
+  }
+
+  .select_device {
+
+  }
+
+  .user_settings{
+
+  }
+
+  .device_settings {
+    
+  }
+ 
+  @keyframes updating {
+    from {opacity: 0;}
+    to {opacity: 100;}
+  }
+  
+  .settings_updated {
+    animation-name: updating;
+    animation-duration: 500ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+  }
+
+  .loading {
+    animation-name: updating;
+    animation-duration: 500ms;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+  }

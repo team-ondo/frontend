@@ -36,9 +36,13 @@
   cursor: pointer;
   padding: 10px 32px;
   background-color: var.$themePaleOrange;
+
+  &:hover {
+    background-color: var.$themeOrange;
+  }
 }
 
-.chart-button:hover {
+.chart__selectedButton {
   background-color: var.$themeOrange;
 }
 

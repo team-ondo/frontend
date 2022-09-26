@@ -45,7 +45,11 @@ export default function Header() {
     <>
       <header className={styles.header}>
         <div className={styles.header__inner}>
-          <Logo width={100} height={84} />
+          <Link href="/">
+            <a className={styles.header__logo}>
+              <Logo width={100} height={84} />
+            </a>
+          </Link>
           {width < 900 ? (
             <>
               <div className={styles.hamburger} onClick={hamburgerClick}>
