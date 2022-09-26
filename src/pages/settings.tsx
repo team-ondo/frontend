@@ -5,6 +5,9 @@ import SettingsRead from "@/components/organisms/SettingsRead";
 import SettingsChange from "@/components/organisms/SettingsChange";
 import SettingsDropDown from "@/components/organisms/SettingsDropDown";
 import api from "@/lib/axios_settings";
+import { useRecoilValue } from "recoil";
+import { loginState } from "@/globalStates/atoms/Auth";
+import { useRouter } from "next/router";
 
 export type UserData = {
   first_name: string;
@@ -42,14 +45,21 @@ export default function SettingsIndex() {
 
   const pageid = "settings";
 
+  const isLoggedin = useRecoilValue<boolean>(loginState);
+  const router = useRouter();
+
   useEffect(() => {
-    api.get(`/settings/user`).then((res) => {
-      setUserData(res.data);
-    });
-    api.get(`/settings/device/`).then((res) => {
-      setDeviceData(res.data);
-      setIsLoading(false);
-    });
+    if (isLoggedin) {
+      api.get(`/settings/user`).then((res) => {
+        setUserData(res.data);
+      });
+      api.get(`/settings/device/`).then((res) => {
+        setDeviceData(res.data);
+        setIsLoading(false);
+      });
+    } else {
+      router.push("/");
+    }
   }, []);
 
   useEffect(() => {
@@ -62,37 +72,41 @@ export default function SettingsIndex() {
     setSelectedDeviceIndex(index);
   }, [selectedDeviceName]);
 
-  return (
-    <PageTemplate pageid={pageid}>
-      {settingsView === SettingsViewState.Read ? (
-        <SettingsRead
-          setSettingsView={setSettingsView}
-          selectedDeviceIndex={selectedDeviceIndex}
-          deviceData={deviceData}
-          userData={userData}
-          isLoading={isLoading}
-        />
-      ) : settingsView === SettingsViewState.Change ? (
-        <SettingsChange
-          setSettingsView={setSettingsView}
-          selectedDeviceIndex={selectedDeviceIndex}
-          deviceData={deviceData}
-          userData={userData}
-        />
-      ) : settingsView === SettingsViewState.Updated ? (
-        <div className={styles.settings_updated}>
-          Settings Updated
-          <br></br>
-          <br></br> Please wait a moment...
-        </div>
-      ) : (
-        <SettingsDropDown
-          setSettingsView={setSettingsView}
-          setSelectedDeviceName={setSelectedDeviceName}
-          deviceData={deviceData}
-          isLoading={isLoading}
-        />
-      )}
-    </PageTemplate>
-  );
+  if (isLoggedin) {
+    return (
+      <PageTemplate pageid={pageid}>
+        {settingsView === SettingsViewState.Read ? (
+          <SettingsRead
+            setSettingsView={setSettingsView}
+            selectedDeviceIndex={selectedDeviceIndex}
+            deviceData={deviceData}
+            userData={userData}
+            isLoading={isLoading}
+          />
+        ) : settingsView === SettingsViewState.Change ? (
+          <SettingsChange
+            setSettingsView={setSettingsView}
+            selectedDeviceIndex={selectedDeviceIndex}
+            deviceData={deviceData}
+            userData={userData}
+          />
+        ) : settingsView === SettingsViewState.Updated ? (
+          <div className={styles.settings_updated}>
+            Settings Updated
+            <br></br>
+            <br></br> Please wait a moment...
+          </div>
+        ) : (
+          <SettingsDropDown
+            setSettingsView={setSettingsView}
+            setSelectedDeviceName={setSelectedDeviceName}
+            deviceData={deviceData}
+            isLoading={isLoading}
+          />
+        )}
+      </PageTemplate>
+    );
+  } else {
+    return "";
+  }
 }
