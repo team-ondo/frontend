@@ -1,0 +1,27 @@
+@use "@variables" as var;
+@use "@mixin" as mi;
+
+.signup {
+  display: flex;
+  justify-content: space-evenly;
+
+  @include mi.mq {
+    display: block;
+  }
+
+  &__first {
+    width: 250px;
+
+    @include mi.mq {
+      width: auto;
+    }
+  }
+
+  &__second {
+    width: 250px;
+
+    @include mi.mq {
+      width: auto;
+    }
+  }
+}

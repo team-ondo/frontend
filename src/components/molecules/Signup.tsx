@@ -9,6 +9,7 @@ import api from "@/lib/axios_settings";
 import Cookies from "js-cookie";
 import { useSetRecoilState } from "recoil";
 import { loginState } from "@/globalStates/atoms/Auth";
+import styles from "@/styles/components/molecules/Signup.module.scss";
 
 interface SignupFormInput {
   firstname: string;
@@ -132,6 +133,7 @@ const FieldCheck = styled("fieldset", {
   width: "100%",
   display: "flex",
   alignItems: "center",
+  justifyContent: "center",
 });
 
 const CheckLink = styled("a", {
@@ -211,109 +213,116 @@ export default function Form() {
           ) : (
             ""
           )}
-          <Fieldset>
-            <Label htmlFor="firstname">First Name</Label>
-            <Input
-              id="firstname"
-              placeholder="Yoshi"
-              {...register("firstname", {
-                required: "* This field is required",
-              })}
-            />
-            <ErrorMsg>{errors.firstname?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="lastname">Last Name</Label>
-            <Input
-              id="lastname"
-              placeholder="Kimura"
-              {...register("lastname", {
-                required: "* This field is required",
-              })}
-            />
-            <ErrorMsg>{errors.lastname?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="email">Email</Label>
-            <Input
-              type="mail"
-              id="email"
-              placeholder="sample@example.com"
-              {...register("email", {
-                required: "* This field is required",
-                pattern: {
-                  value: /^[\w\-._]+@[\w\-._]+\.[A-Za-z]+/,
-                  message: "* Invalid email address",
-                },
-              })}
-            />
-            <ErrorMsg>{errors.email?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input
-              id="phone"
-              {...register("phone", {
-                required: "* This field is required",
-              })}
-            />
-            <Annotation>※Please include hyphen.</Annotation>
-            <ErrorMsg>{errors.phone?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              {...register("password", {
-                required: "* This field is required",
-              })}
-            />
-            <ErrorMsg>{errors.password?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="confirmPassword">Confirm Password</Label>
-            <Input
-              id="confirmPassword"
-              type="password"
-              {...register("confirmPassword", {
-                required: "* This field is required",
-                validate: (value) => {
-                  return (
-                    value === getValues("password") || "* Fields do not match"
-                  );
-                },
-              })}
-            />
-            <ErrorMsg>{errors.confirmPassword?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="serialnumber">Serial Number</Label>
-            <Input
-              id="serialnumber"
-              {...register("serialnumber", {
-                required: "* This field is required",
-              })}
-            />
-            <Annotation>※Please enter the number on the device.</Annotation>
-            <ErrorMsg>{errors.serialnumber?.message}</ErrorMsg>
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="zipcode">Zip Code</Label>
-            <Input
-              id="zipcode"
-              {...register("zipcode", {
-                required: "* This field is required",
-              })}
-            />
-            <Annotation>
-              ※Please the zip code of the house where you want to place the
-              device.
-              <br />
-              ※Please do not include hyphen.
-            </Annotation>
-            <ErrorMsg>{errors.zipcode?.message}</ErrorMsg>
-          </Fieldset>
+          <div className={styles.signup}>
+            <div className={styles.signup__first}>
+              <Fieldset>
+                <Label htmlFor="firstname">First Name</Label>
+                <Input
+                  id="firstname"
+                  placeholder="Yoshi"
+                  {...register("firstname", {
+                    required: "* This field is required",
+                  })}
+                />
+                <ErrorMsg>{errors.firstname?.message}</ErrorMsg>
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="lastname">Last Name</Label>
+                <Input
+                  id="lastname"
+                  placeholder="Kimura"
+                  {...register("lastname", {
+                    required: "* This field is required",
+                  })}
+                />
+                <ErrorMsg>{errors.lastname?.message}</ErrorMsg>
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  type="mail"
+                  id="email"
+                  placeholder="sample@example.com"
+                  {...register("email", {
+                    required: "* This field is required",
+                    pattern: {
+                      value: /^[\w\-._]+@[\w\-._]+\.[A-Za-z]+/,
+                      message: "* Invalid email address",
+                    },
+                  })}
+                />
+                <ErrorMsg>{errors.email?.message}</ErrorMsg>
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="phone">Phone Number</Label>
+                <Input
+                  id="phone"
+                  {...register("phone", {
+                    required: "* This field is required",
+                  })}
+                />
+                <Annotation>※Please include hyphen.</Annotation>
+                <ErrorMsg>{errors.phone?.message}</ErrorMsg>
+              </Fieldset>
+            </div>
+            <div className={styles.signup__second}>
+              <Fieldset>
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  id="password"
+                  type="password"
+                  {...register("password", {
+                    required: "* This field is required",
+                  })}
+                />
+                <ErrorMsg>{errors.password?.message}</ErrorMsg>
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
+                <Input
+                  id="confirmPassword"
+                  type="password"
+                  {...register("confirmPassword", {
+                    required: "* This field is required",
+                    validate: (value) => {
+                      return (
+                        value === getValues("password") ||
+                        "* Fields do not match"
+                      );
+                    },
+                  })}
+                />
+                <ErrorMsg>{errors.confirmPassword?.message}</ErrorMsg>
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="serialnumber">Serial Number</Label>
+                <Input
+                  id="serialnumber"
+                  {...register("serialnumber", {
+                    required: "* This field is required",
+                  })}
+                />
+                <Annotation>※Please enter the number on the device.</Annotation>
+                <ErrorMsg>{errors.serialnumber?.message}</ErrorMsg>
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="zipcode">Zip Code</Label>
+                <Input
+                  id="zipcode"
+                  {...register("zipcode", {
+                    required: "* This field is required",
+                  })}
+                />
+                <Annotation>
+                  ※Please the zip code of the house where you want to place the
+                  device.
+                  <br />
+                  ※Please do not include hyphen.
+                </Annotation>
+                <ErrorMsg>{errors.zipcode?.message}</ErrorMsg>
+              </Fieldset>
+            </div>
+          </div>
           <FieldCheck>
             <Checkbox id="ppcheck" onChange={() => handleCheckClick}>
               <CheckboxIndicator>

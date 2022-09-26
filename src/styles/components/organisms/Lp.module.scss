@@ -6,7 +6,7 @@
   justify-content: center;
   min-width: var.$contentWidthPc;
   background: #F4F7F1;
-  height: 1070px;
+  height: 900px;
 
   @include mi.mq {
     min-width: auto;
@@ -30,7 +30,7 @@
   }
 
   &__inner {
-    width: var.$contentWidthPc;
+    width: 1200px;
     padding: 16px 0;
     display: flex;
     justify-content: space-between;
@@ -69,7 +69,7 @@
 
   &__form {
     position: absolute;
-    top: 10px;
+    top: 80px;
     right: 0;
   }
 
