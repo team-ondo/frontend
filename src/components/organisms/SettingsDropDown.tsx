@@ -180,7 +180,7 @@ type Props = {
   setSelectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
   setDeviceData: React.Dispatch<React.SetStateAction<[]>>;
   deviceData: React.Dispatch<React.SetStateAction<[]>>;
-  isLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -199,23 +199,16 @@ export default function DropDownSettings({
   isLoading,
   setIsLoading,
 }: Props) {
+
   const getDeviceName = () => {
     let dropDownText = document.getElementById("drop_menu_settings");
     let selectedText = dropDownText.options[dropDownText.selectedIndex].text;
     return setSelectedDeviceName(selectedText);
   };
 
-  // useEffect(() => {
-  //   const index: number = deviceData.findIndex((e: {}) => e.device_name === selectedDeviceName);
-  //   console.log(index);
-  //   setSelectedDeviceIndex(index);
-  // }, [deviceData])
-
   const settingsViewChange = () => {
     getDeviceName();
     setSettingsView(SettingsViewState.Read);
-    // console.log("DROPDOWN", deviceData);
-    console.log("DROPDOWN", selectedDeviceIndex);
   };
 
   if (isLoading) {

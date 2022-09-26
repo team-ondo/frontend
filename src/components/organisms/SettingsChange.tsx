@@ -175,7 +175,7 @@ type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
   settingsView: React.Dispatch<React.SetStateAction<number>>;
   // selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
-  // selectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
+  selectedDeviceIndex: number;
   deviceData: React.Dispatch<React.SetStateAction<[]>>;
   setDeviceData: React.Dispatch<React.SetStateAction<[]>>;
   userData: React.Dispatch<React.SetStateAction<{}>>;
@@ -189,14 +189,14 @@ type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState]
 export default function SettingsChange({
   setSettingsView,
   settingsView,
-  // selectedDeviceName,
-  // selectedDeviceIndex,
   deviceData,
   setDeviceData,
+  selectedDeviceIndex,
   userData,
   setUserData,
   isLoading,
 }: Props) {
+
   const submitSettingsChange = () => {
     let firstName: string = document.getElementById("firstName").value;
     let lastName: string = document.getElementById("lastName").value;
@@ -223,14 +223,14 @@ export default function SettingsChange({
     };
 
     const updatedDeviceSettings: {} = {
-      device_name: deviceName ? deviceName : deviceData[0].device_name, //Roppongi_Device
+      device_name: deviceName ? deviceName : deviceData[selectedDeviceIndex].device_name, //Roppongi_Device
       temperature_upper_limit: hotTempSetting
         ? hotTempSetting
-        : deviceData[0].temperature_upper_limit, //30.2
+        : deviceData[selectedDeviceIndex].temperature_upper_limit, //30.2
       temperature_lower_limit: coldTempSetting
         ? coldTempSetting
-        : deviceData[0].temperature_lower_limit, //27?
-      zip_code: zipcode ? zipcode : deviceData[0].zip_code, //1001701
+        : deviceData[selectedDeviceIndex].temperature_lower_limit, //27?
+      zip_code: zipcode ? zipcode : deviceData[selectedDeviceIndex].zip_code, //1001701
     };
 
     api.put(`/settings/user/`, updatedUserSettings).then((res) => {
@@ -243,11 +243,6 @@ export default function SettingsChange({
     });
     setSettingsView(SettingsViewState.Updated)
   };
-
-  
-
-  console.log("CHANGE", setSettingsView);
-  console.log("CHANGE", deviceData);
 
   return (
     <>

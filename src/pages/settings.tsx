@@ -28,13 +28,10 @@ export default function SettingsIndex() {
   const [settingsView, setSettingsView] = useState<number>(SettingsViewState.DropDown);
   const [userData, setUserData] = useState<{}>({});
   const [deviceData, setDeviceData] = useState<[]>([]);
-  const [selectedDeviceName, setSelectedDeviceName] =
-    useState<string>("hello ondo");
+  const [selectedDeviceName, setSelectedDeviceName] = useState<string>("");
   const [selectedDeviceIndex, setSelectedDeviceIndex] = useState<number>(-1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // console.log(selectedDeviceName);
-  // console.log("SETTINGS", selectedDeviceIndex);
   const pageid = "settings";
 
   useEffect(() => {
@@ -48,14 +45,14 @@ export default function SettingsIndex() {
   }, []);
 
   useEffect(() => {
-    const index: number = deviceData.findIndex(
-      (e: {}) => e.device_name === selectedDeviceName
-    );
+    let index: number = deviceData.findIndex(
+        (e: any) => e.device_name === selectedDeviceName
+      );
+    if (index === -1) {
+      index = 0;
+    }
     setSelectedDeviceIndex(index);
   }, [selectedDeviceName]);
-
-  // console.log("SETTINGS", selectedDeviceIndex);
-  // console.log(settingsView);
 
   return (
     <PageTemplate pageid={pageid}>

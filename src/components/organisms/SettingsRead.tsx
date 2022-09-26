@@ -176,7 +176,7 @@ type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
   settingsView: React.Dispatch<React.SetStateAction<number>>;
   selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
-  selectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
+  selectedDeviceIndex: number;
   deviceData: DeviceData;
   userData: UserData;
   isLoading: boolean;
@@ -194,20 +194,6 @@ export default function SettingsRead({
   userData,
   isLoading,
 }: Props) {
-  // useEffect(() => {
-  //   let index: number = Number(selectedDeviceIndex);
-  //   console.log(deviceData[index]);
-  // }, []);
-
-  // console.log(settingsView);
-
-  // const setIndex = () => {
-  //   let index: number = Number(selectedDeviceIndex);
-  //   // let device: {} = dataArray[index];
-  //   console.log(deviceData[index]);
-  // };
-
-  // setIndex();
 
   const openSettingsChange = () => {
     setSettingsView(SettingsViewState.Change);
@@ -232,14 +218,14 @@ export default function SettingsRead({
             <div className={styles.device_settings}>
               <h2>Device Settings</h2>
               <br></br>
-              <Text>Device ID: {deviceData[0].device_id}</Text>
-              <Text>Device Name: {deviceData[0].device_name}</Text>
-              <Text>Device Location: {deviceData[0].zip_code}</Text>
+              <Text>Device ID: {deviceData[selectedDeviceIndex].device_id}</Text>
+              <Text>Device Name: {deviceData[selectedDeviceIndex].device_name}</Text>
+              <Text>Device Location: {deviceData[selectedDeviceIndex].zip_code}</Text>
               <Text>
-                Hot Temperature Limit: {deviceData[0].temperature_upper_limit}
+                Hot Temperature Limit: {deviceData[selectedDeviceIndex].temperature_upper_limit}
               </Text>
               <Text>
-                Cold Temperature Limit: {deviceData[0].temperature_lower_limit}
+                Cold Temperature Limit: {deviceData[selectedDeviceIndex].temperature_lower_limit}
               </Text>
               <Button onClick={() => openSettingsChange()}>
                 Change Settings
