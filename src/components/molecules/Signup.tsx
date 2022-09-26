@@ -7,10 +7,8 @@ import { CheckIcon } from "@radix-ui/react-icons";
 import { useForm, SubmitHandler } from "react-hook-form";
 import api from "@/lib/axios_settings";
 import Cookies from "js-cookie";
-
-type Props = {
-  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { useSetRecoilState } from "recoil";
+import { loginState } from "@/globalStates/atoms/Auth";
 
 interface SignupFormInput {
   firstname: string;
@@ -148,7 +146,7 @@ const ErrorMsg = styled("p", {
   marginTop: 5,
 });
 
-export default function Form({ setLoggedin }: Props) {
+export default function Form() {
   const {
     register,
     handleSubmit,
@@ -157,6 +155,7 @@ export default function Form({ setLoggedin }: Props) {
   } = useForm<SignupFormInput>();
   const [isChecked, setChecked] = useState<boolean>(false);
   const [errMessage, setErrMessage] = useState<string | null>();
+  const setLoggedin = useSetRecoilState<boolean>(loginState);
 
   const signupOnSubmit: SubmitHandler<SignupFormInput> = (data) => {
     setErrMessage("");

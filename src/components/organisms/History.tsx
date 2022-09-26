@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import styles from "@/styles/components/organisms/History.module.scss";
 import AlarmHistory from "./AlarmHistory";
-import api from "../../lib/axios_settings";
+import api from "@/lib/axios_settings";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,6 +25,14 @@ ChartJS.register(
   Legend,
   Filler
 );
+
+const DateState = {
+  Day: 0,
+  Week: 1,
+  Month: 2,
+} as const;
+
+type DateState = typeof DateState[keyof typeof DateState];
 
 const options_temp = {
   responsive: true,
@@ -59,6 +67,7 @@ export default function History() {
   const [dataHumidMax, setDataHumidMax] = useState<number[]>([]);
   const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
+  const [dateState, setdateState] = useState<DateState>(DateState.Week);
 
   const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
@@ -99,6 +108,8 @@ export default function History() {
       let historicalData = res.data;
       updateDataState(historicalData);
     });
+
+    setdateState(DateState.Day);
   };
 
   // FETCH WEEK HELPER
@@ -108,6 +119,8 @@ export default function History() {
       let historicalData = res.data;
       updateDataState(historicalData);
     });
+
+    setdateState(DateState.Week);
   };
 
   // FETCH MONTH HELPER
@@ -118,6 +131,8 @@ export default function History() {
 
       updateDataState(historicalData);
     });
+
+    setdateState(DateState.Month);
   };
 
   // WEEK AS DEFAULT ON LOAD
@@ -171,19 +186,27 @@ export default function History() {
         <div className={styles.top__inner}>
           <nav className={styles["chart-navigation"]}>
             <button
-              className={styles["chart-button"]}
+              className={`${styles["chart-button"]} ${
+                dateState === DateState.Day ? styles.chart__selectedButton : ""
+              }`}
               onClick={dayButtonHandler}
             >
               Day
             </button>
             <button
-              className={styles["chart-button"]}
+              className={`${styles["chart-button"]} ${
+                dateState === DateState.Week ? styles.chart__selectedButton : ""
+              }`}
               onClick={weekButtonHandler}
             >
               Week
             </button>
             <button
-              className={styles["chart-button"]}
+              className={`${styles["chart-button"]} ${
+                dateState === DateState.Month
+                  ? styles.chart__selectedButton
+                  : ""
+              }`}
               onClick={monthButtonHandler}
             >
               Month

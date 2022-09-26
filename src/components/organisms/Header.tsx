@@ -5,14 +5,13 @@ import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import { useSetRecoilState } from "recoil";
+import { loginState } from "@/globalStates/atoms/Auth";
 
-type Props = {
-  setLoggedin: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export default function Header({ setLoggedin }: Props) {
+export default function Header() {
   const [width, setWidth] = useState<number>(0);
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const setLoggedin = useSetRecoilState<boolean>(loginState);
 
   useEffect(() => {
     // get the wiindow width
@@ -46,7 +45,11 @@ export default function Header({ setLoggedin }: Props) {
     <>
       <header className={styles.header}>
         <div className={styles.header__inner}>
-          <Logo width={100} height={84} />
+          <Link href="/">
+            <a className={styles.header__logo}>
+              <Logo width={100} height={84} />
+            </a>
+          </Link>
           {width < 900 ? (
             <>
               <div className={styles.hamburger} onClick={hamburgerClick}>

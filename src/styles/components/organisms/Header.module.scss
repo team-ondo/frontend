@@ -32,6 +32,14 @@
     }
   }
 
+  &__logo {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
   &__menu {
     display: flex;
     justify-content: center;
