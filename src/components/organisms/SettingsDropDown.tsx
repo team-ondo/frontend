@@ -172,8 +172,8 @@ const CheckLink = styled("a", {
 });
 
 type Props = {
-  setSettingsView: React.Dispatch<React.SetStateAction<string>>;
-  settingsView: React.Dispatch<React.SetStateAction<string>>;
+  setSettingsView: React.Dispatch<React.SetStateAction<number>>;
+  settingsView: React.Dispatch<React.SetStateAction<number>>;
   setSelectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
   selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
   selectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
@@ -183,6 +183,9 @@ type Props = {
   isLoading: React.Dispatch<React.SetStateAction<boolean>>;
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+const SettingsViewState = { DropDown: 0, Read: 1, Change: 2, Updated: 3 } as const; 
+type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function DropDownSettings({
   setSettingsView,
@@ -210,31 +213,32 @@ export default function DropDownSettings({
 
   const settingsViewChange = () => {
     getDeviceName();
-    setSettingsView("read settings");
+    setSettingsView(SettingsViewState.Read);
     // console.log("DROPDOWN", deviceData);
     console.log("DROPDOWN", selectedDeviceIndex);
   };
 
-  if (isLoading === true) {
+  if (isLoading) {
     return <div className="loading">Loading...</div>;
   } else {
     return (
       <>
         <div className={styles.top}>
-          <div className={styles.top__inner}></div>
-          <div className="select_device">
-            <h3>Please select your device:</h3>
-            <select className="drop_menu" id="drop_menu_settings">
-              {deviceData.map((obj: any) => {
-                return (
-                  <option value={obj.device_name}>{obj.device_name}</option>
-                );
-              })}
-            </select>
+          <div className={styles.top__inner}>
+            <div className={styles.select_device}>
+              <h3>Please select your device:</h3>
+              <select className="drop_menu" id="drop_menu_settings">
+                {deviceData.map((obj: any, i: number) => {
+                  return (
+                    <option key={i} value={obj.device_name}>{obj.device_name}</option>
+                  );
+                })}
+              </select>
+            </div>
+            <Button title={"Select"} onClick={() => settingsViewChange()}>
+              Select
+            </Button>
           </div>
-          <Button title={"Submit"} onClick={() => settingsViewChange()}>
-            Submit
-          </Button>
         </div>
       </>
     );

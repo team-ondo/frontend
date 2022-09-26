@@ -5,7 +5,7 @@ import { indigo, mauve, blackA } from "@radix-ui/colors";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
-import api from "../../lib/axios_settings";
+import api from "@/lib/axios_settings";
 
 const StyledTabs = styled(TabsPrimitive.Root, {
   display: "flex",
@@ -172,8 +172,8 @@ const CheckLink = styled("a", {
 });
 
 type Props = {
-  setSettingsView: React.Dispatch<React.SetStateAction<string>>;
-  settingsView: React.Dispatch<React.SetStateAction<string>>;
+  setSettingsView: React.Dispatch<React.SetStateAction<number>>;
+  settingsView: React.Dispatch<React.SetStateAction<number>>;
   // selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
   // selectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
   deviceData: React.Dispatch<React.SetStateAction<[]>>;
@@ -182,6 +182,9 @@ type Props = {
   setUserData: React.Dispatch<React.SetStateAction<{}>>;
   isLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+const SettingsViewState = { DropDown: 0, Read: 1, Change: 2, Updated: 3 } as const; 
+type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function SettingsChange({
   setSettingsView,
@@ -232,14 +235,16 @@ export default function SettingsChange({
 
     api.put(`/settings/user/`, updatedUserSettings).then((res) => {
       console.log(res.data);
-      location.reload()
+      location.reload();
     });
-
+    
     api.put(`/settings/device/`, updatedDeviceSettings).then((res) => {
       console.log(res.data);
     });
-    setSettingsView("read settings")
+    setSettingsView(SettingsViewState.Updated)
   };
+
+  
 
   console.log("CHANGE", setSettingsView);
   console.log("CHANGE", deviceData);
@@ -247,56 +252,57 @@ export default function SettingsChange({
   return (
     <>
       <div className={styles.top}>
-        <div className={styles.top__inner}></div>
-        <h2>User Settings</h2>
-        <Fieldset>
-          <Label htmlFor="firstName">First Name</Label>
-          <Input id="firstName" placeholder={userData.first_name} />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="lastName">Last Name</Label>
-          <Input id="lastName" placeholder={userData.last_name} />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="email">Email</Label>
-          <Input id="email" placeholder={userData.email} />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="oldPassword">Old Password</Label>
-          <Input id="oldPassword" type="password" />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="newPassword">New Password</Label>
-          <Input id="newPassword" type="password" />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="phoneNumber">Phone Number</Label>
-          <Input id="phoneNumber" placeholder={userData.phone_number} />
-        </Fieldset>
-        <h2>Device Settings</h2>
-        <Fieldset>
-          <Label htmlFor="deviceName">Device Name</Label>
-          <Input id="deviceName" placeholder={deviceData[0].device_name} />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="zipcode">Zip Code (Device Location)</Label>
-          <Input id="zipcode" placeholder={deviceData[0].zip_code} />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="hotTempSetting">Hot Temperature Setting</Label>
-          <Input
-            id="hotTempSetting"
-            placeholder={deviceData[0].temperature_upper_limit}
-          />
-        </Fieldset>
-        <Fieldset>
-          <Label htmlFor="coldTempSetting">Cold Temperature Setting</Label>
-          <Input
-            id="coldTempSetting"
-            placeholder={deviceData[0].temperature_lower_limit}
-          />
-        </Fieldset>
-        <Button onClick={() => submitSettingsChange()}>Submit</Button>
+        <div className={styles.top__inner}>
+          <h2>User Settings</h2>
+          <Fieldset>
+            <Label htmlFor="firstName">First Name</Label>
+            <Input id="firstName" placeholder={userData.first_name} />
+          </Fieldset>
+          <Fieldset>
+            <Label htmlFor="lastName">Last Name</Label>
+            <Input id="lastName" placeholder={userData.last_name} />
+          </Fieldset>
+          <Fieldset>
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" placeholder={userData.email} />
+          </Fieldset>
+          <Fieldset>
+            <Label htmlFor="oldPassword">Old Password</Label>
+            <Input id="oldPassword" type="password" />
+          </Fieldset>
+          <Fieldset>
+            <Label htmlFor="newPassword">New Password</Label>
+            <Input id="newPassword" type="password" />
+          </Fieldset>
+          <Fieldset>
+            <Label htmlFor="phoneNumber">Phone Number</Label>
+            <Input id="phoneNumber" placeholder={userData.phone_number} />
+          </Fieldset>
+          <h2>Device Settings</h2>
+          <Fieldset>
+            <Label htmlFor="deviceName">Device Name</Label>
+            <Input id="deviceName" placeholder={deviceData[0].device_name} />
+          </Fieldset>
+          <Fieldset>
+            <Label htmlFor="zipcode">Zip Code (Device Location)</Label>
+            <Input id="zipcode" placeholder={deviceData[0].zip_code} />
+          </Fieldset>
+          <Fieldset>
+            <Label htmlFor="hotTempSetting">Hot Temperature Setting</Label>
+            <Input
+              id="hotTempSetting"
+              placeholder={deviceData[0].temperature_upper_limit}
+            />
+          </Fieldset>
+          <Fieldset>
+            <Label htmlFor="coldTempSetting">Cold Temperature Setting</Label>
+            <Input
+              id="coldTempSetting"
+              placeholder={deviceData[0].temperature_lower_limit}
+            />
+          </Fieldset>
+          <Button onClick={() => submitSettingsChange()}>Submit</Button>
+        </div>
       </div>
     </>
   );

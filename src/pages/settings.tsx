@@ -3,11 +3,28 @@ import PageTemplate from "@/components/templates/PageTemplate";
 import SettingsRead from "@/components/organisms/SettingsRead";
 import SettingsChange from "@/components/organisms/SettingsChange";
 import SettingsDropDown from "@/components/organisms/SettingsDropDown";
-import api from "../lib/axios_settings";
+import api from "@/lib/axios_settings";
+
+export type UserData = {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+};
+
+export type DeviceData = {
+  device_id: number;
+  device_name: string;
+  zip_code: string;
+  temperature_upper_limit: number;
+  temperature_lower_limit: number;
+};
+
+const SettingsViewState = { DropDown: 0, Read: 1, Change: 2, Updated: 3 } as const; 
+type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function SettingsIndex() {
-  const [settingsView, setSettingsView] =
-    useState<string>("drop down settings");
+  const [settingsView, setSettingsView] = useState<number>(SettingsViewState.DropDown);
   const [userData, setUserData] = useState<{}>({});
   const [deviceData, setDeviceData] = useState<[]>([]);
   const [selectedDeviceName, setSelectedDeviceName] =
@@ -15,20 +32,16 @@ export default function SettingsIndex() {
   const [selectedDeviceIndex, setSelectedDeviceIndex] = useState<number>(-1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  console.log(selectedDeviceName);
-  console.log("SETTINGS", selectedDeviceIndex);
+  // console.log(selectedDeviceName);
+  // console.log("SETTINGS", selectedDeviceIndex);
   const pageid = "settings";
 
   useEffect(() => {
     api.get(`/settings/user`).then((res) => {
       setUserData(res.data);
     });
-  }, []);
-
-  useEffect(() => {
     api.get(`/settings/device/`).then((res) => {
       setDeviceData(res.data);
-      console.log(res.data);
       setIsLoading(false);
     });
   }, []);
@@ -40,13 +53,12 @@ export default function SettingsIndex() {
     setSelectedDeviceIndex(index);
   }, [selectedDeviceName]);
 
-  console.log("SETTINGS", selectedDeviceIndex);
-  console.log(settingsView);
+  // console.log("SETTINGS", selectedDeviceIndex);
+  // console.log(settingsView);
 
   return (
     <PageTemplate pageid={pageid}>
-      <div className="settings_page">
-        {settingsView === "read settings" ? (
+        {settingsView === SettingsViewState.Read ? (
           <SettingsRead
             setSettingsView={setSettingsView}
             settingsView={settingsView}
@@ -56,7 +68,7 @@ export default function SettingsIndex() {
             userData={userData}
             isLoading={isLoading}
           />
-        ) : settingsView === "change settings" ? (
+        ) : settingsView === SettingsViewState.Change ? (
           <SettingsChange
             setSettingsView={setSettingsView}
             settingsView={settingsView}
@@ -66,6 +78,11 @@ export default function SettingsIndex() {
             userData={userData}
             isLoading={isLoading}
           />
+        ) : settingsView === SettingsViewState.Updated ? (
+          <div className="settings_updated">
+            Settings Updated!
+            <br></br><br></br> Please wait a moment...
+          </div>
         ) : (
           <SettingsDropDown
             setSettingsView={setSettingsView}
@@ -82,7 +99,6 @@ export default function SettingsIndex() {
             isLoading={isLoading}
           />
         )}
-      </div>
     </PageTemplate>
   );
 }

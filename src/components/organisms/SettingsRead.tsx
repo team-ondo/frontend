@@ -6,6 +6,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { CheckIcon } from "@radix-ui/react-icons";
 import api from "../../lib/axios_settings";
+import { UserData, DeviceData } from "@/pages/settings";
 
 const StyledTabs = styled(TabsPrimitive.Root, {
   display: "flex",
@@ -172,14 +173,17 @@ const CheckLink = styled("a", {
 });
 
 type Props = {
-  setSettingsView: React.Dispatch<React.SetStateAction<string>>;
-  settingsView: React.Dispatch<React.SetStateAction<string>>;
+  setSettingsView: React.Dispatch<React.SetStateAction<number>>;
+  settingsView: React.Dispatch<React.SetStateAction<number>>;
   selectedDeviceName: React.Dispatch<React.SetStateAction<string>>;
   selectedDeviceIndex: React.Dispatch<React.SetStateAction<number>>;
-  deviceData: React.Dispatch<React.SetStateAction<[]>>;
-  userData: React.Dispatch<React.SetStateAction<{}>>;
-  isLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  deviceData: DeviceData;
+  userData: UserData;
+  isLoading: boolean;
 };
+
+const SettingsViewState = { DropDown: 0, Read: 1, Change: 2, Updated: 3 } as const; 
+type SettingViewState = typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function SettingsRead({
   setSettingsView,
@@ -206,40 +210,41 @@ export default function SettingsRead({
   // setIndex();
 
   const openSettingsChange = () => {
-    setSettingsView("change settings");
+    setSettingsView(SettingsViewState.Change);
   };
 
-  if (isLoading === true) {
+  if (isLoading) {
     return <div className="loading">Loading...</div>;
   } else {
     return (
       <>
         <div className={styles.top}>
-          <div className={styles.top__inner}></div>
-          <div className="user-settings">
-            <h2>User Settings</h2>
-            <br></br>
-            <Text>First Name: {userData.first_name}</Text>
-            <Text>Last Name: {userData.last_name}</Text>
-            <Text>Email: {userData.email}</Text>
-            <Text>Password: *****</Text>
-            <Text>Phone Number: {userData.phone_number}</Text>
-          </div>
-          <div className="device-settings">
-            <h2>Device Settings</h2>
-            <br></br>
-            <Text>Device ID: {deviceData[0].device_id}</Text>
-            <Text>Device Name: {deviceData[0].device_name}</Text>
-            <Text>Device Location: {deviceData[0].zip_code}</Text>
-            <Text>
-              Hot Temperature Limit: {deviceData[0].temperature_upper_limit}
-            </Text>
-            <Text>
-              Cold Temperature Limit: {deviceData[0].temperature_lower_limit}
-            </Text>
-            <Button onClick={() => openSettingsChange()}>
-              Change Settings
-            </Button>
+          <div className={styles.top__inner}>
+            <div className={styles.user_settings}>
+              <h2>User Settings</h2>
+              <br></br>
+              <Text>First Name: {userData.first_name}</Text>
+              <Text>Last Name: {userData.last_name}</Text>
+              <Text>Email: {userData.email}</Text>
+              <Text>Password: *****</Text>
+              <Text>Phone Number: {userData.phone_number}</Text>
+            </div>
+            <div className={styles.device_settings}>
+              <h2>Device Settings</h2>
+              <br></br>
+              <Text>Device ID: {deviceData[0].device_id}</Text>
+              <Text>Device Name: {deviceData[0].device_name}</Text>
+              <Text>Device Location: {deviceData[0].zip_code}</Text>
+              <Text>
+                Hot Temperature Limit: {deviceData[0].temperature_upper_limit}
+              </Text>
+              <Text>
+                Cold Temperature Limit: {deviceData[0].temperature_lower_limit}
+              </Text>
+              <Button onClick={() => openSettingsChange()}>
+                Change Settings
+              </Button>
+            </div>
           </div>
         </div>
       </>

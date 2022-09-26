@@ -1,7 +1,7 @@
 @use "@variables" as var;
 @use "@mixin" as mi;
 
-.setting {
+.top {
     display: flex;
     justify-content: center;
     min-width: var.$contentWidthPc;
@@ -18,4 +18,16 @@
         width: 100%;
       }
     }
+  }
+
+  .select_device {
+
+  }
+
+  .user_settings{
+
+  }
+
+  .device_settings {
+    
   }
