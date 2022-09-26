@@ -106,7 +106,5 @@ export default function SettingsIndex() {
         )}
       </PageTemplate>
     );
-  } else {
-    return "";
   }
 }
