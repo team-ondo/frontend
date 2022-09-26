@@ -174,8 +174,8 @@ const CheckLink = styled("a", {
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
   selectedDeviceIndex: number;
-  deviceData: React.Dispatch<React.SetStateAction<[]>>;
-  userData: React.Dispatch<React.SetStateAction<{}>>;
+  deviceData: any;
+  userData: any;
 };
 
 const SettingsViewState = {
@@ -193,6 +193,7 @@ export default function SettingsChange({
   selectedDeviceIndex,
   userData,
 }: Props) {
+  
   const submitSettingsChange = () => {
     let firstName = (document.getElementById("firstName") as HTMLInputElement).value;
     let lastName = (document.getElementById("lastName") as HTMLInputElement).value;

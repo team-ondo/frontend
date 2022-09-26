@@ -175,7 +175,7 @@ const CheckLink = styled("a", {
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
   selectedDeviceIndex: number;
-  deviceData: DeviceData;
+  deviceData: any;
   userData: UserData;
   isLoading: boolean;
 };

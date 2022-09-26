@@ -34,8 +34,8 @@ export default function SettingsIndex() {
   const [settingsView, setSettingsView] = useState<number>(
     SettingsViewState.DropDown
   );
-  const [userData, setUserData] = useState<{}>({});
-  const [deviceData, setDeviceData] = useState<[]>([]);
+  const [userData, setUserData] = useState<any>({});
+  const [deviceData, setDeviceData] = useState<any>([]);
   const [selectedDeviceName, setSelectedDeviceName] = useState<string>("");
   const [selectedDeviceIndex, setSelectedDeviceIndex] = useState<number>(-1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -67,8 +67,6 @@ export default function SettingsIndex() {
       {settingsView === SettingsViewState.Read ? (
         <SettingsRead
           setSettingsView={setSettingsView}
-          settingsView={settingsView}
-          selectedDeviceName={selectedDeviceName}
           selectedDeviceIndex={selectedDeviceIndex}
           deviceData={deviceData}
           userData={userData}
@@ -77,12 +75,9 @@ export default function SettingsIndex() {
       ) : settingsView === SettingsViewState.Change ? (
         <SettingsChange
           setSettingsView={setSettingsView}
-          settingsView={settingsView}
-          selectedDeviceName={selectedDeviceName}
           selectedDeviceIndex={selectedDeviceIndex}
           deviceData={deviceData}
           userData={userData}
-          isLoading={isLoading}
         />
       ) : settingsView === SettingsViewState.Updated ? (
         <div className={styles.settings_updated}>
@@ -93,16 +88,8 @@ export default function SettingsIndex() {
       ) : (
         <SettingsDropDown
           setSettingsView={setSettingsView}
-          settingsView={settingsView}
           setSelectedDeviceName={setSelectedDeviceName}
-          selectedDeviceName={selectedDeviceName}
-          selectedDeviceIndex={selectedDeviceIndex}
-          setSelectedDeviceIndex={setSelectedDeviceIndex}
-          setDeviceData={setDeviceData}
           deviceData={deviceData}
-          userData={userData}
-          deviceData={deviceData}
-          setIsLoading={setIsLoading}
           isLoading={isLoading}
         />
       )}

@@ -192,6 +192,7 @@ export default function DropDownSettings({
   deviceData,
   isLoading,
 }: Props) {
+  
   const getDeviceName = () => {
     let dropDownText = document.getElementById("drop_menu_settings") as HTMLSelectElement | null;;
     let selectedText = dropDownText?.options[dropDownText.selectedIndex].text;
