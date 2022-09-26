@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import styles from "@/styles/components/organisms/Livedata.module.scss";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement } from "chart.js";
-import { LivaData } from "@/components/organisms/Top";
+import { LiveData } from "@/components/organisms/Top";
 
 Chart.register(ArcElement);
 
-export default function Livedata({ temperature_celsius, humidity }: LivaData) {
+export default function Livedata({ temperature_celsius, humidity }: LiveData) {
   const [tempColor, setTempColor] = useState<
     CanvasGradient | "rgb(255, 99, 132)"
   >("rgb(255, 99, 132)");
