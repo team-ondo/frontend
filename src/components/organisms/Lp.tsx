@@ -44,7 +44,7 @@ export default function Lp() {
           className={styles.recommend__itemImage}
           src={FeatureList[i].image}
           width="400"
-          height="193"
+          height="225"
           alt=""
         />
       </div>
@@ -92,7 +92,7 @@ export default function Lp() {
                 </div>
               </div>
             </AnimationTrigger>
-            <AnimationTrigger animation="fadeIn" rootMargin="100px" triggerOnce>
+            <AnimationTrigger animation="fadeIn" rootMargin="200px" triggerOnce>
               <div className={styles.introduction__box}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
