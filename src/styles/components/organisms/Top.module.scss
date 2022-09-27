@@ -4,17 +4,23 @@
 .alarm-button {
   border: 1px solid var.$themeGray;
   cursor: pointer;
-  background-color: var.$themeDarkPink;
+  background-color: var.$themeDarkerPink;
   font-size: 24px;
   font-weight: bold;
-  padding: 42px 24px;
+  padding: 30px 24px;
   width: 100%;
   margin-bottom: 24px;
   border-radius: 10px;
-}
+  display: flex;
+  align-items: center;
 
-.alarm-button:hover {
-  background-color: var.$themeDarkerPink;
+  & img {
+    margin-right: 10px;
+  }
+
+  &:hover {
+    background-color: var.$themeDarkPink;
+  }
 }
 
 .top {
