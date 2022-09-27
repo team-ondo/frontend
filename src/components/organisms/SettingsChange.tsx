@@ -6,6 +6,7 @@ import api from "@/lib/axios_settings";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { deviceIdState } from "@/globalStates/atoms/Auth";
 import { useRecoilValue } from "recoil";
+import { useRouter } from "next/router";
 
 interface SettingInput {
   firstName: string;
@@ -116,6 +117,7 @@ export default function SettingsChange({
   } = useForm<SettingInput>();
   const [errMessage, setErrMessage] = useState<string | null>();
   const deviceId = useRecoilValue<string>(deviceIdState);
+  const router = useRouter();
 
   const settingOnSubmit: SubmitHandler<SettingInput> = (data) => {
     setErrMessage("");
@@ -147,7 +149,7 @@ export default function SettingsChange({
       .put(`/settings/user/`, updatedUserSettings)
       .then((res) => {
         console.log(res.data);
-        location.reload();
+        router.reload();
       })
       .catch((error: any) => {
         if (error.response.status === 422) {
