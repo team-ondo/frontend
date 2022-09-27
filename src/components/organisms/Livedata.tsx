@@ -6,7 +6,11 @@ import { LiveData } from "@/components/organisms/Top";
 
 Chart.register(ArcElement, Tooltip, Legend);
 
-export default function Livedata({ temperature_celsius, humidity }: LiveData) {
+export default function Livedata({
+  temperature_celsius,
+  humidity,
+  deviceName,
+}: LiveData) {
   const [tempColor, setTempColor] = useState<
     CanvasGradient | "rgb(255, 255, 255)"
   >("rgb(255, 255, 255)");
@@ -132,7 +136,7 @@ export default function Livedata({ temperature_celsius, humidity }: LiveData) {
       <p className={styles.livedata__heading}>
         The current room temperature and humidity.
         <br />
-        Device name: Nishi Azabu Device
+        Device name: {deviceName}
       </p>
       <div className={styles.livedata}>
         <div className={styles.temperature}>
