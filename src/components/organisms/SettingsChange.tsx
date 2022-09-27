@@ -1,104 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styles from "@/styles/components/organisms/Settings.module.scss";
 import { styled } from "@stitches/react";
-import { indigo, mauve, blackA } from "@radix-ui/colors";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { CheckIcon } from "@radix-ui/react-icons";
+import { indigo, mauve } from "@radix-ui/colors";
 import api from "@/lib/axios_settings";
-
-const StyledTabs = styled(TabsPrimitive.Root, {
-  display: "flex",
-  flexDirection: "column",
-  width: 350,
-  boxShadow: `0 2px 10px ${blackA.blackA4}`,
-  borderRadius: 4,
-});
-
-const StyledList = styled(TabsPrimitive.List, {
-  flexShrink: 0,
-  display: "flex",
-  borderBottom: `1px solid ${mauve.mauve6}`,
-});
-
-const StyledTrigger = styled(TabsPrimitive.Trigger, {
-  all: "unset",
-  fontFamily: "inherit",
-  backgroundColor: "white",
-  padding: "0 20px",
-  height: 45,
-  flex: 1,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize: 15,
-  lineHeight: 1,
-  color: mauve.mauve11,
-  userSelect: "none",
-  "&:first-child": { borderTopLeftRadius: 6 },
-  "&:last-child": { borderTopRightRadius: 6 },
-  "&:hover": { color: indigo.indigo11 },
-  '&[data-state="active"]': {
-    color: indigo.indigo11,
-    boxShadow: "inset 0 -1px 0 0 currentColor, 0 1px 0 0 currentColor",
-    backgroundColor: indigo.indigo3,
-  },
-  "&:focus": { position: "relative" },
-});
-
-const StyledContent = styled(TabsPrimitive.Content, {
-  flexGrow: 1,
-  padding: 20,
-  backgroundColor: "white",
-  borderBottomLeftRadius: 6,
-  borderBottomRightRadius: 6,
-  outline: "none",
-});
-
-const StyledCheckbox = styled(CheckboxPrimitive.Root, {
-  all: "unset",
-  backgroundColor: "white",
-  width: 25,
-  height: 25,
-  borderRadius: 4,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  boxShadow: `0 2px 10px ${blackA.blackA7}`,
-  "&:hover": { backgroundColor: indigo.indigo3 },
-});
-
-const StyledIndicator = styled(CheckboxPrimitive.Indicator, {
-  color: indigo.indigo11,
-});
-
-// Exports
-export const Tabs = StyledTabs;
-export const TabsList = StyledList;
-export const TabsTrigger = StyledTrigger;
-export const TabsContent = StyledContent;
-export const Checkbox = StyledCheckbox;
-export const CheckboxIndicator = StyledIndicator;
-
-const Box = styled("div", {
-  display: "flex",
-  justifyContent: "center",
-});
-const Flex = styled("div", { display: "flex" });
-
-const Text = styled("div", {
-  marginBottom: 20,
-  color: mauve.mauve11,
-  fontSize: 15,
-  lineHeight: 1.5,
-});
-
-const Annotation = styled("p", {
-  marginTop: 5,
-  color: mauve.mauve11,
-  fontSize: 12,
-  lineHeight: 1.5,
-});
 
 const Button = styled("button", {
   all: "unset",
@@ -111,6 +15,7 @@ const Button = styled("button", {
   lineHeight: 1,
   fontWeight: 500,
   height: 35,
+  cursor: "pointer",
 
   variants: {
     variant: {
@@ -158,19 +63,6 @@ const Input = styled("input", {
   "&::placeholder": { color: mauve.mauve7 },
 });
 
-const FieldCheck = styled("fieldset", {
-  all: "unset",
-  width: "100%",
-  display: "flex",
-  alignItems: "center",
-});
-
-const CheckLink = styled("a", {
-  color: indigo.indigo11,
-  textDecoration: "underline",
-  "&:visited": { color: indigo.indigo11 },
-});
-
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
   selectedDeviceIndex: number;
@@ -184,7 +76,7 @@ const SettingsViewState = {
   Change: 2,
   Updated: 3,
 } as const;
-type SettingViewState =
+type SettingsViewState =
   typeof SettingsViewState[keyof typeof SettingsViewState];
 
 export default function SettingsChange({
@@ -256,9 +148,10 @@ export default function SettingsChange({
 
   return (
     <>
-      <div className={styles.top}>
-        <div className={styles.top__inner}>
-          <h2>User Settings</h2>
+      <div className={styles.change}>
+        <div className={styles.change__inner}>
+          <div className={styles.change__contents}>
+          <h2 className={styles.change__heading}>User Settings</h2>
           <Fieldset>
             <Label htmlFor="firstName">First Name</Label>
             <Input id="firstName" placeholder={userData.first_name} />
@@ -283,7 +176,7 @@ export default function SettingsChange({
             <Label htmlFor="phoneNumber">Phone Number</Label>
             <Input id="phoneNumber" placeholder={userData.phone_number} />
           </Fieldset>
-          <h2>Device Settings</h2>
+          <h2 className={styles.change__heading}>Device Settings</h2>
           <Fieldset>
             <Label htmlFor="deviceName">Device Name</Label>
             <Input
@@ -316,7 +209,10 @@ export default function SettingsChange({
               }
             />
           </Fieldset>
+          <div className={styles.change__button}>
           <Button onClick={() => submitSettingsChange()}>Submit</Button>
+          </div>
+          </div>
         </div>
       </div>
     </>
