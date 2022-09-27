@@ -207,7 +207,7 @@ export default function Form() {
     <>
       <form onSubmit={handleSubmit(signupOnSubmit)}>
         <TabsContent value="tab1">
-          <Text>Please register your account.</Text>
+          <Text>Please register your account:</Text>
           {errMessage ? (
             <ErrorMsg css={{ marginBottom: 10 }}>{errMessage}</ErrorMsg>
           ) : (
@@ -261,7 +261,7 @@ export default function Form() {
                     required: "* This field is required",
                   })}
                 />
-                <Annotation>※Please include hyphen.</Annotation>
+                <Annotation>※ Please include hyphens</Annotation>
                 <ErrorMsg>{errors.phone?.message}</ErrorMsg>
               </Fieldset>
             </div>
@@ -302,7 +302,9 @@ export default function Form() {
                     required: "* This field is required",
                   })}
                 />
-                <Annotation>※Please enter the number on the device.</Annotation>
+                <Annotation>
+                  ※ Please enter the device's serial number
+                </Annotation>
                 <ErrorMsg>{errors.serialnumber?.message}</ErrorMsg>
               </Fieldset>
               <Fieldset>
@@ -314,10 +316,8 @@ export default function Form() {
                   })}
                 />
                 <Annotation>
-                  ※Please the zip code of the house where you want to place the
-                  device.
+                  ※ Please enter the device's zip code without hyphens
                   <br />
-                  ※Please do not include hyphen.
                 </Annotation>
                 <ErrorMsg>{errors.zipcode?.message}</ErrorMsg>
               </Fieldset>
