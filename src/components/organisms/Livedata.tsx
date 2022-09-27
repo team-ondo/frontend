@@ -133,11 +133,7 @@ export default function Livedata({
 
   return (
     <>
-      <p className={styles.livedata__heading}>
-        The current room temperature and humidity.
-        <br />
-        Device name: {deviceName}
-      </p>
+      <p className={styles.livedata__heading}>Device: {deviceName}</p>
       <div className={styles.livedata}>
         <div className={styles.temperature}>
           <h2>Temperature</h2>

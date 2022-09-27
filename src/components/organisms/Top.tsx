@@ -110,8 +110,13 @@ export default function Top() {
             onClick={toggleAlarmHandler}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icon_alarmRinging.png" width={30} height={30} alt="alarm ringing" />
-            Device Alarm is Ringing | Please Click to Reset Device.
+            <img
+              src="/icon_alarmRinging.png"
+              width={30}
+              height={30}
+              alt="alarm ringing"
+            />
+            Alarm is Ringing | Please Click to Reset.
           </button>
         )}
 
@@ -138,9 +143,7 @@ export default function Top() {
         ) : liveErrMessage ? (
           <div className={styles.top__livedata}>{liveErrMessage}</div>
         ) : (
-          <div className={styles.top__livedata}>
-            Loading the temperature and humidity data.
-          </div>
+          <div className={styles.top__livedata}>Loading data.</div>
         )}
       </div>
     </div>

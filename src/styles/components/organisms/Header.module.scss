@@ -22,7 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 960px;
+    width: 1100px;
     padding: 15px 0;
 
     @include mi.mq {
@@ -47,7 +47,7 @@
   }
 
   &__menuInner {
-    width: 600px;
+    width: 700px;
   }
 
   &__menuList {
@@ -110,7 +110,7 @@
       display: block;
       width: 28px;
       height: 4px;
-      content: '';
+      content: "";
       background: var.$themeDarkOrange;
       transition: transform 0.2s, top 0.2s;
     }
@@ -152,4 +152,3 @@
     height: 50px;
   }
 }
-
