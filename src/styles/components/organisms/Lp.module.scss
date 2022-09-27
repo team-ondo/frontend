@@ -20,12 +20,12 @@
     min-width: var.$contentWidthPc;
     max-width: 1920px;
     height: 100%;
-    background: center / cover no-repeat url('/mv.jpg');
+    background: center / cover no-repeat url('/mv_device.jpg');
 
     @include mi.mq {
       width: 100%;
       min-width: auto;
-      background: center / cover no-repeat url('/mv.jpg');
+      background: center / cover no-repeat url('/mv_device.jpg');
     }
   }
 
@@ -227,6 +227,8 @@
   }
 
   &__itemImage {
+    border-radius: 10px;
+    
     @include mi.mq {
       width: 355px;
       height: auto;
