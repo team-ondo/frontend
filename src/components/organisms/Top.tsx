@@ -110,7 +110,12 @@ export default function Top() {
             onClick={toggleAlarmHandler}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/icon_alarmRinging.png" width={30} height={30} alt="alarm ringing" />
+            <img
+              src="/icon_alarmRinging.png"
+              width={30}
+              height={30}
+              alt="alarm ringing"
+            />
             Device Alarm is Ringing | Please Click to Reset Device.
           </button>
         )}
