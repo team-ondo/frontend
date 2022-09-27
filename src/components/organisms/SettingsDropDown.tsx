@@ -71,7 +71,13 @@ export default function DropDownSettings({
   };
 
   if (isLoading) {
-    return <div className={styles.loading}>Loading...</div>;
+    return (
+      <div className={styles.top}>
+        <div className={styles.top__innner}>
+          <div className={styles.loading}>Loading...</div>
+        </div>
+      </div>
+    );
   } else {
     return (
       <>
