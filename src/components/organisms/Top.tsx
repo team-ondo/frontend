@@ -16,6 +16,7 @@ export type LiveData = {
   temperature_celsius: number;
   humidity: number;
   alarm?: boolean;
+  deviceName: string;
 };
 
 type Props = {
@@ -28,8 +29,15 @@ export default function Top({ deviceId }: Props) {
   const [weatherErrMessage, setWeatherErrMessage] = useState<string | null>();
   const [liveErrMessage, setLiveErrMessage] = useState<string | null>();
   const [alarmIsRinging, setAlarmIsRinging] = useState<boolean>(false);
+  const [deviceName, setDeviceName] = useState<string | null>();
 
   useEffect(() => {
+    // get device name
+    // TODO impoement catch
+    api.get(`/device-data/${deviceId}/device-name`).then((res) => {
+      setDeviceName(res.data.device_name);
+    });
+
     // weather data
     api
       .get(`/weather-info/en/${deviceId}`)
@@ -124,6 +132,7 @@ export default function Top({ deviceId }: Props) {
           <Livedata
             temperature_celsius={liveData.temperature_celsius}
             humidity={liveData.humidity}
+            deviceName={deviceName ? deviceName : ""}
           />
         ) : liveErrMessage ? (
           <div className={styles.top__livedata}>{liveErrMessage}</div>
