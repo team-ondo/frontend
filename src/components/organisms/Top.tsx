@@ -143,9 +143,7 @@ export default function Top() {
         ) : liveErrMessage ? (
           <div className={styles.top__livedata}>{liveErrMessage}</div>
         ) : (
-          <div className={styles.top__livedata}>
-            Loading the temperature and humidity data.
-          </div>
+          <div className={styles.top__livedata}>Loading data.</div>
         )}
       </div>
     </div>
