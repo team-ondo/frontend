@@ -116,7 +116,7 @@ export default function Top() {
               height={30}
               alt="alarm ringing"
             />
-            Device Alarm is Ringing | Please Click to Reset Device.
+            Alarm is Ringing | Please Click to Reset.
           </button>
         )}
 
