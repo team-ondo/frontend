@@ -62,7 +62,7 @@ export default function Top() {
           "Failed to retrieve the temperature and humidity data."
         );
       });
-  }, [deviceId]);
+  }, []);
 
   const updateLivedata = () => {
     api
