@@ -14,7 +14,7 @@ const Button = styled("button", {
   lineHeight: 1,
   fontWeight: 500,
   height: 35,
-  width: 100,
+  width: "100%",
   cursor: "pointer",
 
   variants: {
@@ -72,8 +72,8 @@ export default function DropDownSettings({
 
   if (isLoading) {
     return (
-      <div className={styles.top}>
-        <div className={styles.top__innner}>
+      <div className={styles.device}>
+        <div className={styles.device__innner}>
           <div className={styles.loading}>Loading...</div>
         </div>
       </div>

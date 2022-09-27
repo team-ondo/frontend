@@ -161,12 +161,13 @@ export default function SettingsChange({
       .put(`/settings/device/${deviceId}`, updatedDeviceSettings)
       .then((res) => {
         console.log(res.data);
-      }).catch((error: any) => {
+      })
+      .catch((error: any) => {
         if (error.response.status === 422) {
           setErrMessage(error.response.data.detail[0].msg);
         } else {
           setErrMessage(error.response.data.detail);
-        };
+        }
       });
     setSettingsView(SettingsViewState.Updated);
   };
