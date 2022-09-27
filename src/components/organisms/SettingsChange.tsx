@@ -3,6 +3,8 @@ import styles from "@/styles/components/organisms/Settings.module.scss";
 import { styled } from "@stitches/react";
 import { indigo, mauve } from "@radix-ui/colors";
 import api from "@/lib/axios_settings";
+import { deviceIdState } from "@/globalStates/atoms/Auth";
+import { useRecoilValue } from "recoil";
 
 const Button = styled("button", {
   all: "unset",
@@ -86,6 +88,8 @@ export default function SettingsChange({
   selectedDeviceIndex,
   userData,
 }: Props) {
+  const deviceId = useRecoilValue<string>(deviceIdState);
+
   const submitSettingsChange = () => {
     let firstName = (document.getElementById("firstName") as HTMLInputElement)
       .value;
@@ -141,9 +145,11 @@ export default function SettingsChange({
       location.reload();
     });
 
-    api.put(`/settings/device/`, updatedDeviceSettings).then((res) => {
-      console.log(res.data);
-    });
+    api
+      .put(`/settings/device/${deviceId}`, updatedDeviceSettings)
+      .then((res) => {
+        console.log(res.data);
+      });
     setSettingsView(SettingsViewState.Updated);
   };
 
