@@ -91,10 +91,15 @@ export default function SettingsIndex() {
             userData={userData}
           />
         ) : settingsView === SettingsViewState.Updated ? (
-          <div className={styles.settings_updated}>
-            Settings Updated
-            <br></br>
-            <br></br> Please wait a moment...
+          <div className={styles.device}>
+            <div className={styles.device__inner}>
+              <div className={styles.settings_updated}>
+                <p className={styles.settings_updated__text}>
+                  Settings Updated
+                </p>
+                <p>Please wait a moment...</p>
+              </div>
+            </div>
           </div>
         ) : (
           <SettingsDropDown
