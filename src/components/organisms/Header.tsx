@@ -66,13 +66,13 @@ export default function Header() {
                 <ul className={styles.header__menuList}>
                   <li className={styles.header__menuItem}>
                     <Link href="/">
-                      <a className={styles.header__menuItemLink}>Top</a>
+                      <a className={styles.header__menuItemLink}>Live Data</a>
                     </Link>
                   </li>
                   <li className={styles.header__menuItem}>
                     <Link href="/history">
                       <a className={styles.header__menuItemLink}>
-                        Historical data
+                        Historical Data
                       </a>
                     </Link>
                   </li>

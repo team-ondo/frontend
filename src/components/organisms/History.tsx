@@ -67,7 +67,7 @@ export default function History() {
   const [dataHumidMax, setDataHumidMax] = useState<number[]>([]);
   const [dataHumidMin, setDataHumidMin] = useState<number[]>([]);
   const [labels, setLabels] = useState<string[]>([]);
-  const [dateState, setdateState] = useState<DateState>(DateState.Week);
+  const [dateState, setdateState] = useState<DateState>(DateState.Day);
 
   const device_id = "a7382f5c-3326-4cf8-b717-549affe1c2eb";
 
@@ -137,7 +137,7 @@ export default function History() {
 
   // WEEK AS DEFAULT ON LOAD
   useEffect(() => {
-    weekButtonHandler();
+    dayButtonHandler();
   }, []);
 
   const data_temp = {

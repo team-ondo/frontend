@@ -26,7 +26,7 @@ export default function Top() {
   const [liveData, setLiveData] = useState<LiveData | null>();
   const [weatherErrMessage, setWeatherErrMessage] = useState<string | null>();
   const [liveErrMessage, setLiveErrMessage] = useState<string | null>();
-  const [alarmIsRinging, setAlarmIsRinging] = useState<boolean>(false);
+  const [alarmIsRinging, setAlarmIsRinging] = useState<boolean>(true);
   const [deviceName, setDeviceName] = useState<string | null>();
   const deviceId = useRecoilValue<string>(deviceIdState);
 
@@ -82,22 +82,23 @@ export default function Top() {
   }, []);
 
   // check alarm when liveData is updated
-  useEffect(() => {
-    if (liveData?.alarm) {
-      setAlarmIsRinging(true);
-    } else {
-      setAlarmIsRinging(false);
-    }
-  }, [liveData]);
+  // useEffect(() => {
+  //   if (liveData?.alarm) {
+  //     setAlarmIsRinging(true);
+  //   } else {
+  //     setAlarmIsRinging(false);
+  //   }
+  // }, [liveData]);
 
   const toggleAlarmHandler = async () => {
     // Ping server to switch alarm off
-    api.get(`/devices/${deviceId}/alarm/off`).then((res) => {
-      let response = res.data;
-      console.log(response);
-      // reset local alarm status to false
-      setAlarmIsRinging(false);
-    });
+    // api.get(`/devices/${deviceId}/alarm/off`).then((res) => {
+    //   let response = res.data;
+    //   console.log(response);
+    //   // reset local alarm status to false
+    //   setAlarmIsRinging(false);
+    // });
+    setAlarmIsRinging(false);
   };
 
   return (
@@ -108,7 +109,14 @@ export default function Top() {
             className={styles["alarm-button"]}
             onClick={toggleAlarmHandler}
           >
-            Device Alarm is Ringing | Please Check and Click to Reset Device.
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/icon_alarmRinging.png"
+              width={30}
+              height={30}
+              alt="alarm ringing"
+            />
+            Alarm is Ringing | Please Click to Reset.
           </button>
         )}
 
@@ -135,9 +143,7 @@ export default function Top() {
         ) : liveErrMessage ? (
           <div className={styles.top__livedata}>{liveErrMessage}</div>
         ) : (
-          <div className={styles.top__livedata}>
-            Loading the temperature and humidity data.
-          </div>
+          <div className={styles.top__livedata}>Loading data.</div>
         )}
       </div>
     </div>

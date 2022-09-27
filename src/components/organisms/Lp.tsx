@@ -44,7 +44,7 @@ export default function Lp() {
           className={styles.recommend__itemImage}
           src={FeatureList[i].image}
           width="400"
-          height="193"
+          height="225"
           alt=""
         />
       </div>
@@ -58,10 +58,10 @@ export default function Lp() {
           <div className={styles.mv__inner}>
             <div className={styles.mv__text}>
               <Logo width={100} height={84} />
-              <p className={styles.mv__textDetail}>Ondo helps people!</p>
+              <p className={styles.mv__textDetail}>Peace of Mind.</p>
               <p className={styles.mv__textDetailS}>
-                Ondo monitors the temperature and humidity of home in order to
-                ensure safety during hotter month.
+                Ondo monitors extremes of temperature and humidity, protecting
+                those you care for.
               </p>
             </div>
             {width < 900 ? (
@@ -85,14 +85,14 @@ export default function Lp() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/icon_graph.png" width={50} height={50} alt="graph" />
                 <div className={styles.introduction__item}>
-                  <p className={styles.introduction__title}>Check Data</p>
+                  <p className={styles.introduction__title}>Data</p>
                   <p className={styles.introduction__text}>
-                    You can see live and historical data.
+                    Easily review data, live and historical.
                   </p>
                 </div>
               </div>
             </AnimationTrigger>
-            <AnimationTrigger animation="fadeIn" rootMargin="100px" triggerOnce>
+            <AnimationTrigger animation="fadeIn" rootMargin="200px" triggerOnce>
               <div className={styles.introduction__box}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
@@ -102,11 +102,10 @@ export default function Lp() {
                   alt="graph"
                 />
                 <div className={styles.introduction__item}>
-                  <p className={styles.introduction__title}>
-                    Send Notification
-                  </p>
+                  <p className={styles.introduction__title}>Notifications</p>
                   <p className={styles.introduction__text}>
-                    If the home heater, you can get notification.
+                    Ondo will let you know when the temperature exceeds
+                    thresholds.
                   </p>
                 </div>
               </div>
@@ -118,7 +117,7 @@ export default function Lp() {
                 <div className={styles.introduction__item}>
                   <p className={styles.introduction__title}>Alarm</p>
                   <p className={styles.introduction__text}>
-                    You can turn alarm off.
+                    Ondo lets you turn the alarm off remotely.
                   </p>
                 </div>
               </div>
@@ -128,7 +127,7 @@ export default function Lp() {
       </section>
       <section className={styles.recommend}>
         <div className={styles.recommend__inner}>
-          <h2 className={styles.recommend__title}>ONDO has many features.</h2>
+          <h2 className={styles.recommend__title}>Features</h2>
           {featurelist}
         </div>
       </section>

@@ -2,23 +2,23 @@
 export default [
   {
     id: "1",
-    heading: "View data history by week, month, and year.",
+    heading: "A beautiful, easy-to-use device.",
     description:
-      "You can view the room temperature and humidity by week, month, and year, as well as the maximum and minimum.",
-    image: "/history_data.png",
+      "Ondo's welcoming, minimalist design makes it a friendly companion at home.",
+    image: "/img_device.png",
   },
   {
     id: "2",
-    heading: "View data history by week, month, and year.",
+    heading: "View historical data by week, month, and year.",
     description:
-      "You can view the room temperature and humidity by week, month, and year, as well as the maximum and minimum.",
-    image: "/notification_data.png",
+      "Charts to display temperature and humidity stored by Ondo, making it easy to check when temperature spikes are likely to occur.",
+    image: "/img_history.png",
   },
   {
     id: "3",
-    heading: "View data history by week, month, and year.",
+    heading: "A suite of notifications.",
     description:
-      "You can view the room temperature and humidity by week, month, and year, as well as the maximum and minimum.",
-    image: "/notification_data.png",
+      "Ondo will let you know when the alarm is ringing or snoozed. It will also tell you when your loved one is away from home.",
+    image: "/img_notifications.png",
   },
 ];
