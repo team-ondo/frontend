@@ -16,6 +16,7 @@ const Button = styled("button", {
   fontWeight: 500,
   height: 35,
   cursor: "pointer",
+  width: "100%",
 
   variants: {
     variant: {
@@ -151,67 +152,67 @@ export default function SettingsChange({
       <div className={styles.change}>
         <div className={styles.change__inner}>
           <div className={styles.change__contents}>
-          <h2 className={styles.change__heading}>User Settings</h2>
-          <Fieldset>
-            <Label htmlFor="firstName">First Name</Label>
-            <Input id="firstName" placeholder={userData.first_name} />
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="lastName">Last Name</Label>
-            <Input id="lastName" placeholder={userData.last_name} />
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" placeholder={userData.email} />
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="oldPassword">Old Password</Label>
-            <Input id="oldPassword" type="password" />
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="newPassword">New Password</Label>
-            <Input id="newPassword" type="password" />
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="phoneNumber">Phone Number</Label>
-            <Input id="phoneNumber" placeholder={userData.phone_number} />
-          </Fieldset>
-          <h2 className={styles.change__heading}>Device Settings</h2>
-          <Fieldset>
-            <Label htmlFor="deviceName">Device Name</Label>
-            <Input
-              id="deviceName"
-              placeholder={deviceData[selectedDeviceIndex].device_name}
-            />
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="zipcode">Zip Code (Device Location)</Label>
-            <Input
-              id="zipcode"
-              placeholder={deviceData[selectedDeviceIndex].zip_code}
-            />
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="hotTempSetting">Hot Temperature Setting</Label>
-            <Input
-              id="hotTempSetting"
-              placeholder={
-                deviceData[selectedDeviceIndex].temperature_upper_limit
-              }
-            />
-          </Fieldset>
-          <Fieldset>
-            <Label htmlFor="coldTempSetting">Cold Temperature Setting</Label>
-            <Input
-              id="coldTempSetting"
-              placeholder={
-                deviceData[selectedDeviceIndex].temperature_lower_limit
-              }
-            />
-          </Fieldset>
-          <div className={styles.change__button}>
-          <Button onClick={() => submitSettingsChange()}>Submit</Button>
-          </div>
+            <h2 className={styles.change__heading}>User Settings</h2>
+            <Fieldset>
+              <Label htmlFor="firstName">First Name</Label>
+              <Input id="firstName" placeholder={userData.first_name} />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="lastName">Last Name</Label>
+              <Input id="lastName" placeholder={userData.last_name} />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" placeholder={userData.email} />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="oldPassword">Old Password</Label>
+              <Input id="oldPassword" type="password" />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="newPassword">New Password</Label>
+              <Input id="newPassword" type="password" />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="phoneNumber">Phone Number</Label>
+              <Input id="phoneNumber" placeholder={userData.phone_number} />
+            </Fieldset>
+            <h2 className={styles.change__heading}>Device Settings</h2>
+            <Fieldset>
+              <Label htmlFor="deviceName">Device Name</Label>
+              <Input
+                id="deviceName"
+                placeholder={deviceData[selectedDeviceIndex].device_name}
+              />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="zipcode">Zip Code (Device Location)</Label>
+              <Input
+                id="zipcode"
+                placeholder={deviceData[selectedDeviceIndex].zip_code}
+              />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="hotTempSetting">Hot Temperature Setting</Label>
+              <Input
+                id="hotTempSetting"
+                placeholder={
+                  deviceData[selectedDeviceIndex].temperature_upper_limit
+                }
+              />
+            </Fieldset>
+            <Fieldset>
+              <Label htmlFor="coldTempSetting">Cold Temperature Setting</Label>
+              <Input
+                id="coldTempSetting"
+                placeholder={
+                  deviceData[selectedDeviceIndex].temperature_lower_limit
+                }
+              />
+            </Fieldset>
+            <div className={styles.change__button}>
+              <Button onClick={() => submitSettingsChange()}>Submit</Button>
+            </div>
           </div>
         </div>
       </div>
