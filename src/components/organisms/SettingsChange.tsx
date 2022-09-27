@@ -4,6 +4,8 @@ import { styled } from "@stitches/react";
 import { indigo, mauve, tomato } from "@radix-ui/colors";
 import api from "@/lib/axios_settings";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { deviceIdState } from "@/globalStates/atoms/Auth";
+import { useRecoilValue } from "recoil";
 
 interface SettingInput {
   firstName: string;
@@ -113,6 +115,7 @@ export default function SettingsChange({
     getValues,
   } = useForm<SettingInput>();
   const [errMessage, setErrMessage] = useState<string | null>();
+  const deviceId = useRecoilValue<string>(deviceIdState);
 
   const settingOnSubmit: SubmitHandler<SettingInput> = (data) => {
     setErrMessage("");
@@ -155,16 +158,15 @@ export default function SettingsChange({
       });
 
     api
-      .put(`/settings/device/`, updatedDeviceSettings)
+      .put(`/settings/device/${deviceId}`, updatedDeviceSettings)
       .then((res) => {
         console.log(res.data);
-      })
-      .catch((error: any) => {
+      }).catch((error: any) => {
         if (error.response.status === 422) {
           setErrMessage(error.response.data.detail[0].msg);
         } else {
           setErrMessage(error.response.data.detail);
-        }
+        };
       });
     setSettingsView(SettingsViewState.Updated);
   };
