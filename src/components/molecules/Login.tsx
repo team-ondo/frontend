@@ -134,7 +134,7 @@ export default function Login() {
       {/* Sign In */}
       <form onSubmit={handleSubmit(onSubmit)}>
         <TabsContent value="tab2">
-          <Text>If you already have account, please sign in here.</Text>
+          <Text>If you already have an account, please sign in here:</Text>
           {errMessage ? (
             <ErrorMsg css={{ marginBottom: 10 }}>{errMessage}</ErrorMsg>
           ) : (
