@@ -303,7 +303,7 @@ export default function Form() {
                   })}
                 />
                 <Annotation>
-                  ※ Please enter the device's serial number
+                  ※ Please enter the device serial number
                 </Annotation>
                 <ErrorMsg>{errors.serialnumber?.message}</ErrorMsg>
               </Fieldset>
@@ -316,7 +316,7 @@ export default function Form() {
                   })}
                 />
                 <Annotation>
-                  ※ Please enter the device's zip code without hyphens
+                  ※ Please enter the device zip code without hyphens
                   <br />
                 </Annotation>
                 <ErrorMsg>{errors.zipcode?.message}</ErrorMsg>
