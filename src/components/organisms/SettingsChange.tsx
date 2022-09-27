@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/components/organisms/Settings.module.scss";
 import { styled } from "@stitches/react";
-import { indigo, mauve } from "@radix-ui/colors";
+import { indigo, mauve, tomato } from "@radix-ui/colors";
 import api from "@/lib/axios_settings";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+interface SettingInput {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  oldPassword: string;
+  newPassword: string;
+  deviceName: string;
+  hotTempSetting: number;
+  coldTempSetting: number;
+  zipcode: string;
+}
 
 const Button = styled("button", {
   all: "unset",
@@ -64,6 +78,12 @@ const Input = styled("input", {
   "&::placeholder": { color: mauve.mauve7 },
 });
 
+const ErrorMsg = styled("p", {
+  color: tomato.tomato8,
+  fontSize: 12,
+  marginTop: 5,
+});
+
 type Props = {
   setSettingsView: React.Dispatch<React.SetStateAction<number>>;
   selectedDeviceIndex: number;
@@ -86,136 +106,157 @@ export default function SettingsChange({
   selectedDeviceIndex,
   userData,
 }: Props) {
-  const submitSettingsChange = () => {
-    let firstName = (document.getElementById("firstName") as HTMLInputElement)
-      .value;
-    let lastName = (document.getElementById("lastName") as HTMLInputElement)
-      .value;
-    let email = (document.getElementById("email") as HTMLInputElement).value;
-    let phoneNumber = (
-      document.getElementById("phoneNumber") as HTMLInputElement
-    ).value;
-    let oldPassword = (
-      document.getElementById("oldPassword") as HTMLInputElement
-    ).value;
-    let newPassword = (
-      document.getElementById("newPassword") as HTMLInputElement
-    ).value;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    getValues,
+  } = useForm<SettingInput>();
+  const [errMessage, setErrMessage] = useState<string | null>();
 
-    let deviceName = (document.getElementById("deviceName") as HTMLInputElement)
-      .value;
-    let hotTempSetting = (
-      document.getElementById("hotTempSetting") as HTMLInputElement
-    ).value;
-    let coldTempSetting = (
-      document.getElementById("coldTempSetting") as HTMLInputElement
-    ).value;
-    let zipcode = (document.getElementById("zipcode") as HTMLInputElement)
-      .value;
-
-    const updatedUserSettings: {} = {
-      // comments contain original data
-      first_name: firstName ? firstName : userData.first_name, // Akemi
-      last_name: lastName ? lastName : userData.last_name, // Kimura
-      email: email ? email : userData.email, //test@test.com
-      phone_number: phoneNumber ? phoneNumber : userData.phone_number, //090-0000-0000
-      old_password: oldPassword ? oldPassword : userData.old_password, //secretPassword
-      new_password: newPassword ? newPassword : "secretPassword",
+  const settingOnSubmit: SubmitHandler<SettingInput> = (data) => {
+    setErrMessage("");
+    const updatedUserSettings = {
+      first_name: data.firstName ? data.firstName : userData.first_name,
+      last_name: data.lastName ? data.lastName : userData.last_name,
+      email: data.email ? data.email : userData.email,
+      phone_number: data.phoneNumber ? data.phoneNumber : userData.phone_number,
+      old_password: data.oldPassword ? data.oldPassword : userData.old_password,
+      new_password: data.newPassword ? data.newPassword : userData.new_password,
     };
 
-    const updatedDeviceSettings: {} = {
-      device_name: deviceName
-        ? deviceName
-        : deviceData[selectedDeviceIndex].device_name, //Roppongi_Device
-      temperature_upper_limit: hotTempSetting
-        ? hotTempSetting
-        : deviceData[selectedDeviceIndex].temperature_upper_limit, //30.2
-      temperature_lower_limit: coldTempSetting
-        ? coldTempSetting
-        : deviceData[selectedDeviceIndex].temperature_lower_limit, //27?
-      zip_code: zipcode ? zipcode : deviceData[selectedDeviceIndex].zip_code, //1001701
+    const updatedDeviceSettings = {
+      device_name: data.deviceName
+        ? data.deviceName
+        : deviceData[selectedDeviceIndex].device_name,
+      temperature_upper_limit: data.hotTempSetting
+        ? data.hotTempSetting
+        : deviceData[selectedDeviceIndex].temperature_upper_limit,
+      temperature_lower_limit: data.coldTempSetting
+        ? data.coldTempSetting
+        : deviceData[selectedDeviceIndex].temperature_lower_limit,
+      zip_code: data.zipcode
+        ? data.zipcode
+        : deviceData[selectedDeviceIndex].zip_code,
     };
 
-    api.put(`/settings/user/`, updatedUserSettings).then((res) => {
-      console.log(res.data);
-      location.reload();
-    });
+    api
+      .put(`/settings/user/`, updatedUserSettings)
+      .then((res) => {
+        console.log(res.data);
+        location.reload();
+      })
+      .catch((error: any) => {
+        if (error.response.status === 422) {
+          setErrMessage(error.response.data.detail[0].msg);
+        } else {
+          setErrMessage(error.response.data.detail);
+        }
+      });
 
-    api.put(`/settings/device/`, updatedDeviceSettings).then((res) => {
-      console.log(res.data);
-    });
+    api
+      .put(`/settings/device/`, updatedDeviceSettings)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((error: any) => {
+        if (error.response.status === 422) {
+          setErrMessage(error.response.data.detail[0].msg);
+        } else {
+          setErrMessage(error.response.data.detail);
+        }
+      });
     setSettingsView(SettingsViewState.Updated);
   };
 
   return (
     <>
-      <div className={styles.change}>
-        <div className={styles.change__inner}>
-          <div className={styles.change__contents}>
-            <h2 className={styles.change__heading}>User Settings</h2>
-            <Fieldset>
-              <Label htmlFor="firstName">First Name</Label>
-              <Input id="firstName" placeholder={userData.first_name} />
-            </Fieldset>
-            <Fieldset>
-              <Label htmlFor="lastName">Last Name</Label>
-              <Input id="lastName" placeholder={userData.last_name} />
-            </Fieldset>
-            <Fieldset>
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" placeholder={userData.email} />
-            </Fieldset>
-            <Fieldset>
-              <Label htmlFor="oldPassword">Old Password</Label>
-              <Input id="oldPassword" type="password" />
-            </Fieldset>
-            <Fieldset>
-              <Label htmlFor="newPassword">New Password</Label>
-              <Input id="newPassword" type="password" />
-            </Fieldset>
-            <Fieldset>
-              <Label htmlFor="phoneNumber">Phone Number</Label>
-              <Input id="phoneNumber" placeholder={userData.phone_number} />
-            </Fieldset>
-            <h2 className={styles.change__heading}>Device Settings</h2>
-            <Fieldset>
-              <Label htmlFor="deviceName">Device Name</Label>
-              <Input
-                id="deviceName"
-                placeholder={deviceData[selectedDeviceIndex].device_name}
-              />
-            </Fieldset>
-            <Fieldset>
-              <Label htmlFor="zipcode">Zip Code (Device Location)</Label>
-              <Input
-                id="zipcode"
-                placeholder={deviceData[selectedDeviceIndex].zip_code}
-              />
-            </Fieldset>
-            <Fieldset>
-              <Label htmlFor="hotTempSetting">Hot Temperature Setting</Label>
-              <Input
-                id="hotTempSetting"
-                placeholder={
-                  deviceData[selectedDeviceIndex].temperature_upper_limit
-                }
-              />
-            </Fieldset>
-            <Fieldset>
-              <Label htmlFor="coldTempSetting">Cold Temperature Setting</Label>
-              <Input
-                id="coldTempSetting"
-                placeholder={
-                  deviceData[selectedDeviceIndex].temperature_lower_limit
-                }
-              />
-            </Fieldset>
-            <div className={styles.change__button}>
-              <Button onClick={() => submitSettingsChange()}>Submit</Button>
+      <form onSubmit={handleSubmit(settingOnSubmit)}>
+        <div className={styles.change}>
+          <div className={styles.change__inner}>
+            <div className={styles.change__contents}>
+              {errMessage ? (
+                <ErrorMsg css={{ marginBottom: 10 }}>{errMessage}</ErrorMsg>
+              ) : (
+                ""
+              )}
+              <h2 className={styles.change__heading}>User Settings</h2>
+              <Fieldset>
+                <Label htmlFor="firstName">First Name</Label>
+                <Input id="firstName" placeholder={userData.first_name} />
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="lastName">Last Name</Label>
+                <Input id="lastName" placeholder={userData.last_name} />
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  placeholder={userData.email}
+                  {...register("email", {
+                    pattern: {
+                      value: /^[\w\-._]+@[\w\-._]+\.[A-Za-z]+/,
+                      message: "* Invalid email address",
+                    },
+                  })}
+                />
+                <ErrorMsg>{errors.email?.message}</ErrorMsg>
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="oldPassword">Old Password</Label>
+                <Input id="oldPassword" type="password" />
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="newPassword">New Password</Label>
+                <Input id="newPassword" type="password" />
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="phoneNumber">Phone Number</Label>
+                <Input id="phoneNumber" placeholder={userData.phone_number} />
+              </Fieldset>
+              <h2 className={styles.change__heading}>Device Settings</h2>
+              <Fieldset>
+                <Label htmlFor="deviceName">Device Name</Label>
+                <Input
+                  id="deviceName"
+                  placeholder={deviceData[selectedDeviceIndex].device_name}
+                />
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="zipcode">Zip Code (Device Location)</Label>
+                <Input
+                  id="zipcode"
+                  placeholder={deviceData[selectedDeviceIndex].zip_code}
+                />
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="hotTempSetting">Hot Temperature Setting</Label>
+                <Input
+                  id="hotTempSetting"
+                  placeholder={
+                    deviceData[selectedDeviceIndex].temperature_upper_limit
+                  }
+                />
+              </Fieldset>
+              <Fieldset>
+                <Label htmlFor="coldTempSetting">
+                  Cold Temperature Setting
+                </Label>
+                <Input
+                  id="coldTempSetting"
+                  placeholder={
+                    deviceData[selectedDeviceIndex].temperature_lower_limit
+                  }
+                />
+              </Fieldset>
+              <div className={styles.change__button}>
+                <Button>Submit</Button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 }

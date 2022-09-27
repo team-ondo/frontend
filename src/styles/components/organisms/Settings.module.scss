@@ -135,6 +135,11 @@
     animation-duration: 500ms;
     animation-direction: alternate;
     animation-iteration-count: infinite;
+    text-align: center;
+
+    &__text {
+      margin-bottom: 20px;
+    }
   }
 
   .loading {
