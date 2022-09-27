@@ -78,7 +78,9 @@
   .user_settings{
     &__heading {
       font-size: 20px;
-      margin-bottom: 20px;
+      margin: 30px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var.$themeDarkGray;
     }
 
     &__button {
@@ -110,7 +112,9 @@
 
     &__heading {
       font-size: 20px;
-      margin-bottom: 20px;
+      margin: 30px 0;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var.$themeDarkGray;
     }
 
     &__contents {
@@ -135,6 +139,11 @@
     animation-duration: 500ms;
     animation-direction: alternate;
     animation-iteration-count: infinite;
+    text-align: center;
+
+    &__text {
+      margin-bottom: 20px;
+    }
   }
 
   .loading {

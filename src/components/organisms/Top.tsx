@@ -62,22 +62,24 @@ export default function Top() {
           "Failed to retrieve the temperature and humidity data."
         );
       });
-  }, []);
 
-  const updateLivedata = () => {
-    api
-      .get(`/device-data/${deviceId}/live`)
-      .then((res) => {
-        setLiveErrMessage(null);
-        setLiveData(res.data);
-      })
-      .catch((error: any) => {
-        // TODO Implement each status code
-        setLiveErrMessage(
-          "Failed to retrieve the temperature and humidity data."
-        );
-      });
-  };
+    // update Livedata every 2 minutes
+    const updateLivedata = setInterval(() => {
+      api
+        .get(`/device-data/${deviceId}/live`)
+        .then((res) => {
+          setLiveErrMessage(null);
+          setLiveData(res.data);
+        })
+        .catch((error: any) => {
+          // TODO Implement each status code
+          setLiveErrMessage(
+            "Failed to retrieve the temperature and humidity data."
+          );
+        });
+    }, 120000);
+    return () => clearInterval(updateLivedata);
+  }, []);
 
   // check alarm when liveData is updated
   useEffect(() => {
@@ -97,9 +99,6 @@ export default function Top() {
       setAlarmIsRinging(false);
     });
   };
-
-  // update Livedata every 2 minutes
-  setInterval(updateLivedata, 120000);
 
   return (
     <div className={styles.top}>
