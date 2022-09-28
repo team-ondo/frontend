@@ -63,10 +63,10 @@
 ### Built With
 
 * [![Next][Next.js]][Next-url]
-* [![TypeScript][TypeScript]][TypeScript]
-* [![Chart.js][Chart.js]][Chart.js]
-* [![SASS][SASS]][SASS]
-* [![Render][Render]][Render]
+* [![TypeScript][TypeScript]][TypeScript-url]
+* [![Chart.js][Chart.js]][Chart.js-url]
+* [![SASS][SASS]][SASS-url]
+* [![Render][Render]][Render-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -167,6 +167,10 @@ Project Link: [https://github.com/team-ondo/frontend](https://github.com/team-on
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [TypeScript]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+[TypeScript-url]: https://www.typescriptlang.org/
 [Chart.js]: https://img.shields.io/badge/chart.js-F5788D.svg?style=for-the-badge&logo=chart.js&logoColor=white
+[Chart.js-url]: https://www.chartjs.org/
 [SASS]: https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white
+[SASS-url]: https://sass-lang.com/
 [Render]: https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white
+[Render-url]: https://render.com/
