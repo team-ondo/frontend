@@ -1,10 +1,10 @@
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
-[![Contributors](https://github.com/team-ondo/frontend/graphs/contributors)][contributors-url]
-[![Forks](https://github.com/team-ondo/frontend/network/members)][forks-url]
-[![Stargazers](https://github.com/team-ondo/frontend/stargazers)][stars-url]
-[![Issues](https://github.com/team-ondo/frontend/issues)][issues-url]
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -56,7 +56,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![[ONDO](https://raw.githubusercontent.com/team-ondo/frontend/develop/docs/images/screenshot.png)](https://ondo.onrender.com/)
+[![ONDO][product-screenshot]](https://ondo.onrender.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -163,4 +163,4 @@ Project Link: [https://github.com/team-ondo/frontend](https://github.com/team-on
 [license-url]: https://github.com/team-ondo/frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: https://raw.githubusercontent.com/team-ondo/frontend/develop/docs/images/screenshot.png
+[product-screenshot]: docs/images/screenshot.png
