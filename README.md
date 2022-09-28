@@ -73,11 +73,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally. To get a local copy up and running follow these simple example steps.
-
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
 
 * yarn
   ```sh
@@ -85,20 +81,18 @@ This is an example of how to list things you need to use the software and how to
   ```
 
 ### Installation
-1. Get a free API Key at [https://openweathermap.org/](https://openweathermap.org/)
-2. Clone the repo
+1. Clone the repo
    ```sh
    git clone https://github.com/team-ondo/frontend.git
    ```
-3. Install NPM packages
+2. Install NPM packages
    ```sh
    yarn install
    ```
-4. Create `.env.local`
-5. Enter your API and server url in `.env.local`
+3. Create `.env.local`
+4. Enter your server url in `.env.local`
    ```js
-   NEXT_PUBLIC_WEATHER_API=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-   NEXT_PUBLIC_SERVER_URL='xxxxxxxxxxxxxxxxxxxxx'
+   NEXT_PUBLIC_SERVER_URL='http://localhost:8000'
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
