@@ -62,11 +62,11 @@
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
-* [![TypeScript][TypeScript]][TypeScript-url]
-* [![Chart.js][Chart.js]][Chart.js-url]
-* [![SASS][SASS]][SASS-url]
-* [![Render][Render]][Render-url]
+[![Next][Next.js]][Next-url]  
+[![TypeScript][TypeScript]][TypeScript-url]  
+[![Chart.js][Chart.js]][Chart.js-url]  
+[![SASS][SASS]][SASS-url]  
+[![Render][Render]][Render-url]  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
