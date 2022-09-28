@@ -1,10 +1,10 @@
 <a name="readme-top"></a>
 
 <!-- PROJECT SHIELDS -->
-[![Contributors][https://github.com/team-ondo/frontend/graphs/contributors]][contributors-url]
-[![Forks][https://github.com/team-ondo/frontend/network/members]][forks-url]
-[![Stargazers][https://github.com/team-ondo/frontend/stargazers]][stars-url]
-[![Issues][https://github.com/team-ondo/frontend/issues]][issues-url]
+[![Contributors](https://github.com/team-ondo/frontend/graphs/contributors)][contributors-url]
+[![Forks](https://github.com/team-ondo/frontend/network/members)][forks-url]
+[![Stargazers](https://github.com/team-ondo/frontend/stargazers)][stars-url]
+[![Issues](https://github.com/team-ondo/frontend/issues)][issues-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -56,7 +56,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![ONDO][https://github.com/team-ondo/frontend/tree/develop/docs/images/screenshot.png]](https://ondo.onrender.com/)
+![[ONDO](https://raw.githubusercontent.com/team-ondo/frontend/develop/docs/images/screenshot.png)](https://ondo.onrender.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -148,3 +148,19 @@ Don't forget to give the project a star! Thanks again!
 Project Link: [https://github.com/team-ondo/frontend](https://github.com/team-ondo/frontend)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/team-ondo/frontend.svg?style=for-the-badge
+[contributors-url]: https://github.com/team-ondo/frontend/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/team-ondo/frontend.svg?style=for-the-badge
+[forks-url]: https://github.com/team-ondo/frontend/network/members
+[stars-shield]: https://img.shields.io/github/stars/team-ondo/frontend.svg?style=for-the-badge
+[stars-url]: https://github.com/team-ondo/frontend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/team-ondo/frontend.svg?style=for-the-badge
+[issues-url]: https://github.com/team-ondo/frontend/issues
+[license-shield]: https://img.shields.io/github/license/team-ondo/frontend.svg?style=for-the-badge
+[license-url]: https://github.com/team-ondo/frontend/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/linkedin_username
+[product-screenshot]: https://raw.githubusercontent.com/team-ondo/frontend/develop/docs/images/screenshot.png
