@@ -302,9 +302,7 @@ export default function Form() {
                     required: "* This field is required",
                   })}
                 />
-                <Annotation>
-                  ※ Please enter the device serial number
-                </Annotation>
+                <Annotation>※ Please enter the device serial number</Annotation>
                 <ErrorMsg>{errors.serialnumber?.message}</ErrorMsg>
               </Fieldset>
               <Fieldset>
