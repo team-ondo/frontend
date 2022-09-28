@@ -13,11 +13,17 @@ export default function PageTemplate({ pageid, children }: Props) {
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <meta name="description" content="Welcome to ONDO!" />
+        <meta
+          name="description"
+          content="Peace of Mind. Ondo monitors extremes of temperature and humidity, protecting those you care for."
+        />
         <meta property="og:site_name" content="ONDO" />
         <meta property="og:title" content="ONDO" />
         <meta property="og:type" content="website" />
-        <meta property="og:description" content="Welcome to ONDO!" />
+        <meta
+          property="og:description"
+          content="Peace of Mind. Ondo monitors extremes of temperature and humidity, protecting those you care for."
+        />
         <title>ONDO</title>
       </Head>
       <main className="main--lp">{children}</main>
